@@ -38,23 +38,23 @@ const Home = () => {
     <section
       ref={homeRef}
       id="home"
-      className="opacity-0 transform translate-y-10 transition-opacity duration-1000 ease-in-out h-screen flex flex-col justify-center items-center bg-gray-900 text-white"
+      className="opacity-0 transform translate-y-10 transition-opacity duration-1000 ease-in-out h-screen flex flex-col md:flex-row justify-center items-center bg-gray-900 text-white"
     >
       <div className="container mx-auto flex flex-col md:flex-row items-center justify-center">
         {/* Left Side */}
-        <div className="flex-1 text-center md:text-left md:pr-8">
-          <h1 className="text-5xl font-extrabold mb-4">Hey, Welcome</h1>
+        <div className="flex-1 text-center md:text-left md:pr-8 mt-8">
+          <h2 className="text-5xl font-extrabold mb-4">Hey, Welcome</h2>
           <h2 className="text-4xl font-semibold mb-2">I'm ADIL</h2>
           <p
             ref={textRef}
-            className="text-2xl font-light opacity-0 transform translate-y-5 transition-all duration-1000 ease-in-out"
+            className="text-2xl text-bold font-light opacity-0 transform translate-y-5 transition-all duration-1000 ease-in-out"
           >
             <Typewriter
               options={{
                 strings: ['MERN Stack Developer'],
                 autoStart: true,
                 loop: true,
-                cursor: '|',
+                cursor: '',
                 delay: 50,
                 deleteSpeed: 30,
               }}
@@ -89,7 +89,7 @@ const Home = () => {
 
         {/* Right Side */}
         <div className="flex-1 mt-8 md:mt-0 flex justify-center relative">
-          <div className="w-[32rem] h-[32rem] bg-gray-800 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 mx-auto md:mx-0 flex items-center justify-center relative">
+          <div className="w-[20rem] h-[20rem] sm:w-[24rem] sm:h-[24rem] md:w-[28rem] md:h-[28rem] bg-gray-800 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 mx-auto md:mx-0 flex items-center justify-center relative">
             <div className="absolute inset-0 w-full h-full overflow-hidden rounded-xl">
               {/* Lottie Animation */}
               <Lottie

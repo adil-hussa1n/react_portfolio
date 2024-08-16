@@ -12,14 +12,14 @@ const About = () => {
             <div className="w-full px-4 lg:w-6/12">
               <div className="flex items-center -mx-3 sm:-mx-4">
                 <div className="w-full px-3 sm:px-4 xl:w-1/2">
-                  <div className="py-3 sm:py-4">
+                  <div className="py-3 sm:py-4 mx-2">
                     <img
                       src={image1}
                       alt="Image 1"
                       className="w-full rounded-2xl"
                     />
                   </div>
-                  <div className="py-3 sm:py-4">
+                  <div className="py-3 sm:py-4 mx-2">
                     <img
                       src={image3}
                       alt="Image 2"
@@ -28,7 +28,7 @@ const About = () => {
                   </div>
                 </div>
                 <div className="w-full px-3 sm:px-4 xl:w-1/2">
-                  <div className="relative z- -10 my-4">
+                  <div className="relative z- -10 my-4 mx-2">
                     <img
                       src={image2}
                       alt="Image 3"
@@ -52,16 +52,16 @@ const About = () => {
             </div>
             <div className="w-full px-4 lg:w-5/12">
               <div className="py-6">
-                <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white">
+                <h2 className="text-3xl font-bold mb-4 text-gray-900 dark:text-white mx-2 ">
                   About Me
                 </h2>
-                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 mx-2 ">
                   I am a passionate MERN stack developer with extensive experience in building scalable web applications. 
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 mx-2">
                   I am currently a student at Leading University, studying in the CSE department. Alongside my studies, I actively participate in various extracurricular activities that enhance my skills and broaden my knowledge.
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+                <p className="text-lg text-gray-700 dark:text-gray-300 mb-4 mx-2 ">
                   When I'm not coding, I love exploring new technologies, reading tech blogs, and working on personal projects.
                 </p>
               </div>

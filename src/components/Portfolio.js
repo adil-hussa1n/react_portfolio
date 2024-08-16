@@ -1,6 +1,9 @@
 import React, { useRef, useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import img1 from '../img/p1.png';
+import img2 from '../img/p2.png';
+import img3 from '../img/p3.png';
 
 const Portfolio = () => {
   const portfolioRef = useRef(null);
@@ -21,12 +24,50 @@ const Portfolio = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const projects = [
+    {
+      src: img1,
+      title: 'Project Title 1',
+      description: 'A brief description of the project, including the technologies used and key features.',
+      link: 'https://github.com/your-username/project-1',
+    },
+    {
+      src: img2,
+      title: 'Project Title 2',
+      description: 'A brief description of the project, including the technologies used and key features.',
+      link: 'https://github.com/your-username/project-2',
+    },
+    {
+      src: img3,
+      title: 'Project Title 3',
+      description: 'A brief description of the project, including the technologies used and key features.',
+      link: 'https://github.com/your-username/project-3',
+    },
+    {
+      src: img1, // Replace with the correct image path
+      title: 'Project Title 4',
+      description: 'A brief description of the project, including the technologies used and key features.',
+      link: 'https://github.com/your-username/project-4',
+    },
+    {
+      src: img2, // Replace with the correct image path
+      title: 'Project Title 5',
+      description: 'A brief description of the project, including the technologies used and key features.',
+      link: 'https://github.com/your-username/project-5',
+    },
+    {
+      src: img3, // Replace with the correct image path
+      title: 'Project Title 6',
+      description: 'A brief description of the project, including the technologies used and key features.',
+      link: 'https://github.com/your-username/project-6',
+    },
+  ];
+
   return (
     <section
       id='portfolio'
       ref={portfolioRef}
       data-aos="fade-up"
-      
       className="bg-white dark:bg-gray-900 py-10 px-6 md:px-12 lg:px-24"
     >
       <div className="container mx-auto">
@@ -47,14 +88,7 @@ const Portfolio = () => {
 
       <div className="container mx-auto grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-3">
         {/* Portfolio items start */}
-        {[
-          { src: 'path-to-image-1.jpg', title: 'Project Title 1', description: 'A brief description of the project, including the technologies used and key features.', link: 'https://github.com/your-username/project-1' },
-          { src: 'path-to-image-2.jpg', title: 'Project Title 2', description: 'A brief description of the project, including the technologies used and key features.', link: 'https://github.com/your-username/project-2' },
-          { src: 'path-to-image-3.jpg', title: 'Project Title 3', description: 'A brief description of the project, including the technologies used and key features.', link: 'https://github.com/your-username/project-3' },
-          { src: 'path-to-image-4.jpg', title: 'Project Title 4', description: 'A brief description of the project, including the technologies used and key features.', link: 'https://github.com/your-username/project-4' },
-          { src: 'path-to-image-5.jpg', title: 'Project Title 5', description: 'A brief description of the project, including the technologies used and key features.', link: 'https://github.com/your-username/project-5' },
-          { src: 'path-to-image-6.jpg', title: 'Project Title 6', description: 'A brief description of the project, including the technologies used and key features.', link: 'https://github.com/your-username/project-6' },
-        ].map((project, index) => (
+        {projects.map((project, index) => (
           <div
             key={index}
             className="flex flex-col items-center p-4 border sm:p-6 rounded-xl dark:border-gray-700 transform transition-transform duration-300 hover:scale-95"
@@ -85,7 +119,6 @@ const Portfolio = () => {
             </div>
           </div>
         ))}
-
       </div>
 
       <div className="text-center mt-8">
