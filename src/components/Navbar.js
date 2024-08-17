@@ -1,106 +1,130 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Navbar = () => {
   const [activeLink, setActiveLink] = useState('home');
-  const [isOpen, setIsOpen] = useState(false); // State for mobile menu visibility
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
     if (isOpen) {
-      setIsOpen(false); // Close the mobile menu when a link is clicked
+      setIsOpen(false);
     }
   };
 
   const toggleMenu = () => {
-    setIsOpen(!isOpen); // Toggle menu visibility
+    setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 1000); // Adjust duration as needed
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-10 shadow-md">
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
-        <a href="#home" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <img src="" className="h-8" alt="" />
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ADIL HUSSAIN</span>
-        </a>
-        <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <a
-            href="src/img/adil-hussain_cv.pdf"
-            download
-            type="button"
-            className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-          >
-            Download CV
-          </a>
-          <button
-            onClick={toggleMenu} // Toggle menu on click
-            type="button"
-            className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-            aria-controls="navbar-cta"
-            aria-expanded={isOpen} // Set aria-expanded attribute based on state
-          >
-            <span className="sr-only">Open main menu</span>
-            <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-              <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-            </svg>
-          </button>
-        </div>
-        <div className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${isOpen ? 'block' : 'hidden'}`} id="navbar-cta">
-          <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-            <li>
-              <a
-                href="#home"
-                onClick={() => handleSetActiveLink('home')}
-                className={`block py-2 px-3 md:p-0 rounded ${
-                  activeLink === 'home'
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                }`}
-                aria-current="page"
+        {isLoading ? (
+          <div className="flex justify-center items-center w-full h-16">
+            <div className="spinner"></div> {/* Updated spinner */}
+          </div>
+        ) : (
+          <>
+            <a href="#home" className="flex items-center space-x-3 rtl:space-x-reverse">
+              <img src="" className="h-8" alt="" />
+              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ADIL HUSSAIN</span>
+            </a>
+            <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+              <button
+                onClick={toggleMenu}
+                type="button"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="navbar-cta"
+                aria-expanded={isOpen}
               >
-                Home
-              </a>
-            </li>
-            <li>
+                <span className="sr-only">Open main menu</span>
+                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
+                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
+                </svg>
+              </button>
               <a
-                href="#about"
-                onClick={() => handleSetActiveLink('about')}
-                className={`block py-2 px-3 md:p-0 rounded ${
-                  activeLink === 'about'
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                }`}
+                href="src/img/adil-hussain_cv.pdf"
+                download
+                className="hidden md:inline-flex items-center px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
-                About
+                Download CV
               </a>
-            </li>
-            <li>
-              <a
-                href="#portfolio"
-                onClick={() => handleSetActiveLink('portfolio')}
-                className={`block py-2 px-3 md:p-0 rounded ${
-                  activeLink === 'portfolio'
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                }`}
-              >
-                Portfolio
-              </a>
-            </li>
-            <li>
-              <a
-                href="#contact"
-                onClick={() => handleSetActiveLink('contact')}
-                className={`block py-2 px-3 md:p-0 rounded ${
-                  activeLink === 'contact'
-                    ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                    : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                }`}
-              >
-                Contact
-              </a>
-            </li>
-          </ul>
-        </div>
+            </div>
+            <div className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${isOpen ? 'block' : 'hidden'}`} id="navbar-cta">
+              <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+                <li>
+                  <a
+                    href="#home"
+                    onClick={() => handleSetActiveLink('home')}
+                    className={`block py-2 px-3 md:p-0 rounded ${
+                      activeLink === 'home'
+                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
+                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+                    }`}
+                    aria-current="page"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#about"
+                    onClick={() => handleSetActiveLink('about')}
+                    className={`block py-2 px-3 md:p-0 rounded ${
+                      activeLink === 'about'
+                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
+                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+                    }`}
+                  >
+                    About
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#portfolio"
+                    onClick={() => handleSetActiveLink('portfolio')}
+                    className={`block py-2 px-3 md:p-0 rounded ${
+                      activeLink === 'portfolio'
+                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
+                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+                    }`}
+                  >
+                    Portfolio
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#contact"
+                    onClick={() => handleSetActiveLink('contact')}
+                    className={`block py-2 px-3 md:p-0 rounded ${
+                      activeLink === 'contact'
+                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
+                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
+                    }`}
+                  >
+                    Contact
+                  </a>
+                </li>
+                <li className="md:hidden">
+                  <a
+                    src="\public\ADIL-CV.pdf"
+                    download
+                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                  >
+                    Download CV
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </>
+        )}
       </div>
     </nav>
   );

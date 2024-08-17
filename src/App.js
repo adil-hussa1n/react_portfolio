@@ -1,22 +1,38 @@
-import React from 'react';
-import Preloader from '../src/components/Preloader';
-import Navbar from '../src/components/Navbar';
-import Home from '../src/components/Home';
-import About from '../src/components/About';
-import Portfolio from '../src/components/Portfolio';
-import Contact from '../src/components/Contact';
-import Footer from '../src/components/Footer';
+import React, { useEffect, useState } from 'react';
+import Preloader from './components/Preloader';
+import Navbar from './components/Navbar';
+import Home from './components/Home';
+import About from './components/About';
+import Portfolio from './components/Portfolio';
+import Contact from './components/Contact';
+import Footer from './components/Footer';
 
 function App() {
+  const [showPreloader, setShowPreloader] = useState(true);
+
+  useEffect(() => {
+    
+    const preloaderTimer = setTimeout(() => {
+      setShowPreloader(false);
+    }, 6000);
+
+    return () => clearTimeout(preloaderTimer);
+  }, []);
+
   return (
     <div>
-      <Preloader />
-      <Navbar />
-      <Home />
-      <About />
-      <Portfolio />
-      <Contact />
-      <Footer />
+      {showPreloader ? (
+        <Preloader />
+      ) : (
+        <>
+          <Navbar />
+          <Home />
+          <About />
+          <Portfolio />
+          <Contact />
+          <Footer />
+        </>
+      )}
     </div>
   );
 }

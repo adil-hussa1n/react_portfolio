@@ -13,6 +13,12 @@ const Contact = () => {
     email: '',
     message: '',
   });
+  const [errors, setErrors] = useState({
+    fullName: '',
+    phoneNumber: '',
+    email: '',
+    message: '',
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,13 +26,27 @@ const Contact = () => {
         contactRef.current &&
         contactRef.current.getBoundingClientRect().top < window.innerHeight
       ) {
-        contactRef.current.classList.add('animate');
+        contactRef.current.classList.add('animate-fade-in');
       }
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const validate = () => {
+    const newErrors = {};
+    if (!formData.fullName) newErrors.fullName = 'Full Name is required.';
+    if (!formData.phoneNumber) newErrors.phoneNumber = 'Phone Number is required.';
+    if (!formData.email) {
+      newErrors.email = 'Email is required.';
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = 'Email address is invalid.';
+    }
+    if (!formData.message) newErrors.message = 'Message is required.';
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -38,37 +58,40 @@ const Contact = () => {
 
   const sendEmail = (e) => {
     e.preventDefault();
-    setIsSending(true);
+    if (validate()) {
+      setIsSending(true);
 
-    emailjs
-      .sendForm(
-        'service_pa2he78',
-        'template_gqslsby',
-        formRef.current,
-        '_IH4Due-KhM-yNs9i'
-      )
-      .then(
-        (result) => {
-          setIsSent(true);
-          formRef.current.reset();
-          setFormData({
-            fullName: '',
-            phoneNumber: '',
-            email: '',
-            message: '',
-          });
-          setIsSending(false);
-          setTimeout(() => setIsSent(false), 5000);
-        },
-        (error) => {
-          console.error(error.text);
-          setIsSending(false);
-        }
-      );
+      emailjs
+        .sendForm(
+          'service_pa2he78',
+          'template_gqslsby',
+          formRef.current,
+          '_IH4Due-KhM-yNs9i'
+        )
+        .then(
+          (result) => {
+            setIsSent(true);
+            formRef.current.reset();
+            setFormData({
+              fullName: '',
+              phoneNumber: '',
+              email: '',
+              message: '',
+            });
+            setErrors({});
+            setIsSending(false);
+            setTimeout(() => setIsSent(false), 5000);
+          },
+          (error) => {
+            console.error(error.text);
+            setIsSending(false);
+          }
+        );
+    }
   };
 
   return (
-    <section ref={contactRef}  id='contact' className="min-h-screen bg-gradient-to-r from-blue-600 via-blue-800 to-blue-900 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
+    <section ref={contactRef} id='contact' className="min-h-screen bg-gradient-to-r from-blue-600 via-blue-800 to-blue-900 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 opacity-0 transition-opacity duration-1000 overflow-hidden">
       <div className="container flex flex-col min-h-screen px-6 py-12 mx-auto">
         <div className="flex-1 lg:flex lg:items-center lg:-mx-6">
           <div className="text-white lg:w-1/2 lg:mx-6">
@@ -96,16 +119,16 @@ const Contact = () => {
             </div>
             <div className="mt-6 md:mt-8">
               <div className="flex mt-4 -mx-1.5">
-                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="#">
+                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="https://www.facebook.com/Adil.hussain2345/">
                   <FaFacebookF className="w-8 h-8" />
                 </a>
-                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="#">
+                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="https://x.com/adil_hussa1n">
                   <FaTwitter className="w-8 h-8" />
                 </a>
-                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="#">
+                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="https://www.linkedin.com/in/adil-hussa1n/">
                   <FaLinkedinIn className="w-8 h-8" />
                 </a>
-                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="#">
+                <a className="mx-1.5 text-white transition-colors duration-300 transform hover:text-blue-500" href="https://github.com/adil-hussa1n">
                   <FaGithub className="w-8 h-8" />
                 </a>
               </div>
@@ -122,49 +145,50 @@ const Contact = () => {
                     name="fullName"
                     value={formData.fullName}
                     onChange={handleChange}
-                    className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                    className={`block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-200 dark:border-gray-600 ${errors.fullName ? 'border-red-500' : ''}`}
                   />
+                  {errors.fullName && <p className="text-red-500 text-sm">{errors.fullName}</p>}
                 </div>
-                <div className="flex-1 mt-6">
+                <div className="flex-1 mt-4">
                   <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Phone Number</label>
                   <input
                     type="text"
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleChange}
-                    className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                    className={`block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-200 dark:border-gray-600 ${errors.phoneNumber ? 'border-red-500' : ''}`}
                   />
+                  {errors.phoneNumber && <p className="text-red-500 text-sm">{errors.phoneNumber}</p>}
                 </div>
-                <div className="flex-1 mt-6">
-                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email</label>
+                <div className="flex-1 mt-4">
+                  <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
                   <input
                     type="email"
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
-                    className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
+                    className={`block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-200 dark:border-gray-600 ${errors.email ? 'border-red-500' : ''}`}
                   />
+                  {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                 </div>
-                <div className="flex-1 mt-6">
+                <div className="flex-1 mt-4">
                   <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Message</label>
                   <textarea
                     name="message"
                     value={formData.message}
                     onChange={handleChange}
-                    rows="4"
-                    className="block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring"
-                  ></textarea>
+                    className={`block w-full px-5 py-3 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-900 dark:text-gray-200 dark:border-gray-600 ${errors.message ? 'border-red-500' : ''}`}
+                  />
+                  {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
                 </div>
                 <button
                   type="submit"
                   disabled={isSending}
-                  className="w-full px-4 py-3 mt-6 text-lg font-semibold text-white transition-colors duration-300 transform bg-blue-500 rounded-md dark:bg-blue-600 hover:bg-blue-600 dark:hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-200 focus:ring-opacity-50"
+                  className="w-full px-6 py-3 mt-4 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300 dark:focus:ring-blue-900"
                 >
                   {isSending ? 'Sending...' : 'Send Message'}
                 </button>
-                {isSent && (
-                  <p className="mt-4 text-green-500">Message sent successfully!</p>
-                )}
+                {isSent && <p className="text-green-500 mt-4">Message sent successfully!</p>}
               </form>
             </div>
           </div>

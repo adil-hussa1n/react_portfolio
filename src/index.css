@@ -17,3 +17,59 @@ html {
   transform: translateY(0) !important;
 }
 
+/* In your global CSS file or Tailwind's custom CSS section */
+
+/* Fade In and Out */
+@keyframes textFadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.animate-text-fade-in-out {
+  animation: textFadeInOut 3s ease-in-out infinite;
+}
+
+.animate-fade-in {
+  opacity: 1;
+  transition: opacity 1s ease-out;
+}
+/* Example for fade-in animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+/* Navbar.css */
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #3498db; /* Color of the spinner */
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
