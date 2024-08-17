@@ -33,7 +33,7 @@ const Preloader = () => {
           </h1>
         ) : (
           <h1 className="text-4xl sm:text-2xl xs:text-xl animate-text-fade-in-out">
-            ADILHUSSA1N.COM
+            ADILHUSSAIN.INFO
           </h1>
         )}
       </div>

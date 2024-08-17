@@ -28,12 +28,12 @@ const Navbar = () => {
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         {isLoading ? (
           <div className="flex justify-center items-center w-full h-16">
-            <div className="spinner"></div> {/* Updated spinner */}
+            <div className="spinner"></div> {/* Ensure the spinner is styled appropriately */}
           </div>
         ) : (
           <>
             <a href="#home" className="flex items-center space-x-3 rtl:space-x-reverse">
-              <img src="" className="h-8" alt="" />
+              <img src="" className="h-8" alt="" /> {/* Ensure this has a valid src */}
               <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ADIL HUSSAIN</span>
             </a>
             <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
@@ -50,8 +50,8 @@ const Navbar = () => {
                 </svg>
               </button>
               <a
-                href="src/img/adil-hussain_cv.pdf"
-                download
+                href="/resume10.pdf"
+                download="adil-hussain_cv.pdf"
                 className="hidden md:inline-flex items-center px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
               >
                 Download CV
@@ -114,8 +114,8 @@ const Navbar = () => {
                 </li>
                 <li className="md:hidden">
                   <a
-                    src="\public\ADIL-CV.pdf"
-                    download
+                    href="/resume10.pdf"
+                    download="adil-hussain_cv.pdf"
                     className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
                   >
                     Download CV

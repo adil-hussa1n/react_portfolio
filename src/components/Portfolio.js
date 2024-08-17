@@ -100,7 +100,6 @@ const Portfolio = () => {
       </div>
 
       <div className="container mx-auto grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-3">
-        {/* Portfolio items start */}
         {projects.map((project, index) => (
           <div
             key={index}
@@ -135,10 +134,9 @@ const Portfolio = () => {
         ))}
       </div>
 
-      {/* Modal for image preview */}
       {selectedImage && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 transition-opacity duration-300">
-          <div className="relative bg-white rounded-lg shadow-2xl overflow-hidden transform transition-transform duration-500 scale-105 p-4 max-w-md">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50 p-4 transition-opacity duration-300">
+          <div className="relative bg-white rounded-lg shadow-2xl overflow-hidden p-4 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl xl:max-w-6xl">
             <img
               src={selectedImage}
               alt="Selected"
