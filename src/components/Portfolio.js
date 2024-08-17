@@ -82,16 +82,6 @@ const Portfolio = () => {
       data-aos="fade-up"
       className="bg-white dark:bg-gray-900 py-10 px-6 md:px-12 lg:px-24 relative"
     >
-      <div className="absolute top-12 right-4">
-        <a
-          href="https://github.com/adil-hussa1n"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-xl text-white bg-gradient-to-r from-blue-500 to-purple-600 px-6 py-3 rounded-full hover:scale-105 transition-transform duration-300 shadow-2xl transform-gpu hover:shadow-blue-700/50"
-        >
-          Visit My GitHub
-        </a>
-      </div>
 
       <div className="container mx-auto">
         <h1 className="mt-7 text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
