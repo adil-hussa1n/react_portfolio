@@ -1,9 +1,45 @@
 import React, { useState, useEffect } from 'react';
+import { FaMoon, FaSun, FaDownload } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = () => {
+const Navbar = ({ theme, toggleTheme }) => {
   const [activeLink, setActiveLink] = useState('home');
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Handle scroll effect for navbar
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+
+      // Update active link based on scroll position
+      const sections = ['home', 'about', 'portfolio', 'contact'];
+      const scrollPosition = window.scrollY + 100;
+
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const section = document.getElementById(sections[i]);
+        if (section && section.offsetTop <= scrollPosition) {
+          setActiveLink(sections[i]);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 800);
+    return () => clearTimeout(timer);
+  }, []);
 
   const handleSetActiveLink = (link) => {
     setActiveLink(link);
@@ -16,117 +52,129 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   };
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000); // Adjust duration as needed
-    return () => clearTimeout(timer);
-  }, []);
+  const navVariants = {
+    hidden: { opacity: 0, y: -20 },
+    visible: { 
+      opacity: 1, 
+      y: 0,
+      transition: { 
+        duration: 0.5,
+        staggerChildren: 0.1 
+      } 
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: { opacity: 1, y: 0 }
+  };
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900 fixed w-full z-10 shadow-md">
-      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <motion.nav 
+      initial="hidden"
+      animate="visible"
+      variants={navVariants}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md bg-white/80 dark:bg-gray-900/80 shadow-lg' : 'bg-transparent'}`}
+    >
+      <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 py-3">
         {isLoading ? (
           <div className="flex justify-center items-center w-full h-16">
-            <div className="spinner"></div> {/* Ensure the spinner is styled appropriately */}
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
           </div>
         ) : (
           <>
-            <a href="#home" className="flex items-center space-x-3 rtl:space-x-reverse">
-              <img src="" className="h-8" alt="" /> {/* Ensure this has a valid src */}
-              <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ADIL HUSSAIN</span>
-            </a>
-            <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-              <button
+            <motion.a 
+              href="#home" 
+              variants={itemVariants}
+              className="flex items-center space-x-2 group"
+            >
+              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center text-white font-bold text-xl">A</div>
+              <span className="self-center text-xl md:text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-purple-600 transition-all duration-300">ADIL HUSSAIN</span>
+            </motion.a>
+            
+            <div className="flex items-center md:order-2 space-x-3">
+              <motion.button
+                variants={itemVariants}
+                onClick={toggleTheme}
+                className="p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+                aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+              >
+                {theme === 'dark' ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-700" />}
+              </motion.button>
+              
+              <motion.a
+                variants={itemVariants}
+                href="/resume10.pdf"
+                download="adil-hussain_cv.pdf"
+                className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm transition-all duration-300 shadow-md hover:shadow-lg"
+              >
+                <FaDownload /> Resume
+              </motion.a>
+              
+              <motion.button
+                variants={itemVariants}
                 onClick={toggleMenu}
                 type="button"
-                className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
-                aria-controls="navbar-cta"
+                className="inline-flex items-center p-2 w-10 h-10 justify-center text-gray-700 dark:text-gray-300 rounded-lg md:hidden hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-300 transition-colors duration-300"
+                aria-controls="navbar-menu"
                 aria-expanded={isOpen}
               >
                 <span className="sr-only">Open main menu</span>
-                <svg className="w-5 h-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 17 14">
-                  <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 1h15M1 7h15M1 13h15"/>
-                </svg>
-              </button>
-              <a
-                href="/resume10.pdf"
-                download="adil-hussain_cv.pdf"
-                className="hidden md:inline-flex items-center px-4 py-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+                <div className="relative w-6 h-5">
+                  <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ${isOpen ? 'rotate-45 top-2' : 'top-0'}`}></span>
+                  <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'} top-2`}></span>
+                  <span className={`absolute h-0.5 w-6 bg-current transform transition-all duration-300 ${isOpen ? '-rotate-45 top-2' : 'top-4'}`}></span>
+                </div>
+              </motion.button>
+            </div>
+            
+            <AnimatePresence>
+              <div 
+                className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${isOpen ? 'block' : 'hidden'}`} 
+                id="navbar-menu"
               >
-                Download CV
-              </a>
-            </div>
-            <div className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${isOpen ? 'block' : 'hidden'}`} id="navbar-cta">
-              <ul className="flex flex-col font-medium p-4 md:p-0 mt-4 border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
-                <li>
-                  <a
-                    href="#home"
-                    onClick={() => handleSetActiveLink('home')}
-                    className={`block py-2 px-3 md:p-0 rounded ${
-                      activeLink === 'home'
-                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                    }`}
-                    aria-current="page"
-                  >
-                    Home
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#about"
-                    onClick={() => handleSetActiveLink('about')}
-                    className={`block py-2 px-3 md:p-0 rounded ${
-                      activeLink === 'about'
-                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                    }`}
-                  >
-                    About
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#portfolio"
-                    onClick={() => handleSetActiveLink('portfolio')}
-                    className={`block py-2 px-3 md:p-0 rounded ${
-                      activeLink === 'portfolio'
-                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                    }`}
-                  >
-                    Portfolio
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="#contact"
-                    onClick={() => handleSetActiveLink('contact')}
-                    className={`block py-2 px-3 md:p-0 rounded ${
-                      activeLink === 'contact'
-                        ? 'text-white bg-blue-700 md:bg-transparent md:text-blue-700 md:dark:text-blue-500'
-                        : 'text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700'
-                    }`}
-                  >
-                    Contact
-                  </a>
-                </li>
-                <li className="md:hidden">
-                  <a
-                    href="/resume10.pdf"
-                    download="adil-hussain_cv.pdf"
-                    className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                  >
-                    Download CV
-                  </a>
-                </li>
-              </ul>
-            </div>
+                <motion.ul 
+                  variants={navVariants}
+                  className="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-8 md:mt-0 md:border-0 bg-white/90 dark:bg-gray-900/90 md:bg-transparent backdrop-blur-md"
+                >
+                  {['home', 'about', 'portfolio', 'contact'].map((item) => (
+                    <motion.li key={item} variants={itemVariants}>
+                      <a
+                        href={`#${item}`}
+                        onClick={() => handleSetActiveLink(item)}
+                        className={`relative block py-2 px-3 md:p-0 rounded capitalize transition-colors duration-300 ${activeLink === item 
+                          ? 'text-purple-600 dark:text-purple-400' 
+                          : 'text-gray-700 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-400'}`}
+                      >
+                        {item}
+                        {activeLink === item && (
+                          <motion.span 
+                            layoutId="activeSection"
+                            className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-purple-600 to-blue-500 md:block hidden"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            transition={{ duration: 0.3 }}
+                          />
+                        )}
+                      </a>
+                    </motion.li>
+                  ))}
+                  <motion.li variants={itemVariants} className="md:hidden mt-4">
+                    <a
+                      href="/resume10.pdf"
+                      download="adil-hussain_cv.pdf"
+                      className="flex items-center justify-center gap-2 w-full px-4 py-2 text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 font-medium rounded-lg text-sm transition-all duration-300"
+                    >
+                      <FaDownload /> Resume
+                    </a>
+                  </motion.li>
+                </motion.ul>
+              </div>
+            </AnimatePresence>
           </>
         )}
       </div>
-    </nav>
+    </motion.nav>
   );
 };
 

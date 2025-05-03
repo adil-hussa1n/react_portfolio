@@ -1,114 +1,155 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import Typewriter from 'typewriter-effect';
 import Lottie from 'lottie-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFacebook, faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub, FaArrowDown } from 'react-icons/fa';
+import { FiMail } from 'react-icons/fi';
 import animationData from '../Ani.json';
 
-const App = () => {
-  const [loading, setLoading] = useState(true);
-  const homeRef = useRef(null);
-  const textRef = useRef(null);
-  const detailsRef = useRef(null);
-  const socialRef = useRef(null);
+const Home = () => {
+  const sectionRef = useRef(null);
+  const containerRef = useRef(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 100);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          if (containerRef.current) {
+            containerRef.current.classList.add('animate-fade-in');
+          }
+        }
+      },
+      { threshold: 0.1 }
+    );
 
-    return () => clearTimeout(timer);
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+    };
   }, []);
 
-  useEffect(() => {
-    if (!loading) {
-      if (homeRef.current) {
-        setTimeout(() => {
-          homeRef.current.classList.add('animate');
-        }, 1000);
-      }
-      if (textRef.current) {
-        setTimeout(() => {
-          textRef.current.classList.remove('opacity-0', 'translate-y-5');
-        }, 1500);
-      }
-      if (detailsRef.current) {
-        setTimeout(() => {
-          detailsRef.current.classList.remove('opacity-0', 'translate-y-5');
-        }, 2000);
-      }
-      if (socialRef.current) {
-        setTimeout(() => {
-          socialRef.current.classList.remove('opacity-0', 'translate-y-5');
-        }, 2500);
-      }
+  const scrollToNext = () => {
+    const aboutSection = document.getElementById('about');
+    if (aboutSection) {
+      aboutSection.scrollIntoView({ behavior: 'smooth' });
     }
-  }, [loading]);
+  };
 
   return (
     <section
-      ref={homeRef}
+      ref={sectionRef}
       id="home"
-      className="opacity-0 transform translate-y-10 transition-opacity duration-1000 ease-in-out h-screen flex flex-col md:flex-row justify-center items-center bg-gray-900 text-white pt-16"
+      className="min-h-screen flex flex-col justify-center items-center relative overflow-hidden pt-16 pb-0 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-black text-gray-800 dark:text-white"
     >
-      <div className="container mx-auto flex flex-col md:flex-row items-center justify-center px-4 md:px-0">
-        {/* Left Side */}
-        <div className="flex-1 text-center md:text-left md:pr-8 mt-8">
-          <h2 className="text-3xl md:text-4xl font-extrabold mb-4">Hey, Welcome</h2>
-          <h2 className="text-2xl md:text-3xl font-semibold mb-2">I'm ADIL</h2>
-          <p
-            ref={textRef}
-            className="text-xl md:text-2xl font-light opacity-0 transform translate-y-5 transition-all duration-1000 ease-in-out"
-          >
-            <Typewriter
-              options={{
-                strings: ['MERN Stack Developer'],
-                autoStart: true,
-                loop: true,
-                cursor: '',
-                delay: 50,
-                deleteSpeed: 30,
-              }}
-            />
-          </p>
-          <div
-            ref={detailsRef}
-            className="opacity-0 transform translate-y-5 transition-all duration-1000 ease-in-out mt-6 space-y-2"
-          >
-            <p className="text-base md:text-lg">Experienced in building full-stack web applications</p>
-            <p className="text-base md:text-lg">Proficient in MongoDB, Express.js, React.js, and Node.js</p>
-            <p className="text-base md:text-lg">Passionate about clean code and user-friendly designs</p>
-          </div>
-          <div
-            ref={socialRef}
-            className="opacity-0 transform translate-y-5 transition-all duration-1000 ease-in-out mt-6 flex justify-center md:justify-start space-x-4"
-          >
-            <a href="https://www.facebook.com/Adil.hussain2345/" target="_blank" rel="noreferrer" aria-label="Facebook">
-              <FontAwesomeIcon icon={faFacebook} className="text-blue-600 hover:text-blue-800" size="lg" />
-            </a>
-            <a href="https://x.com/adil_hussa1n" target="_blank" rel="noreferrer" aria-label="Twitter">
-              <FontAwesomeIcon icon={faTwitter} className="text-blue-400 hover:text-blue-600" size="lg" />
-            </a>
-            <a href="https://www.linkedin.com/in/adil-hussa1n/" target="_blank" rel="noreferrer" aria-label="LinkedIn">
-              <FontAwesomeIcon icon={faLinkedin} className="text-blue-700 hover:text-blue-900" size="lg" />
-            </a>
-            <a href="https://github.com/adil-hussa1n" target="_blank" rel="noreferrer" aria-label="GitHub">
-              <FontAwesomeIcon icon={faGithub} className="text-gray-600 hover:text-gray-800" size="lg" />
-            </a>
-          </div>
-        </div>
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 -left-20 w-64 h-64 bg-purple-500 opacity-10 dark:opacity-5 rounded-full filter blur-3xl animate-blob"></div>
+        <div className="absolute top-1/3 -right-20 w-80 h-80 bg-blue-500 opacity-10 dark:opacity-5 rounded-full filter blur-3xl animate-blob animation-delay-2000"></div>
+        <div className="absolute bottom-0 left-1/4 w-72 h-72 bg-purple-600 opacity-10 dark:opacity-5 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
+      </div>
 
-        {/* Right Side */}
-        <div className="flex-1 mt-8 md:mt-0 flex justify-center relative">
-          <div className="w-[16rem] h-[16rem] sm:w-[20rem] sm:h-[20rem] md:w-[24rem] md:h-[24rem] bg-gray-800 rounded-xl shadow-2xl transform hover:scale-105 transition-transform duration-300 mx-auto md:mx-0 flex items-center justify-center relative">
-            <div className="absolute inset-0 w-full h-full overflow-hidden rounded-xl">
-              <Lottie animationData={animationData} loop className="w-full h-full object-cover" />
+      <div 
+        ref={containerRef}
+        className="container mx-auto max-w-7xl opacity-0 z-10"
+      >
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          {/* Left Column - Text Content */}
+          <div className="order-2 lg:order-1 text-center lg:text-left">
+            <div className="space-y-6">
+              <div className="inline-block px-4 py-2 bg-purple-100 dark:bg-purple-900/30 rounded-full text-purple-600 dark:text-purple-400 font-medium text-sm mb-2 animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
+                <span>👋 Welcome to my portfolio</span>
+              </div>
+              
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
+                Hi, I'm <span className="gradient-text">Adil Hussain</span>
+              </h1>
+              
+              <div className="text-xl md:text-2xl font-medium text-gray-600 dark:text-gray-300 h-12 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
+                <Typewriter
+                  options={{
+                    strings: [
+                      'MERN Stack Developer',
+                      'Full Stack Engineer',
+                      'UI/UX Enthusiast',
+                      'Problem Solver'
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    delay: 50,
+                    deleteSpeed: 30,
+                  }}
+                />
+              </div>
+              
+              <p className="text-base md:text-lg text-gray-600 dark:text-gray-400 max-w-lg mx-auto lg:mx-0 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
+                I craft modern web applications with a focus on clean code, performance, and exceptional user experience. Specialized in the MERN stack and passionate about creating innovative digital solutions.
+              </p>
+              
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start animate-fade-in-up" style={{ animationDelay: '1s' }}>
+                <a 
+                  href="#contact" 
+                  className="px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl flex items-center gap-2"
+                >
+                  <FiMail className="text-lg" /> Contact Me
+                </a>
+                <a 
+                  href="/resume10.pdf" 
+                  download="adil-hussain_cv.pdf"
+                  className="px-6 py-3 border-2 border-purple-600 dark:border-purple-500 text-purple-600 dark:text-purple-400 hover:bg-purple-600 hover:text-white dark:hover:bg-purple-500 dark:hover:text-white font-medium rounded-lg transition-all duration-300 flex items-center gap-2"
+                >
+                  Download Resume
+                </a>
+              </div>
+              
+              <div className="flex gap-4 justify-center lg:justify-start pt-4 animate-fade-in-up" style={{ animationDelay: '1.2s' }}>
+                <a href="https://www.facebook.com/Adil.hussain2345/" target="_blank" rel="noreferrer" aria-label="Facebook" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-600 hover:text-white dark:hover:bg-blue-600 transition-all duration-300">
+                  <FaFacebookF />
+                </a>
+                <a href="https://x.com/adil_hussa1n" target="_blank" rel="noreferrer" aria-label="Twitter" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-400 hover:text-white dark:hover:bg-blue-400 transition-all duration-300">
+                  <FaTwitter />
+                </a>
+                <a href="https://www.linkedin.com/in/adil-hussa1n/" target="_blank" rel="noreferrer" aria-label="LinkedIn" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-blue-700 hover:text-white dark:hover:bg-blue-700 transition-all duration-300">
+                  <FaLinkedinIn />
+                </a>
+                <a href="https://github.com/adil-hussa1n" target="_blank" rel="noreferrer" aria-label="GitHub" className="w-10 h-10 rounded-full flex items-center justify-center bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-700 hover:text-white dark:hover:bg-gray-600 transition-all duration-300">
+                  <FaGithub />
+                </a>
+              </div>
+            </div>
+          </div>
+          
+          {/* Right Column - Animation */}
+          <div className="order-1 lg:order-2 animate-fade-in-left" style={{ animationDelay: '0.4s' }}>
+            <div className="relative mx-auto">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-500/20 rounded-full filter blur-3xl opacity-70 animate-pulse"></div>
+              <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden p-2 border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-all duration-500">
+                <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-blue-500"></div>
+                <Lottie 
+                  animationData={animationData} 
+                  loop 
+                  className="w-full h-full max-w-lg mx-auto" 
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
+      
+      {/* Scroll Down Indicator */}
+      <button 
+        onClick={scrollToNext}
+        className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce bg-white dark:bg-gray-800 p-3 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 text-purple-600 dark:text-purple-400 focus:outline-none"
+        aria-label="Scroll down"
+      >
+        <FaArrowDown />
+      </button>
     </section>
   );
 };
 
-export default App;
+export default Home;

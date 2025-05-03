@@ -75,24 +75,6 @@ const Contact = () => {
       });
     }
   };
-  
-  const contactInfo = [
-    {
-      icon: <FiMapPin className="text-xl" />,
-      title: "Location",
-      content: "Sylhet, Bangladesh",
-    },
-    {
-      icon: <FiPhone className="text-xl" />,
-      title: "Phone",
-      content: "+8801715541267",
-    },
-    {
-      icon: <FiMail className="text-xl" />,
-      title: "Email",
-      content: "hussainadil981@gmail.com",
-    },
-  ];
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -127,6 +109,24 @@ const Contact = () => {
         );
     }
   };
+
+  const contactInfo = [
+    {
+      icon: <FiMapPin className="text-xl" />,
+      title: "Location",
+      content: "Sylhet, Bangladesh",
+    },
+    {
+      icon: <FiPhone className="text-xl" />,
+      title: "Phone",
+      content: "+8801715541267",
+    },
+    {
+      icon: <FiMail className="text-xl" />,
+      title: "Email",
+      content: "hussainadil981@gmail.com",
+    },
+  ];
 
   return (
     <section
@@ -217,7 +217,7 @@ const Contact = () => {
                       value={formData.fullName}
                       onChange={handleChange}
                       className={`block w-full px-4 py-3 pl-12 bg-gray-50 dark:bg-gray-900 border ${errors.fullName ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600 dark:text-white transition-colors duration-300`}
-                      placeholder="ADIL HUSSAIN"
+                      placeholder="John Doe"
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 dark:text-gray-400">
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
@@ -237,7 +237,7 @@ const Contact = () => {
                       value={formData.phoneNumber}
                       onChange={handleChange}
                       className={`block w-full px-4 py-3 pl-12 bg-gray-50 dark:bg-gray-900 border ${errors.phoneNumber ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600 dark:text-white transition-colors duration-300`}
-                      placeholder="+8801711223344"
+                      placeholder="+1 (123) 456-7890"
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 dark:text-gray-400">
                       <FiPhone className="h-5 w-5" />
@@ -255,7 +255,7 @@ const Contact = () => {
                       value={formData.email}
                       onChange={handleChange}
                       className={`block w-full px-4 py-3 pl-12 bg-gray-50 dark:bg-gray-900 border ${errors.email ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-700'} rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 dark:focus:ring-purple-600 dark:text-white transition-colors duration-300`}
-                      placeholder="adil@gmail.com"
+                      placeholder="john@example.com"
                     />
                     <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-gray-500 dark:text-gray-400">
                       <FiMail className="h-5 w-5" />
