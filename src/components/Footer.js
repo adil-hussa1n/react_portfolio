@@ -93,7 +93,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
           <p>&copy; {currentYear} Adil Hussain. All Rights Reserved.</p>
           <p className="mt-2 md:mt-0 flex items-center">
-            Made with <FaHeart className="text-red-500 mx-1" /> by Adil Hussain
+            Design & Developed by Adil Hussain
           </p>
         </div>
       </div>

@@ -157,13 +157,13 @@ const Portfolio = () => {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-12 animate-fade-in-up" style={{ animationDelay: '0.5s' }}>
+        <div className="flex flex-wrap justify-center gap-2 sm:gap-3 mb-8 sm:mb-12 animate-fade-in-up overflow-x-auto py-2" style={{ animationDelay: '0.5s' }}>
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveCategory(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${activeCategory === category.id
-                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md'
+              className={`px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${activeCategory === category.id
+                ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-md transform scale-105'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 border border-gray-200 dark:border-gray-700'
                 }`}
             >
@@ -173,7 +173,7 @@ const Portfolio = () => {
         </div>
 
         {/* Projects Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
@@ -184,49 +184,49 @@ const Portfolio = () => {
                 <img
                   src={project.src}
                   alt={project.title}
-                  className="w-full h-56 object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-48 sm:h-52 lg:h-56 object-cover object-center transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 md:opacity-0 md:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
                   <div className="flex space-x-2">
                     <a
                       href={project.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="p-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors duration-300"
+                      className="p-1.5 sm:p-2 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors duration-300"
                       aria-label="View GitHub Repository"
                     >
-                      <FaGithub className="text-lg" />
+                      <FaGithub className="text-sm sm:text-lg" />
                     </a>
                     {project.demo && (
                       <a
                         href={project.demo}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-colors duration-300"
+                        className="p-1.5 sm:p-2 bg-purple-600 text-white rounded-full hover:bg-purple-500 transition-colors duration-300"
                         aria-label="View Live Demo"
                       >
-                        <FaExternalLinkAlt className="text-lg" />
+                        <FaExternalLinkAlt className="text-sm sm:text-lg" />
                       </a>
                     )}
                   </div>
                 </div>
-                <div className="absolute top-3 right-3 bg-purple-600 text-white text-xs font-medium px-2 py-1 rounded-full">
+                <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-600 to-blue-500 text-white text-xs font-medium px-2 py-0.5 rounded-full shadow-sm">
                   {project.category}
                 </div>
               </div>
               
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-2">{project.title}</h3>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">{project.description}</p>
+              <div className="p-4 sm:p-5 lg:p-6">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-1 sm:mb-2">{project.title}</h3>
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
                 
-                <div className="flex flex-wrap gap-2 mb-4">
+                <div className="flex flex-wrap gap-1.5 sm:gap-2 mb-3 sm:mb-4">
                   {project.technologies.slice(0, 3).map((tech, index) => (
-                    <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
+                    <span key={index} className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
                       {tech}
                     </span>
                   ))}
                   {project.technologies.length > 3 && (
-                    <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300">
                       +{project.technologies.length - 3}
                     </span>
                   )}
@@ -234,7 +234,7 @@ const Portfolio = () => {
                 
                 <button
                   onClick={() => openProjectDetails(project)}
-                  className="w-full py-2 px-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition-all duration-300 shadow-md hover:shadow-lg"
+                  className="w-full py-1.5 sm:py-2 px-3 sm:px-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-medium rounded-lg flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base"
                 >
                   <FaCode /> View Details
                 </button>
@@ -253,49 +253,49 @@ const Portfolio = () => {
 
       {/* Project Details Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4 animate-fade-in">
-          <div className="bg-white dark:bg-gray-800 rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in">
+        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 animate-fade-in">
+          <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in">
             <div className="relative">
               <img 
                 src={selectedProject.src} 
                 alt={selectedProject.title} 
-                className="w-full h-64 md:h-80 object-cover object-center"
+                className="w-full h-48 sm:h-56 md:h-64 lg:h-80 object-cover object-center"
               />
               <button
                 onClick={closeProjectDetails}
-                className="absolute top-4 right-4 p-2 bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors duration-300"
+                className="absolute top-3 right-3 p-1.5 sm:p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors duration-300 z-10"
                 aria-label="Close details"
               >
-                <FaTimes />
+                <FaTimes className="text-sm sm:text-base" />
               </button>
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/80 to-transparent p-6">
-                <h2 className="text-2xl md:text-3xl font-bold text-white">{selectedProject.title}</h2>
+              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 sm:p-6">
+                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{selectedProject.title}</h2>
               </div>
             </div>
             
-            <div className="p-6 space-y-6">
+            <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
               <div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">Project Overview</h3>
-                <p className="text-gray-600 dark:text-gray-300">{selectedProject.longDescription}</p>
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-2 sm:mb-3 gradient-text">Project Overview</h3>
+                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">{selectedProject.longDescription}</p>
               </div>
               
               <div>
-                <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">Technologies Used</h3>
-                <div className="flex flex-wrap gap-2">
+                <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-2 sm:mb-3 gradient-text">Technologies Used</h3>
+                <div className="flex flex-wrap gap-1.5 sm:gap-2">
                   {selectedProject.technologies.map((tech, index) => (
-                    <span key={index} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
+                    <span key={index} className="inline-flex items-center px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
                       {tech}
                     </span>
                   ))}
                 </div>
               </div>
               
-              <div className="flex flex-wrap gap-4 pt-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4">
                 <a
                   href={selectedProject.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-6 py-3 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg flex items-center gap-2 transition-colors duration-300"
+                  className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg flex items-center justify-center sm:justify-start gap-2 transition-colors duration-300 text-sm sm:text-base"
                 >
                   <FaGithub /> View Repository
                 </a>
@@ -304,7 +304,7 @@ const Portfolio = () => {
                     href={selectedProject.demo}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-medium rounded-lg flex items-center gap-2 transition-all duration-300"
+                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-medium rounded-lg flex items-center justify-center sm:justify-start gap-2 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base"
                   >
                     <FaExternalLinkAlt /> Live Demo
                   </a>
