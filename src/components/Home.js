@@ -73,10 +73,10 @@ const Home = () => {
                 <Typewriter
                   options={{
                     strings: [
-                      'MERN Stack Developer',
-                      'Full Stack Engineer',
-                      'UI/UX Enthusiast',
-                      'Problem Solver'
+                      'IT Instructor',
+                      'Full Stack Developer',
+                      'Web Developer',
+                      'Data Analyst'
                     ],
                     autoStart: true,
                     loop: true,
@@ -87,7 +87,7 @@ const Home = () => {
               </div>
               
               <p className="text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 max-w-lg mx-auto lg:mx-0 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-                I craft modern web applications with a focus on clean code, performance, and exceptional user experience. Specialized in the MERN stack and passionate about creating innovative digital solutions.
+                IT Instructor at AC Tech Institute and Part-time Web Developer at Darun Tech. Based in Sylhet, Bangladesh. Passionate about creating modern, responsive web applications and teaching the next generation of developers.
               </p>
               
               <div className="flex flex-wrap gap-3 sm:gap-4 justify-center lg:justify-start animate-fade-in-up" style={{ animationDelay: '1s' }}>

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { FaCode, FaServer, FaMobileAlt, FaDatabase, FaLaptopCode, FaUserTie } from 'react-icons/fa';
+import { FaCode, FaServer, FaMobileAlt, FaDatabase, FaLaptopCode, FaUserTie, FaGraduationCap, FaBriefcase, FaChartBar } from 'react-icons/fa';
 
 const About = () => {
   const sectionRef = useRef(null);
@@ -30,10 +30,10 @@ const About = () => {
   }, []);
 
   const skills = [
-    { name: 'Frontend Development', icon: <FaCode />, description: 'Building responsive and interactive user interfaces with React.js, Redux, HTML5, CSS3, and JavaScript.' },
-    { name: 'Backend Development', icon: <FaServer />, description: 'Creating robust server-side applications using Node.js, Express.js, and RESTful APIs.' },
-    { name: 'Mobile Development', icon: <FaMobileAlt />, description: 'Developing cross-platform mobile applications using React Native.' },
-    { name: 'Database Management', icon: <FaDatabase />, description: 'Designing and managing databases with MongoDB, MySQL, and Firebase.' },
+    { name: 'Frontend Development', icon: <FaCode />, description: 'Building responsive and interactive user interfaces with React.js, Redux, HTML5, CSS3, JavaScript, and Tailwind CSS.' },
+    { name: 'Backend Development', icon: <FaServer />, description: 'Creating robust server-side applications using Node.js, Express.js, Django, and RESTful APIs with JWT Authentication.' },
+    { name: 'Database Management', icon: <FaDatabase />, description: 'Designing and managing databases with MongoDB, Mongoose, SQL, and Firebase.' },
+    { name: 'Data Analysis', icon: <FaChartBar />, description: 'Analyzing and visualizing data using Pandas, NumPy, Matplotlib, Seaborn, and Power BI.' },
   ];
 
   return (
@@ -55,11 +55,11 @@ const About = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-purple-600 to-blue-500 mx-auto rounded-full mb-6 animate-fade-in-up" style={{ animationDelay: '0.3s' }}></div>
           <p className="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.4s' }}>
-            I'm a passionate MERN stack developer dedicated to creating elegant, efficient, and user-friendly web applications.
+            I'm a passionate Full Stack Developer and IT Instructor with expertise in web development, data analysis, and machine learning.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
           {/* Left side - About Me */}
           <div className="space-y-6 animate-fade-in-right" style={{ animationDelay: '0.5s' }}>
             <div className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 card-hover">
@@ -71,14 +71,35 @@ const About = () => {
               </div>
               
               <div className="space-y-4 text-gray-600 dark:text-gray-300">
+                <div className="mb-10">
+                  <div className="flex items-center mb-6">
+                    <div className="p-3 bg-purple-100 dark:bg-purple-900/30 rounded-lg mr-4">
+                      <FaGraduationCap className="text-2xl text-purple-600 dark:text-purple-400" />
+                    </div>
+                    <h3 className="text-2xl font-bold gradient-text">Education</h3>
+                  </div>
+                  
+                  <div className="relative pl-8 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1.5 before:bg-gradient-to-b before:from-purple-600 before:to-blue-500 before:rounded-full p-4 bg-white dark:bg-gray-800/50 rounded-lg shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 dark:border-gray-700/50">
+                    <div className="absolute -left-2.5 top-0 w-5 h-5 rounded-full bg-purple-600 border-4 border-white dark:border-gray-900"></div>
+                    <p className="font-bold text-lg text-gray-800 dark:text-white flex items-center">
+                      Leading University, Sylhet, Bangladesh
+                    </p>
+                    <p className="text-md font-medium text-purple-600 dark:text-purple-400 mt-1">Bachelor of Science in Computer Science and Engineering</p>
+                    <div className="flex flex-wrap items-center gap-3 mt-2 text-sm text-gray-600 dark:text-gray-400">
+                      <span className="px-3 py-1 bg-purple-100 dark:bg-purple-900/30 rounded-full">2021 – 2024</span>
+                    </div>
+                    <div className="mt-3 pl-2 border-l-2 border-purple-200 dark:border-purple-800/50">
+                      <p className="font-medium text-gray-700 dark:text-gray-300">Extracurricular Activities:</p>
+                      <ul className="list-disc ml-5 mt-1 text-sm space-y-1 text-gray-600 dark:text-gray-400">
+                        <li>General Secretary, Leading University Computer Club</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                
+                
                 <p className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-purple-600 before:to-blue-500 before:rounded-full">
-                  I am a MERN stack developer with a passion for creating clean, efficient, and user-friendly web applications. Currently, I'm a student at Leading University, studying Computer Science and Engineering.
-                </p>
-                <p className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-blue-500 before:to-purple-600 before:rounded-full">
-                  Alongside my studies, I actively participate in various extracurricular activities that enhance my skills and broaden my knowledge in the field of web development and software engineering.
-                </p>
-                <p className="relative pl-6 before:content-[''] before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-gradient-to-b before:from-purple-600 before:to-blue-500 before:rounded-full">
-                  When I'm not coding, I love exploring new technologies, reading tech blogs, and working on personal projects that challenge me to grow as a developer.
+                  When I'm not coding, I enjoy exploring new technologies, contributing to open-source projects, and sharing my knowledge with the developer community through my role as General Secretary of the Leading University Computer Club.
                 </p>
               </div>
             </div>
@@ -175,15 +196,15 @@ const About = () => {
                 <div className="transform transition-all duration-300 hover:translate-x-2">
                   <h4 className="text-lg font-semibold mb-3 flex items-center text-gray-800 dark:text-white">
                     <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-lg mr-3 text-red-600 dark:text-red-400">
-                      <FaMobileAlt className="text-xl" />
+                      <FaChartBar className="text-xl" />
                     </div>
-                    Mobile Development
+                    Data Analysis & Machine Learning
                   </h4>
                   <p className="text-gray-600 dark:text-gray-300 mb-3 pl-12">
-                    I develop cross-platform mobile applications using modern frameworks.
+                    I analyze data and build machine learning models using Python libraries and visualization tools.
                   </p>
                   <div className="flex flex-wrap gap-2 pl-12">
-                    {['React Native', 'Expo', 'Android Studio', 'iOS'].map((skill, index) => (
+                    {['Pandas', 'NumPy', 'Matplotlib', 'Seaborn', 'Power BI', 'Supervised Learning', 'Unsupervised Learning'].map((skill, index) => (
                       <span key={index} className="px-3 py-1 bg-gradient-to-r from-red-500/10 to-orange-500/10 dark:from-red-500/20 dark:to-orange-500/20 border border-red-200 dark:border-red-800/30 rounded-full text-sm font-medium text-gray-700 dark:text-gray-200 hover:from-red-500/20 hover:to-orange-500/20 dark:hover:from-red-500/30 dark:hover:to-orange-500/30 transition-all duration-300">
                         {skill}
                       </span>
@@ -193,6 +214,9 @@ const About = () => {
               </div>
             </div>
           </div>
+
+         
+          
         </div>
       </div>
     </section>
