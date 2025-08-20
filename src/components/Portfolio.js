@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaTimes, FaCode, FaTerminal } from 'react-icons/fa';
+import { BiCodeAlt } from 'react-icons/bi';
 import img1 from '../img/p1.png';
 import img2 from '../img/p2.png';
 import img3 from '../img/p3.png';
@@ -200,14 +201,27 @@ const Portfolio = () => {
           {filteredProjects.map((project, index) => (
             <div
               key={project.id}
-              className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:scale-[1.02] transition-all duration-300 card-hover animate-fade-in-up"
+              className="bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:scale-[1.02] transition-all duration-300 card-hover animate-fade-in-up relative"
               style={{ animationDelay: `${0.2 + index * 0.1}s` }}
             >
+              {/* Terminal-like header */}
+              <div className="bg-gray-100 dark:bg-gray-700 py-2 px-3 flex items-center justify-between">
+                <div className="flex items-center space-x-1.5">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+                </div>
+                <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
+                  <span className="mr-1.5">{project.category}</span>
+                  <div className="h-3 w-3 rounded-full bg-gradient-to-r from-purple-600 to-blue-500"></div>
+                </div>
+              </div>
+              
               <div className="relative overflow-hidden group">
                 <img
                   src={project.src}
                   alt={project.title}
-                  className="w-full h-48 sm:h-52 lg:h-56 object-cover object-center transition-transform duration-500 group-hover:scale-110"
+                  className="w-full h-40 sm:h-44 lg:h-48 object-cover object-center transition-transform duration-500 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 md:opacity-0 md:group-hover:opacity-100 opacity-100 transition-opacity duration-300 flex items-end justify-start p-4">
                   <div className="flex space-x-2">
@@ -233,31 +247,41 @@ const Portfolio = () => {
                     )}
                   </div>
                 </div>
-                <div className="absolute top-2 right-2 bg-gradient-to-r from-purple-600 to-blue-500 text-white text-xs font-medium px-2 py-0.5 rounded-full shadow-sm">
-                  {project.category}
-                </div>
               </div>
               
-              <div className="p-4 sm:p-5 lg:p-6">
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-1 sm:mb-2">{project.title}</h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 line-clamp-2">{project.description}</p>
+              <div className="p-4 sm:p-5">
+                {/* Project title with code-like formatting */}
+                <div className="mb-3 font-mono">
+                  <span className="text-purple-600 dark:text-purple-400">const</span> <span className="text-blue-600 dark:text-blue-400">project</span> <span className="text-gray-600 dark:text-gray-400">= {'{'}</span>
+                  <div className="pl-4 mt-1">
+                    <span className="text-green-600 dark:text-green-400">name:</span> <span className="text-orange-600 dark:text-orange-400">'{project.title}'</span>
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400">{'}'}</div>
+                </div>
                 
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {project.technologies.slice(0, 3).map((tech, index) => (
-                    <span key={index} className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
-                      {tech}
-                    </span>
-                  ))}
-                  {project.technologies.length > 3 && (
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300">
-                      +{project.technologies.length - 3}
-                    </span>
-                  )}
+                <p className="text-sm text-gray-600 dark:text-gray-300 mb-3 line-clamp-2 border-l-2 border-gray-300 dark:border-gray-600 pl-3">{project.description}</p>
+                
+                {/* Tech stack with code-like formatting */}
+                <div className="mb-3 font-mono text-xs">
+                  <span className="text-green-600 dark:text-green-400">stack:</span> <span className="text-gray-600 dark:text-gray-400">[</span>
+                  <div className="flex flex-wrap gap-1.5 mt-1.5">
+                    {project.technologies.slice(0, 3).map((tech, index) => (
+                      <span key={index} className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 border border-blue-200 dark:border-blue-800/30 text-blue-800 dark:text-blue-300">
+                        '{tech}'
+                      </span>
+                    ))}
+                    {project.technologies.length > 3 && (
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-md text-xs font-medium bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-300">
+                        +{project.technologies.length - 3}
+                      </span>
+                    )}
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400">]</div>
                 </div>
                 
                 <button
                   onClick={() => openProjectDetails(project)}
-                  className="w-full py-1.5 sm:py-2 px-3 sm:px-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-medium rounded-lg flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base"
+                  className="w-full py-1.5 sm:py-2 px-3 sm:px-4 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-medium rounded-lg flex items-center justify-center gap-1.5 sm:gap-2 transition-all duration-300 shadow-md hover:shadow-lg text-sm"
                 >
                   <FaCode /> View Details
                 </button>
@@ -276,62 +300,109 @@ const Portfolio = () => {
 
       {/* Project Details Modal */}
       {selectedProject && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 animate-fade-in">
-          <div className="bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl animate-scale-in">
-            <div className="relative">
-              <img 
-                src={selectedProject.src} 
-                alt={selectedProject.title} 
-                className="w-full h-48 sm:h-56 md:h-64 lg:h-80 object-cover object-center"
-              />
-              <button
-                onClick={closeProjectDetails}
-                className="absolute top-3 right-3 p-1.5 sm:p-2 bg-black/60 hover:bg-black/80 text-white rounded-full transition-colors duration-300 z-10"
-                aria-label="Close details"
-              >
-                <FaTimes className="text-sm sm:text-base" />
-              </button>
-              <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-black/90 to-transparent p-4 sm:p-6">
-                <h2 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">{selectedProject.title}</h2>
-              </div>
-            </div>
-            
-            <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-2 sm:mb-3 gradient-text">Project Overview</h3>
-                <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">{selectedProject.longDescription}</p>
-              </div>
-              
-              <div>
-                <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-2 sm:mb-3 gradient-text">Technologies Used</h3>
-                <div className="flex flex-wrap gap-1.5 sm:gap-2">
-                  {selectedProject.technologies.map((tech, index) => (
-                    <span key={index} className="inline-flex items-center px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full text-xs sm:text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
-                      {tech}
-                    </span>
-                  ))}
+        <div className="fixed inset-0 z-50 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+          <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div className="fixed inset-0 bg-gray-900 bg-opacity-75 transition-opacity" aria-hidden="true" onClick={closeProjectDetails}></div>
+
+            <span className="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+            <div className="inline-block align-bottom bg-white dark:bg-gray-800 rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full border border-gray-200 dark:border-gray-700">
+              {/* Terminal-like header */}
+              <div className="bg-gray-100 dark:bg-gray-700 py-2 px-4 flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500"></div>
                 </div>
-              </div>
-              
-              <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:gap-4 pt-2 sm:pt-4">
-                <a
-                  href={selectedProject.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg flex items-center justify-center sm:justify-start gap-2 transition-colors duration-300 text-sm sm:text-base"
+                <div className="text-xs text-gray-500 dark:text-gray-400 flex items-center">
+                  <BiCodeAlt className="mr-1" /> project-details.js
+                </div>
+                <button
+                  type="button"
+                  className="text-gray-400 hover:text-gray-500 dark:hover:text-gray-300 focus:outline-none"
+                  onClick={closeProjectDetails}
                 >
-                  <FaGithub /> View Repository
-                </a>
-                {selectedProject.demo && (
-                  <a
-                    href={selectedProject.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="px-4 sm:px-6 py-2.5 sm:py-3 bg-gradient-to-r from-blue-500 to-purple-600 hover:from-purple-600 hover:to-blue-500 text-white font-medium rounded-lg flex items-center justify-center sm:justify-start gap-2 transition-all duration-300 shadow-md hover:shadow-lg text-sm sm:text-base"
-                  >
-                    <FaExternalLinkAlt /> Live Demo
-                  </a>
-                )}
+                  <span className="sr-only">Close</span>
+                  <svg className="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+
+              <div className="bg-white dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="sm:flex sm:items-start">
+                  <div className="mt-3 text-center sm:mt-0 sm:text-left w-full">
+                    {/* Project title with code-like formatting */}
+                    <div className="font-mono mb-4">
+                      <span className="text-purple-600 dark:text-purple-400">const</span> <span className="text-blue-600 dark:text-blue-400">projectDetails</span> <span className="text-gray-600 dark:text-gray-400">= {'{'}</span>
+                      <div className="pl-4 mt-1">
+                        <span className="text-green-600 dark:text-green-400">title:</span> <span className="text-orange-600 dark:text-orange-400">"{selectedProject.title}"</span><span className="text-gray-600 dark:text-gray-400">,</span>
+                      </div>
+                      <div className="pl-4">
+                        <span className="text-green-600 dark:text-green-400">category:</span> <span className="text-orange-600 dark:text-orange-400">"{selectedProject.category}"</span>
+                      </div>
+                      <div className="text-gray-600 dark:text-gray-400">{'}'}</div>
+                    </div>
+                    
+                    <div className="mt-4 mb-6 relative overflow-hidden rounded-lg">
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-500/20 mix-blend-overlay"></div>
+                      <img 
+                        src={selectedProject.src} 
+                        alt={selectedProject.title} 
+                        className="w-full h-64 sm:h-80 object-cover object-center rounded-lg shadow-md"
+                      />
+                    </div>
+                    
+                    <div className="mt-6 space-y-6">
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                          <FaTerminal className="mr-2 text-purple-600 dark:text-purple-400" /> 
+                          Project Description
+                        </h4>
+                        <p className="text-gray-600 dark:text-gray-300 border-l-4 border-purple-500 pl-4 py-2">{selectedProject.description}</p>
+                      </div>
+                      
+                      <div>
+                        <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                          <FaCode className="mr-2 text-blue-600 dark:text-blue-400" /> 
+                          Technologies Used
+                        </h4>
+                        <div className="font-mono text-sm bg-gray-50 dark:bg-gray-900/50 p-4 rounded-lg">
+                          <span className="text-green-600 dark:text-green-400">technologies:</span> <span className="text-gray-600 dark:text-gray-400">[</span>
+                          <div className="flex flex-wrap gap-2 mt-2 pl-4">
+                            {selectedProject.technologies.map((tech, index) => (
+                              <span key={index} className="px-3 py-1 bg-gradient-to-r from-blue-500/10 to-purple-500/10 dark:from-blue-500/20 dark:to-purple-500/20 border border-blue-200 dark:border-blue-800/30 rounded-md text-sm font-medium text-blue-800 dark:text-blue-300">
+                                '{tech}'
+                              </span>
+                            ))}
+                          </div>
+                          <span className="text-gray-600 dark:text-gray-400">]</span>
+                        </div>
+                      </div>
+                      
+                      <div className="flex flex-wrap gap-4 pt-2">
+                        <a
+                          href={selectedProject.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="inline-flex items-center px-4 py-2 border border-gray-300 dark:border-gray-600 text-sm font-medium rounded-md shadow-sm text-gray-800 dark:text-white bg-white dark:bg-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                        >
+                          <FaGithub className="mr-2" /> GitHub Repository
+                        </a>
+                        {selectedProject.demo && (
+                          <a
+                            href={selectedProject.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-purple-700 hover:to-blue-600 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500"
+                          >
+                            <FaExternalLinkAlt className="mr-2" /> Live Demo
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

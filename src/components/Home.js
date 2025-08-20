@@ -1,9 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import Typewriter from 'typewriter-effect';
-import Lottie from 'lottie-react';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub, FaArrowDown } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
-import animationData from '../Ani.json';
+import { FaCode, FaLaptopCode, FaDatabase } from 'react-icons/fa';
 
 const Home = () => {
   const sectionRef = useRef(null);
@@ -75,8 +74,7 @@ const Home = () => {
                     strings: [
                       'IT Instructor',
                       'Full Stack Developer',
-                      'Web Developer',
-                      'Data Analyst'
+                    
                     ],
                     autoStart: true,
                     loop: true,
@@ -123,17 +121,71 @@ const Home = () => {
             </div>
           </div>
           
-          {/* Right Column - Animation - Optimized for mobile */}
+          {/* Right Column - Modern Hero Design */}
           <div className="order-1 lg:order-2 animate-fade-in-left" style={{ animationDelay: '0.4s' }}>
             <div className="relative mx-auto max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg">
               <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 to-blue-500/20 rounded-full filter blur-3xl opacity-70 animate-pulse"></div>
-              <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden p-2 border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-all duration-500">
+              <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 transform hover:scale-105 transition-all duration-500">
                 <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-blue-500"></div>
-                <Lottie 
-                  animationData={animationData} 
-                  loop 
-                  className="w-full h-full" 
-                />
+                
+                {/* Modern Code-themed Hero Design */}
+                <div className="p-6 flex flex-col space-y-6">
+                  {/* Terminal Header */}
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
+                    <div className="ml-2 text-xs text-gray-500 dark:text-gray-400">developer_profile.js</div>
+                  </div>
+                  
+                  {/* Code Content */}
+                  <div className="font-mono text-sm text-gray-800 dark:text-gray-200 space-y-3">
+                    <div>
+                      <span className="text-purple-600 dark:text-purple-400">const</span> <span className="text-blue-600 dark:text-blue-400">developer</span> <span className="text-gray-600 dark:text-gray-400">=</span> <span className="text-gray-600 dark:text-gray-400">{'{'}</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-green-600 dark:text-green-400">name:</span> <span className="text-orange-600 dark:text-orange-400">'Adil Hussain'</span><span className="text-gray-600 dark:text-gray-400">,</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-green-600 dark:text-green-400">title:</span> <span className="text-orange-600 dark:text-orange-400">'Full Stack Developer'</span><span className="text-gray-600 dark:text-gray-400">,</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-green-600 dark:text-green-400">location:</span> <span className="text-orange-600 dark:text-orange-400">'Sylhet, Bangladesh'</span><span className="text-gray-600 dark:text-gray-400">,</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-green-600 dark:text-green-400">skills:</span> <span className="text-gray-600 dark:text-gray-400">[</span>
+                    </div>
+                    <div className="pl-8">
+                      <span className="text-orange-600 dark:text-orange-400">'React'</span><span className="text-gray-600 dark:text-gray-400">,</span> <span className="text-orange-600 dark:text-orange-400">'JavaScript'</span><span className="text-gray-600 dark:text-gray-400">,</span> <span className="text-orange-600 dark:text-orange-400">'Node.js'</span><span className="text-gray-600 dark:text-gray-400">,</span>
+                    </div>
+                    <div className="pl-8">
+                      <span className="text-orange-600 dark:text-orange-400">'Tailwind'</span><span className="text-gray-600 dark:text-gray-400">,</span> <span className="text-orange-600 dark:text-orange-400">'Python'</span>
+                    </div>
+                    <div className="pl-4">
+                      <span className="text-gray-600 dark:text-gray-400">]</span>
+                    </div>
+                    <div><span className="text-gray-600 dark:text-gray-400">{'}'}</span><span className="text-purple-600 dark:text-purple-400">;</span></div>
+                  </div>
+                  
+                  {/* Tech Icons */}
+                  <div className="flex justify-around pt-2">
+                    <div className="flex flex-col items-center">
+                      <FaCode className="text-2xl text-purple-600 dark:text-purple-400" />
+                      <span className="text-xs mt-1 text-gray-600 dark:text-gray-400">Frontend</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <FaLaptopCode className="text-2xl text-blue-600 dark:text-blue-400" />
+                      <span className="text-xs mt-1 text-gray-600 dark:text-gray-400">Backend</span>
+                    </div>
+                    <div className="flex flex-col items-center">
+                      <FaDatabase className="text-2xl text-green-600 dark:text-green-400" />
+                      <span className="text-xs mt-1 text-gray-600 dark:text-gray-400">Data</span>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Animated Border */}
+                <div className="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600"></div>
               </div>
             </div>
           </div>

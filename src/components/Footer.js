@@ -31,7 +31,7 @@ const Footer = () => {
           <div className="md:col-span-1">
             <h2 className="text-2xl font-bold mb-4 gradient-text">Adil Hussain</h2>
             <p className="text-gray-600 dark:text-gray-400 mb-4">
-              IT Instructor at AC Tech Institute and Full Stack Developer with expertise in web development, data analysis, and machine learning.
+              IT Instructor at AC Tech Institute and Full Stack Developer with expertise in web development, data science, and machine learning.
             </p>
             <div className="flex space-x-3">
               {socialLinks.map((link, index) => (

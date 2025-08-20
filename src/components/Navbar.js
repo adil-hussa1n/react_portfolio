@@ -88,7 +88,7 @@ const Navbar = ({ theme, toggleTheme }) => {
               variants={itemVariants}
               className="flex items-center space-x-2 group"
             >
-              <div className="h-8 w-8 sm:h-10 sm:w-10 rounded-full bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center text-white font-bold text-lg sm:text-xl">A</div>
+
               <span className="self-center text-lg sm:text-xl md:text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-purple-600 transition-all duration-300">ADIL</span>
             </motion.a>
             
