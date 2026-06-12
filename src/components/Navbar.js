@@ -74,12 +74,12 @@ const Navbar = ({ theme, toggleTheme }) => {
       initial="hidden"
       animate="visible"
       variants={navVariants}
-      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md bg-white/90 dark:bg-gray-900/90 shadow-lg' : 'bg-transparent'}`}
+      className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'backdrop-blur-md bg-white/80 dark:bg-zinc-950/80 border-b border-zinc-200/50 dark:border-zinc-900/40 shadow-lg dark:shadow-2xl' : 'bg-transparent'}`}
     >
-      <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 sm:px-6 py-2 sm:py-3">
+      <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 sm:px-6 py-3">
         {isLoading ? (
           <div className="flex justify-center items-center w-full h-16">
-            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-600"></div>
+            <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-purple-500"></div>
           </div>
         ) : (
           <>
@@ -88,25 +88,24 @@ const Navbar = ({ theme, toggleTheme }) => {
               variants={itemVariants}
               className="flex items-center space-x-2 group"
             >
-
-              <span className="self-center text-lg sm:text-xl md:text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-purple-600 to-blue-500 bg-clip-text text-transparent group-hover:from-blue-500 group-hover:to-purple-600 transition-all duration-300">ADIL</span>
+              <span className="self-center text-xl md:text-2xl font-bold whitespace-nowrap bg-gradient-to-r from-purple-500 to-blue-400 bg-clip-text text-transparent group-hover:from-blue-400 group-hover:to-purple-500 transition-all duration-300">ADIL</span>
             </motion.a>
             
             <div className="flex items-center md:order-2 space-x-2 sm:space-x-3">
               <motion.button
                 variants={itemVariants}
                 onClick={toggleTheme}
-                className="p-1.5 sm:p-2 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300"
+                className="p-2 rounded-xl text-zinc-650 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 hover:bg-zinc-200/85 dark:hover:bg-zinc-800/80 transition-colors duration-300"
                 aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
               >
-                {theme === 'dark' ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-gray-700" />}
+                {theme === 'dark' ? <FaSun className="text-yellow-400" /> : <FaMoon className="text-purple-550 dark:text-purple-400" />}
               </motion.button>
               
               <motion.a
                 variants={itemVariants}
                 href="/resume10.pdf"
                 download="adil-hussain_cv.pdf"
-                className="hidden md:inline-flex items-center gap-2 px-4 py-2 text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm transition-all duration-300 shadow-md hover:shadow-lg"
+                className="btn-premium hidden md:inline-flex items-center gap-2 px-5 py-2.5 text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 font-semibold rounded-xl text-sm transition-all duration-300 shadow-md hover:shadow-lg"
               >
                 <FaDownload /> Resume
               </motion.a>
@@ -115,61 +114,82 @@ const Navbar = ({ theme, toggleTheme }) => {
                 variants={itemVariants}
                 onClick={toggleMenu}
                 type="button"
-                className="inline-flex items-center p-1.5 sm:p-2 w-8 h-8 sm:w-10 sm:h-10 justify-center text-gray-700 dark:text-gray-300 rounded-lg md:hidden hover:bg-gray-200 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-300 transition-colors duration-300"
-                aria-controls="navbar-menu"
+                className="inline-flex items-center p-2 justify-center text-zinc-650 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white rounded-xl md:hidden bg-zinc-100 dark:bg-zinc-900/60 border border-zinc-200 dark:border-zinc-800/80 hover:bg-zinc-200/85 dark:hover:bg-zinc-800/80 focus:outline-none transition-colors duration-300"
+                aria-controls="mobile-menu"
                 aria-expanded={isOpen}
               >
                 <span className="sr-only">Open main menu</span>
-                <div className="relative w-5 sm:w-6 h-4 sm:h-5">
-                  <span className={`absolute h-0.5 w-5 sm:w-6 bg-current transform transition-all duration-300 ${isOpen ? 'rotate-45 top-1.5 sm:top-2' : 'top-0'}`}></span>
-                  <span className={`absolute h-0.5 w-5 sm:w-6 bg-current transform transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'} top-1.5 sm:top-2`}></span>
-                  <span className={`absolute h-0.5 w-5 sm:w-6 bg-current transform transition-all duration-300 ${isOpen ? '-rotate-45 top-1.5 sm:top-2' : 'top-3 sm:top-4'}`}></span>
+                <div className="relative w-5 h-4">
+                  <span className={`absolute h-0.5 w-5 bg-current transform transition-all duration-300 ${isOpen ? 'rotate-45 top-1.5' : 'top-0'}`}></span>
+                  <span className={`absolute h-0.5 w-5 bg-current transform transition-all duration-300 ${isOpen ? 'opacity-0' : 'opacity-100'} top-1.5`}></span>
+                  <span className={`absolute h-0.5 w-5 bg-current transform transition-all duration-300 ${isOpen ? '-rotate-45 top-1.5' : 'top-3'}`}></span>
                 </div>
               </motion.button>
             </div>
             
-            <AnimatePresence>
-              <div 
-                className={`items-center justify-between w-full md:flex md:w-auto md:order-1 ${isOpen ? 'block' : 'hidden'}`} 
-                id="navbar-menu"
-              >
-                <motion.ul 
-                  variants={navVariants}
-                  className="flex flex-col font-medium p-4 md:p-0 mt-4 rounded-lg md:flex-row md:space-x-6 lg:space-x-8 md:mt-0 md:border-0 bg-white/95 dark:bg-gray-900/95 md:bg-transparent backdrop-blur-md shadow-lg md:shadow-none"
-                >
-                  {['home', 'about', 'portfolio', 'contact'].map((item) => (
-                    <motion.li key={item} variants={itemVariants}>
-                      <a
-                        href={`#${item}`}
-                        onClick={() => handleSetActiveLink(item)}
-                        className={`relative block py-2.5 px-3 md:p-0 rounded capitalize transition-colors duration-300 text-center md:text-left ${activeLink === item 
-                          ? 'text-white md:text-purple-600 dark:md:text-purple-400 bg-gradient-to-r from-purple-600 to-blue-500 md:bg-none' 
-                          : 'text-gray-700 hover:text-purple-600 dark:text-gray-300 dark:hover:text-purple-400'}`}
-                      >
-                        {item}
-                        {activeLink === item && (
-                          <motion.span 
-                            layoutId="activeSection"
-                            className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-purple-600 to-blue-500 hidden md:block"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.3 }}
-                          />
-                        )}
-                      </a>
-                    </motion.li>
-                  ))}
-                  <motion.li variants={itemVariants} className="md:hidden mt-4">
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center justify-between md:w-auto md:order-1" id="desktop-menu">
+              <ul className="flex flex-row font-medium space-x-6 lg:space-x-8 md:bg-transparent">
+                {['home', 'about', 'portfolio', 'contact'].map((item) => (
+                  <li key={item}>
                     <a
-                      href="/resume10.pdf"
-                      download="adil-hussain_cv.pdf"
-                      className="flex items-center justify-center gap-2 py-2.5 px-3 text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 font-medium rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                      href={`#${item}`}
+                      onClick={() => handleSetActiveLink(item)}
+                      className={`relative block py-1.5 px-1 capitalize transition-colors duration-300 text-zinc-650 dark:text-zinc-400 hover:text-zinc-950 dark:hover:text-white font-semibold text-sm ${activeLink === item ? 'text-purple-600 dark:text-purple-400' : ''}`}
                     >
-                      <FaDownload /> Download Resume
+                      {item}
+                      {activeLink === item && (
+                        <motion.span 
+                          layoutId="activeSection"
+                          className="absolute inset-x-0 -bottom-1 h-0.5 bg-gradient-to-r from-purple-500 to-blue-400"
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          transition={{ duration: 0.3 }}
+                        />
+                      )}
                     </a>
-                  </motion.li>
-                </motion.ul>
-              </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Mobile Menu Dropdown with smooth Framer Motion height/opacity animation */}
+            <AnimatePresence>
+              {isOpen && (
+                <motion.div 
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                  className="w-full md:hidden overflow-hidden mt-3" 
+                  id="mobile-menu"
+                >
+                  <ul className="flex flex-col font-medium p-4 rounded-2xl bg-white/90 dark:bg-zinc-950/90 border border-zinc-200 dark:border-zinc-900 backdrop-blur-xl shadow-2xl space-y-2">
+                    {['home', 'about', 'portfolio', 'contact'].map((item) => (
+                      <li key={item}>
+                        <a
+                          href={`#${item}`}
+                          onClick={() => handleSetActiveLink(item)}
+                          className={`block py-2.5 px-4 rounded-xl capitalize transition-all duration-300 text-center text-sm ${activeLink === item 
+                            ? 'text-white bg-gradient-to-r from-purple-600 to-blue-500 shadow-lg shadow-purple-500/20' 
+                            : 'text-zinc-650 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-900/60 hover:text-zinc-950 dark:hover:text-white'}`}
+                        >
+                          {item}
+                        </a>
+                      </li>
+                    ))}
+                    <li className="pt-2">
+                      <a
+                        href="/resume10.pdf"
+                        download="adil-hussain_cv.pdf"
+                        className="btn-premium flex items-center justify-center gap-2 py-2.5 px-4 text-white bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-lg text-sm"
+                      >
+                        <FaDownload /> Download Resume
+                      </a>
+                    </li>
+                  </ul>
+                </motion.div>
+              )}
             </AnimatePresence>
           </>
         )}

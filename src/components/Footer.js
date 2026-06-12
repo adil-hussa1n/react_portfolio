@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaHeart, FaGithub, FaLinkedinIn, FaTwitter, FaFacebookF } from 'react-icons/fa';
+import { FaGithub, FaLinkedinIn, FaTwitter, FaFacebookF } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,28 +12,30 @@ const Footer = () => {
   ];
   
   const socialLinks = [
-    { icon: <FaGithub />, url: 'https://github.com/adil-hussa1n', label: 'GitHub' },
-    { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/adil-hussa1n/', label: 'LinkedIn' },
-    { icon: <FaTwitter />, url: 'https://x.com/adil_hussa1n', label: 'Twitter' },
-    { icon: <FaFacebookF />, url: 'https://www.facebook.com/Adil.hussain2345/', label: 'Facebook' },
+    { icon: <FaGithub />, url: 'https://github.com/adil-hussa1n', label: 'GitHub', hoverClass: 'hover:bg-zinc-700 hover:text-white' },
+    { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/adil-hussa1n/', label: 'LinkedIn', hoverClass: 'hover:bg-blue-700 hover:text-white' },
+    { icon: <FaTwitter />, url: 'https://x.com/adil_hussa1n', label: 'Twitter', hoverClass: 'hover:bg-sky-500 hover:text-white' },
+    { icon: <FaFacebookF />, url: 'https://www.facebook.com/Adil.hussain2345/', label: 'Facebook', hoverClass: 'hover:bg-blue-600 hover:text-white' },
   ];
 
   return (
-    <footer className="relative bg-white dark:bg-gray-900 pt-16 pb-6 overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-purple-600 to-blue-500"></div>
-      <div className="absolute -bottom-24 -right-24 w-48 h-48 bg-blue-500 opacity-5 rounded-full filter blur-3xl"></div>
-      <div className="absolute -bottom-24 -left-24 w-48 h-48 bg-purple-500 opacity-5 rounded-full filter blur-3xl"></div>
+    <footer className="relative bg-zinc-100 dark:bg-zinc-950 pt-16 pb-8 overflow-hidden text-zinc-600 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 transition-colors duration-500">
+      {/* Ambient background glows */}
+      <div className="absolute -bottom-24 -right-24 w-64 h-64 glow-orb-blue opacity-10 rounded-full"></div>
+      <div className="absolute -bottom-24 -left-24 w-64 h-64 glow-orb-purple opacity-10 rounded-full"></div>
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
+          
           {/* Logo and description */}
-          <div className="md:col-span-1">
-            <h2 className="text-2xl font-bold mb-4 gradient-text">Adil Hussain</h2>
-            <p className="text-gray-600 dark:text-gray-400 mb-4">
-              IT Instructor at AC Tech Institute and Full Stack Developer with expertise in web development, data science, and machine learning.
+          <div className="space-y-4">
+            <h2 className="text-2xl font-bold tracking-wider bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-500 dark:to-blue-400 bg-clip-text text-transparent dark:glow-text-purple">
+              Adil Hussain
+            </h2>
+            <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              IT Instructor at AC Tech Institute and Full Stack Developer with expertise in React, Node, and Data Science. Passionate about building performant web products.
             </p>
-            <div className="flex space-x-3">
+            <div className="flex space-x-3 pt-2">
               {socialLinks.map((link, index) => (
                 <a 
                   key={index}
@@ -41,7 +43,7 @@ const Footer = () => {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={link.label}
-                  className="p-2 bg-gray-200 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300 hover:bg-gradient-to-r hover:from-purple-600 hover:to-blue-500 hover:text-white transition-all duration-300"
+                  className={`p-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 transition-all duration-300 ${link.hoverClass}`}
                 >
                   {link.icon}
                 </a>
@@ -50,16 +52,16 @@ const Footer = () => {
           </div>
           
           {/* Quick links */}
-          <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Quick Links</h3>
-            <ul className="space-y-2">
+          <div>
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 font-mono">Quick Navigation</h3>
+            <ul className="space-y-2.5 text-sm">
               {sections.map((section, index) => (
                 <li key={index}>
                   <a 
                     href={section.path}
-                    className="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 flex items-center"
+                    className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 flex items-center group"
                   >
-                    <span className="mr-2">→</span>
+                    <span className="text-purple-655 dark:text-purple-500 mr-2 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
                     {section.name}
                   </a>
                 </li>
@@ -68,33 +70,38 @@ const Footer = () => {
           </div>
           
           {/* Contact info */}
-          <div className="md:col-span-1">
-            <h3 className="text-lg font-semibold mb-4 text-gray-800 dark:text-gray-200">Contact Info</h3>
-            <div className="space-y-2 text-gray-600 dark:text-gray-400">
-              <p>Sylhet, Bangladesh</p>
-              <p>hussainadil981@gmail.com</p>
-              <p>+8801715541267</p>
+          <div className="space-y-4">
+            <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 font-mono">Contact Details</h3>
+            <div className="space-y-2 text-sm leading-relaxed">
+              <p className="flex items-center gap-2">
+                <span className="text-purple-600 dark:text-purple-400">Location:</span> Sylhet, Bangladesh
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="text-purple-600 dark:text-purple-400">Email:</span> hussainadil981@gmail.com
+              </p>
+              <p className="flex items-center gap-2">
+                <span className="text-purple-600 dark:text-purple-400">Phone:</span> +8801715541267
+              </p>
             </div>
-            <div className="mt-4">
+            <div className="pt-2">
               <a 
                 href="#contact"
-                className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 text-white rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+                className="btn-premium inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-purple-500/20 text-xs sm:text-sm"
               >
                 Get In Touch
               </a>
             </div>
           </div>
+
         </div>
         
         {/* Divider */}
-        <div className="border-t border-gray-200 dark:border-gray-800 mb-6"></div>
+        <div className="border-t border-zinc-200 dark:border-zinc-900 mb-6"></div>
         
         {/* Copyright */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-gray-600 dark:text-gray-400 text-sm">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-zinc-500 dark:text-zinc-500 text-xs sm:text-sm gap-2">
           <p>&copy; {currentYear} Adil Hussain. All Rights Reserved.</p>
-          <p className="mt-2 md:mt-0 flex items-center">
-            Design & Developed by Adil Hussain
-          </p>
+          <p className="font-mono text-zinc-400 dark:text-zinc-600">Designed &amp; Engineered by Adil</p>
         </div>
       </div>
     </footer>

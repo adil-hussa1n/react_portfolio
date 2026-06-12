@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-const Preloader = () => {
+const Preloader = ({ theme }) => {
   const [loading, setLoading] = useState(0);
   const [showText, setShowText] = useState(false);
 
@@ -31,8 +31,12 @@ const Preloader = () => {
   const letters = "ADIL HUSSAIN".split('');
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gradient-to-br from-gray-900 to-black z-50">
-      <div className="text-center px-4">
+    <div className="fixed inset-0 flex items-center justify-center bg-slate-50 dark:bg-zinc-950 z-50 transition-colors duration-500">
+      {/* Background decoration orbs */}
+      <div className="absolute top-1/4 left-1/4 w-[250px] h-[250px] glow-orb-purple opacity-10 dark:opacity-20 rounded-full animate-pulse-slow"></div>
+      <div className="absolute bottom-1/4 right-1/4 w-[250px] h-[250px] glow-orb-blue opacity-10 dark:opacity-20 rounded-full animate-pulse-slow"></div>
+      
+      <div className="text-center px-4 relative z-10">
         <div className="mb-8">
           {showText && (
             <div className="flex flex-wrap justify-center mb-6">
@@ -51,21 +55,21 @@ const Preloader = () => {
             </div>
           )}
           <p 
-            className="text-lg text-gray-400 mb-6 opacity-0 animate-fade-in"
+            className="text-lg text-zinc-600 dark:text-zinc-400 mb-6 opacity-0 animate-fade-in"
             style={{ animationDelay: '1.8s' }}
           >
             Portfolio Loading
           </p>
         </div>
 
-        <div className="relative w-64 md:w-80 h-2 bg-gray-800 rounded-full overflow-hidden mx-auto">
+        <div className="relative w-64 md:w-80 h-2 bg-zinc-200 dark:bg-zinc-800 rounded-full overflow-hidden mx-auto">
           <div
             className="h-full bg-gradient-to-r from-purple-600 to-blue-500 rounded-full transition-all duration-100"
             style={{ width: `${loading}%` }}
           />
         </div>
 
-        <div className="flex justify-between mt-2 text-xs text-gray-500 w-64 md:w-80 mx-auto opacity-0 animate-fade-in"
+        <div className="flex justify-between mt-2 text-xs text-zinc-500 dark:text-zinc-500 w-64 md:w-80 mx-auto opacity-0 animate-fade-in"
           style={{ animationDelay: '0.8s' }}
         >
           <span>0%</span>

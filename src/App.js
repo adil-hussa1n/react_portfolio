@@ -10,7 +10,9 @@ import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   const [showPreloader, setShowPreloader] = useState(true);
-  const [theme, setTheme] = useState('dark');
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem('theme') || 'dark';
+  });
 
   useEffect(() => {
     // Reduced preloader time for better UX
@@ -18,13 +20,11 @@ function App() {
       setShowPreloader(false);
     }, 3000);
 
-    // Check for saved theme preference
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-    document.documentElement.classList.toggle('dark', savedTheme === 'dark');
+    // Apply the theme preference on mount and update
+    document.documentElement.classList.toggle('dark', theme === 'dark');
 
     return () => clearTimeout(preloaderTimer);
-  }, []);
+  }, [theme]);
 
   const toggleTheme = () => {
     const newTheme = theme === 'dark' ? 'light' : 'dark';
@@ -43,7 +43,7 @@ function App() {
       </div>
       
       {showPreloader ? (
-        <Preloader key="preloader" />
+        <Preloader key="preloader" theme={theme} />
       ) : (
         <>
           <Navbar theme={theme} toggleTheme={toggleTheme} />
