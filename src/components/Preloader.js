@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
+const steps = [
+  'Initializing Aurora environment...',
+  'Loading styling variables...',
+  'Building component elements...',
+  'Pre-loading images & assets...',
+  'Establishing secure link...',
+  'System ready.'
+];
+
 const Preloader = () => {
   const [loading, setLoading] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
-
-  const steps = [
-    'Initializing Aurora environment...',
-    'Loading styling variables...',
-    'Building component elements...',
-    'Pre-loading images & assets...',
-    'Establishing secure link...',
-    'System ready.'
-  ];
 
   const totalSegments = 10;
   const activeSegments = Math.floor((loading / 100) * totalSegments);

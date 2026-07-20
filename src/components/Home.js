@@ -148,7 +148,7 @@ const Home = () => {
 
                     {/* Code content */}
                     <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-2 text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                      <div className="text-zinc-400 text-[10px] mb-3">// Software Engineer Profile</div>
+                      <div className="text-zinc-400 text-[10px] mb-3">{"// Software Engineer Profile"}</div>
                       <div>
                         <span className="text-violet-500">const</span> <span className="text-cyan-500">developer</span> <span className="text-zinc-500">=</span> <span className="text-zinc-500">{'{'}</span>
                       </div>

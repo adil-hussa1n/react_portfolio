@@ -201,6 +201,7 @@ const Portfolio = () => {
                 <img
                   src={project.src}
                   alt={project.title}
+                  loading="lazy"
                   className="w-full h-44 sm:h-48 lg:h-52 object-cover object-top transition-transform duration-700 group-hover:scale-110"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
@@ -317,7 +318,7 @@ const Portfolio = () => {
                   </span>
 
                   <div className="relative overflow-hidden rounded-xl mb-6 group cursor-zoom-in" onClick={() => { closeProjectDetails(); setLightboxIndex(projects.findIndex(p => p.id === selectedProject.id)); }}>
-                    <img src={selectedProject.src} alt={selectedProject.title} className="w-full h-64 sm:h-80 object-cover object-top rounded-xl border border-zinc-200/30 dark:border-zinc-800/20 transition-transform duration-500 hover:scale-[1.02]" />
+                    <img src={selectedProject.src} alt={selectedProject.title} loading="lazy" className="w-full h-64 sm:h-80 object-cover object-top rounded-xl border border-zinc-200/30 dark:border-zinc-800/20 transition-transform duration-500 hover:scale-[1.02]" />
                     <div className="absolute top-4 right-4 p-2.5 bg-black/50 backdrop-blur-md rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity">
                       <FaSearchPlus className="text-sm" />
                     </div>
