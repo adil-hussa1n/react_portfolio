@@ -15,12 +15,10 @@ function App() {
   });
 
   useEffect(() => {
-    // Reduced preloader time for better UX
     const preloaderTimer = setTimeout(() => {
       setShowPreloader(false);
     }, 3000);
 
-    // Apply the theme preference on mount and update
     document.documentElement.classList.toggle('dark', theme === 'dark');
 
     return () => clearTimeout(preloaderTimer);
@@ -34,12 +32,15 @@ function App() {
   };
 
   return (
-    <div className={`${theme} min-h-screen bg-gradient-to-b from-white to-gray-100 dark:from-gray-900 dark:to-gray-950 transition-colors duration-500`}>
-      {/* Background decorative elements */}
-      <div className="fixed top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0">
-        <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-purple-500 opacity-5 rounded-full filter blur-3xl animate-float-slow"></div>
-        <div className="absolute bottom-1/3 left-1/3 w-64 h-64 bg-blue-500 opacity-5 rounded-full filter blur-3xl animate-float-medium"></div>
-        <div className="absolute top-2/3 right-1/3 w-80 h-80 bg-indigo-500 opacity-5 rounded-full filter blur-3xl animate-float-fast"></div>
+    <div className={`${theme} min-h-screen bg-surface-50 dark:bg-surface-950 transition-colors duration-500`}>
+      {/* Mesh gradient background */}
+      <div className="fixed inset-0 pointer-events-none z-0">
+        <div className="mesh-gradient absolute inset-0 opacity-40 dark:opacity-30"></div>
+        <div className="dot-grid absolute inset-0 opacity-50"></div>
+        {/* Floating aurora orbs */}
+        <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] glow-orb-emerald opacity-40 rounded-full animate-float-slow"></div>
+        <div className="absolute bottom-1/3 -left-20 w-[400px] h-[400px] glow-orb-cyan opacity-30 rounded-full animate-float-medium"></div>
+        <div className="absolute top-2/3 right-1/3 w-[350px] h-[350px] glow-orb-violet opacity-25 rounded-full animate-float-fast"></div>
       </div>
       
       {showPreloader ? (

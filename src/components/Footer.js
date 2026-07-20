@@ -3,103 +3,87 @@ import { FaGithub, FaLinkedinIn, FaTwitter, FaFacebookF } from 'react-icons/fa';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
-  
+
   const sections = [
     { name: 'Home', path: '#home' },
     { name: 'About', path: '#about' },
     { name: 'Portfolio', path: '#portfolio' },
     { name: 'Contact', path: '#contact' },
   ];
-  
+
   const socialLinks = [
-    { icon: <FaGithub />, url: 'https://github.com/adil-hussa1n', label: 'GitHub', hoverClass: 'hover:bg-zinc-700 hover:text-white' },
-    { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/adil-hussa1n/', label: 'LinkedIn', hoverClass: 'hover:bg-blue-700 hover:text-white' },
-    { icon: <FaTwitter />, url: 'https://x.com/adil_hussa1n', label: 'Twitter', hoverClass: 'hover:bg-sky-500 hover:text-white' },
-    { icon: <FaFacebookF />, url: 'https://www.facebook.com/Adil.hussain2345/', label: 'Facebook', hoverClass: 'hover:bg-blue-600 hover:text-white' },
+    { icon: <FaGithub />, url: 'https://github.com/adil-hussa1n', label: 'GitHub' },
+    { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/adil-hussa1n/', label: 'LinkedIn' },
+    { icon: <FaTwitter />, url: 'https://x.com/adil_hussa1n', label: 'Twitter' },
+    { icon: <FaFacebookF />, url: 'https://www.facebook.com/Adil.hussain2345/', label: 'Facebook' },
   ];
 
   return (
-    <footer className="relative bg-zinc-100 dark:bg-zinc-950 pt-16 pb-8 overflow-hidden text-zinc-600 dark:text-zinc-400 border-t border-zinc-200 dark:border-zinc-900 transition-colors duration-500">
-      {/* Ambient background glows */}
-      <div className="absolute -bottom-24 -right-24 w-64 h-64 glow-orb-blue opacity-10 rounded-full"></div>
-      <div className="absolute -bottom-24 -left-24 w-64 h-64 glow-orb-purple opacity-10 rounded-full"></div>
-      
+    <footer className="relative bg-white/30 dark:bg-surface-950/50 pt-16 pb-8 overflow-hidden text-zinc-600 dark:text-zinc-400 border-t border-zinc-200/30 dark:border-zinc-800/20 backdrop-blur-sm">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 mb-12">
-          
-          {/* Logo and description */}
+
+          {/* Brand */}
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold tracking-wider bg-gradient-to-r from-purple-600 to-blue-600 dark:from-purple-500 dark:to-blue-400 bg-clip-text text-transparent dark:glow-text-purple">
+            <h2 className="text-2xl font-bold tracking-tight aurora-text">
               Adil Hussain
             </h2>
-            <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
-              IT Instructor at AC Tech Institute and Full Stack Developer with expertise in React, Node, and Data Science. Passionate about building performant web products.
+            <p className="text-sm leading-relaxed">
+              Software Engineer at Darun Tech Private Limited. Full Stack Developer specializing in React, Node.js, and MongoDB. Passionate about building scalable web applications.
             </p>
-            <div className="flex space-x-3 pt-2">
+            <div className="flex space-x-2 pt-2">
               {socialLinks.map((link, index) => (
-                <a 
+                <a
                   key={index}
                   href={link.url}
                   target="_blank"
                   rel="noreferrer"
                   aria-label={link.label}
-                  className={`p-2.5 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-500 dark:text-zinc-400 transition-all duration-300 ${link.hoverClass}`}
+                  className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/50 dark:bg-zinc-900/30 border border-zinc-200/50 dark:border-zinc-800/30 text-zinc-500 hover:border-cyan-500/40 hover:text-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 backdrop-blur-md transition-all duration-300"
                 >
                   {link.icon}
                 </a>
               ))}
             </div>
           </div>
-          
+
           {/* Quick links */}
           <div>
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 font-mono">Quick Navigation</h3>
+            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-4">Quick Navigation</h3>
             <ul className="space-y-2.5 text-sm">
               {sections.map((section, index) => (
                 <li key={index}>
-                  <a 
+                  <a
                     href={section.path}
-                    className="hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300 flex items-center group"
+                    className="hover:text-cyan-500 transition-colors duration-300 flex items-center group"
                   >
-                    <span className="text-purple-655 dark:text-purple-500 mr-2 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
+                    <span className="text-emerald-500 mr-2 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
                     {section.name}
                   </a>
                 </li>
               ))}
             </ul>
           </div>
-          
-          {/* Contact info */}
-          <div className="space-y-4">
-            <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-4 font-mono">Contact Details</h3>
-            <div className="space-y-2 text-sm leading-relaxed">
-              <p className="flex items-center gap-2">
-                <span className="text-purple-600 dark:text-purple-400">Location:</span> Sylhet, Bangladesh
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="text-purple-600 dark:text-purple-400">Email:</span> hussainadil981@gmail.com
-              </p>
-              <p className="flex items-center gap-2">
-                <span className="text-purple-600 dark:text-purple-400">Phone:</span> +8801715541267
-              </p>
-            </div>
-            <div className="pt-2">
-              <a 
-                href="#contact"
-                className="btn-premium inline-flex items-center px-5 py-2.5 bg-gradient-to-r from-purple-600 to-blue-500 hover:from-blue-500 hover:to-purple-600 text-white font-semibold rounded-xl transition-all duration-300 shadow-md hover:shadow-purple-500/20 text-xs sm:text-sm"
-              >
-                Get In Touch
-              </a>
-            </div>
-          </div>
 
+          {/* Contact */}
+          <div className="space-y-4">
+            <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-4">Contact Details</h3>
+            <div className="space-y-2 text-sm leading-relaxed">
+              <p><span className="text-emerald-500 font-medium">Location:</span> Sylhet, Bangladesh</p>
+              <p><span className="text-emerald-500 font-medium">Email:</span> hussainadil981@gmail.com</p>
+              <p><span className="text-emerald-500 font-medium">Phone:</span> +8801715541267</p>
+            </div>
+            <a href="#contact" className="btn-aurora inline-flex items-center px-5 py-2.5 rounded-xl text-xs sm:text-sm mt-2">
+              Get In Touch
+            </a>
+          </div>
         </div>
-        
-        {/* Divider */}
-        <div className="border-t border-zinc-200 dark:border-zinc-900 mb-6"></div>
-        
+
+        {/* Animated gradient divider */}
+        <div className="h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent mb-6"></div>
+
         {/* Copyright */}
-        <div className="flex flex-col sm:flex-row justify-between items-center text-zinc-500 dark:text-zinc-500 text-xs sm:text-sm gap-2">
+        <div className="flex flex-col sm:flex-row justify-between items-center text-zinc-500 text-xs sm:text-sm gap-2">
           <p>&copy; {currentYear} Adil Hussain. All Rights Reserved.</p>
           <p className="font-mono text-zinc-400 dark:text-zinc-600">Designed &amp; Engineered by Adil</p>
         </div>
