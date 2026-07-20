@@ -20,9 +20,9 @@ const projects = [
   {
     id: 1,
     src: imgNew1,
-    title: 'OmniPOS — Universal Business Management System',
-    description: 'A full-stack universal point-of-sale (POS) and business management system.',
-    longDescription: 'OmniPOS is a premium React 19 + Laravel point-of-sale and business management platform designed for diverse retail and hospitality businesses. It features multiple Zustand state stores, real-time transaction processing, cart management, dynamic table/order state mapping (dine-in, takeaway, retail transaction flows), print-ready receipt rendering, dark mode, and an advanced sales analytics dashboard.',
+    title: 'OmniPOS — Restaurant POS & Management System',
+    description: 'A full-stack point-of-sale (POS) and restaurant business management system.',
+    longDescription: 'OmniPOS is a premium React 19 + Laravel point-of-sale and business management platform designed specifically for restaurants and food service operations. It features multiple Zustand state stores, real-time transaction calculations, cart management, dynamic table/order state mapping (dine-in, takeaway, order tracking flows), print-ready receipt rendering, dark mode, and an advanced sales analytics dashboard.',
     technologies: ['React 19', 'Vite', 'Laravel', 'MySQL', 'Zustand', 'Tailwind CSS v4'],
     category: 'fullstack',
     github: 'https://github.com/adil-hussa1n/The-Cage-Cafe-Pos',
