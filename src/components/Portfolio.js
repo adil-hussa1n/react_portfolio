@@ -2,12 +2,13 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaCode, FaTerminal, FaSearchPlus, FaTimes, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import imgNew1 from '../img/1.png';
-import imgNew2 from '../img/2.png';
-import imgNew3 from '../img/3.png';
-import imgExploreConnect from '../img/exploreconnect.jpg';
+import imgOmniPOS from '../img/omnipos_dashboard.png';
+import imgApexArena from '../img/apex_arena_booking.png';
+import imgAIPersonality from '../img/ai_personality_predictor.png';
+import imgSmartCamera from '../img/smart_camera_detection.png';
+import imgMedify from '../img/medify_healthcare.png';
+import imgBloodify from '../img/bloodify_donation.png';
 import imgJobNest from '../img/jobnest.jpg';
-import imgSportsAcademy from '../img/sports_academy.png';
 
 const categories = [
   { id: 'all', name: 'All Projects' },
@@ -19,7 +20,7 @@ const categories = [
 const projects = [
   {
     id: 1,
-    src: imgNew1,
+    src: imgOmniPOS,
     title: 'OmniPOS — Restaurant POS & Management System',
     description: 'A full-stack point-of-sale (POS) and restaurant business management system.',
     longDescription: 'OmniPOS is a premium React 19 + Laravel point-of-sale and business management platform designed specifically for restaurants and food service operations. It features multiple Zustand state stores, real-time transaction calculations, cart management, dynamic table/order state mapping (dine-in, takeaway, order tracking flows), print-ready receipt rendering, dark mode, and an advanced sales analytics dashboard.',
@@ -30,7 +31,7 @@ const projects = [
   },
   {
     id: 2,
-    src: imgSportsAcademy,
+    src: imgApexArena,
     title: 'Apex Arena',
     description: 'A full-stack indoor sports booking platform with real-time websocket scheduling.',
     longDescription: 'Apex Arena is a premium sports court reservation platform built using React 19, Express, and MySQL. It features shift-based court rates, transaction concurrency slot-locking, real-time WebSocket syncing via Socket.IO, custom alert dialogs, and an interactive Pannellum 360° virtual tour.',
@@ -41,7 +42,7 @@ const projects = [
   },
   {
     id: 3,
-    src: imgNew2,
+    src: imgAIPersonality,
     title: 'AI Personality Predictor',
     description: 'An NLP machine learning system classifying MBTI personality types from text.',
     longDescription: 'AI Personality Predictor leverages Next.js 15, FastAPI, and scikit-learn. It processes raw user text or files through a spaCy/NLTK pipeline (URL removal, lemmatization, custom stop words) to predict MBTI types with confidence levels and full interactive Plotly probability breakdowns.',
@@ -52,7 +53,7 @@ const projects = [
   },
   {
     id: 4,
-    src: imgExploreConnect,
+    src: imgSmartCamera,
     title: 'Smart Camera Object Detection',
     description: 'An intelligent computer vision system for real-time video stream recognition.',
     longDescription: 'Smart Camera Object Detection uses OpenCV, YOLOv8, and PyTorch to perform object recognition, track security perimeter violation logic, execute threat verification log recordings, and trigger instant email/webhook notification alerts.',
@@ -63,7 +64,7 @@ const projects = [
   },
   {
     id: 5,
-    src: imgNew3,
+    src: imgMedify,
     title: 'Medify247',
     description: 'A full-stack medical appointment scheduling and subscription management portal.',
     longDescription: 'Medify247 is a comprehensive healthcare system with doctor/patient authentication, online booking portals, home diagnostics requests, secure subscription plans, payment gateway integration, and a dedicated admin coordination dashboard.',
@@ -74,7 +75,7 @@ const projects = [
   },
   {
     id: 6,
-    src: imgNew3,
+    src: imgBloodify,
     title: 'Bloodify247',
     description: 'A real-time community blood donor registration and emergency seeker network.',
     longDescription: 'Bloodify247 connects blood seekers and verified community donors instantly. It features dynamic donor filtering by location/blood group, real-time emergency request boards, SMS notification alerts, and full admin review controls.',
