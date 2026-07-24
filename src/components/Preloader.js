@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 const steps = [
   'Initializing Aurora environment...',
@@ -16,7 +16,163 @@ const Preloader = () => {
   const totalSegments = 15;
   const activeSegments = Math.floor((loading / 100) * totalSegments);
 
+  // Web Audio API refs
+  const audioContextRef = useRef(null);
+  const humOscRef = useRef(null);
+  const sweepOscRef = useRef(null);
+  const humGainRef = useRef(null);
+  const sweepGainRef = useRef(null);
+
+  // Initialize Audio Context and base oscillators
+  const initAudio = () => {
+    if (audioContextRef.current) return;
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+
+      const ctx = new AudioContextClass();
+      audioContextRef.current = ctx;
+
+      const now = ctx.currentTime;
+
+      // 1. Low ambient cyber hum
+      const humOsc = ctx.createOscillator();
+      const humGain = ctx.createGain();
+      humOsc.type = 'sine';
+      humOsc.frequency.setValueAtTime(65, now); // Low hum (around C2)
+      humGain.gain.setValueAtTime(0.015, now); // Subtle volume
+
+      humOsc.connect(humGain);
+      humGain.connect(ctx.destination);
+      humOsc.start(now);
+
+      humOscRef.current = humOsc;
+      humGainRef.current = humGain;
+
+      // 2. Rising power-up sweep oscillator
+      const sweepOsc = ctx.createOscillator();
+      const sweepGain = ctx.createGain();
+      sweepOsc.type = 'triangle'; // Softer harmonics than sawtooth
+      sweepOsc.frequency.setValueAtTime(90, now);
+      sweepGain.gain.setValueAtTime(0.01, now);
+
+      // Low pass filter to make the sweep warmer/smoother
+      const filter = ctx.createBiquadFilter();
+      filter.type = 'lowpass';
+      filter.frequency.setValueAtTime(350, now);
+
+      sweepOsc.connect(filter);
+      filter.connect(sweepGain);
+      sweepGain.connect(ctx.destination);
+      sweepOsc.start(now);
+
+      sweepOscRef.current = sweepOsc;
+      sweepGainRef.current = sweepGain;
+    } catch (e) {
+      console.warn('Web Audio API not supported or blocked:', e);
+    }
+  };
+
+  // Play micro terminal beep
+  const playStepBeep = () => {
+    const ctx = audioContextRef.current;
+    if (!ctx || ctx.state === 'suspended') return;
+
+    try {
+      const now = ctx.currentTime;
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      osc.type = 'sine';
+      // High-tech beep with a bit of pitch variance
+      const pitch = 950 + Math.random() * 80;
+      osc.frequency.setValueAtTime(pitch, now);
+
+      gain.gain.setValueAtTime(0.012, now);
+      gain.gain.exponentialRampToValueAtTime(0.00001, now + 0.06);
+
+      osc.connect(gain);
+      gain.connect(ctx.destination);
+
+      osc.start(now);
+      osc.stop(now + 0.06);
+    } catch (e) {
+      // Ignore audio glitches
+    }
+  };
+
+  // Play melodic chord when booting completes
+  const playCompleteChime = () => {
+    const ctx = audioContextRef.current;
+    if (!ctx || ctx.state === 'suspended') return;
+
+    try {
+      const now = ctx.currentTime;
+      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 (Ascending arpeggio)
+      
+      notes.forEach((freq, idx) => {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+
+        gain.gain.setValueAtTime(0.018, now + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.00001, now + idx * 0.08 + 0.35);
+
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        osc.start(now + idx * 0.08);
+        osc.stop(now + idx * 0.08 + 0.4);
+      });
+    } catch (e) {
+      // Ignore audio glitches
+    }
+  };
+
+  // Smoothly fade out ambient sounds
+  const fadeOutAmbient = () => {
+    const ctx = audioContextRef.current;
+    if (!ctx) return;
+
+    try {
+      const now = ctx.currentTime;
+      if (humGainRef.current) {
+        humGainRef.current.gain.setValueAtTime(humGainRef.current.gain.value, now);
+        humGainRef.current.gain.exponentialRampToValueAtTime(0.00001, now + 0.4);
+      }
+      if (sweepGainRef.current) {
+        sweepGainRef.current.gain.setValueAtTime(sweepGainRef.current.gain.value, now);
+        sweepGainRef.current.gain.exponentialRampToValueAtTime(0.00001, now + 0.4);
+      }
+
+      // Stop oscillators after fade
+      setTimeout(() => {
+        try {
+          if (humOscRef.current) humOscRef.current.stop();
+          if (sweepOscRef.current) sweepOscRef.current.stop();
+        } catch (err) {}
+      }, 500);
+    } catch (e) {}
+  };
+
   useEffect(() => {
+    // Attempt to initialize on load
+    initAudio();
+
+    // Event listener to unlock audio if blocked by autoplay policy
+    const handleUnlock = () => {
+      initAudio();
+      if (audioContextRef.current && audioContextRef.current.state === 'suspended') {
+        audioContextRef.current.resume();
+      }
+    };
+
+    window.addEventListener('click', handleUnlock);
+    window.addEventListener('touchstart', handleUnlock);
+    window.addEventListener('keydown', handleUnlock);
+
     // Increment progress
     const interval = setInterval(() => {
       setLoading((prev) => {
@@ -28,7 +184,17 @@ const Preloader = () => {
       });
     }, 20);
 
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener('click', handleUnlock);
+      window.removeEventListener('touchstart', handleUnlock);
+      window.removeEventListener('keydown', handleUnlock);
+      // Clean up oscillators on unmount
+      try {
+        if (humOscRef.current) humOscRef.current.stop();
+        if (sweepOscRef.current) sweepOscRef.current.stop();
+      } catch (e) {}
+    };
   }, []);
 
   useEffect(() => {
@@ -38,6 +204,30 @@ const Preloader = () => {
     );
     setCurrentStep(stepIndex);
   }, [loading]);
+
+  // Sync sweep pitch with loading progress
+  useEffect(() => {
+    if (sweepOscRef.current && audioContextRef.current) {
+      try {
+        const now = audioContextRef.current.currentTime;
+        // Ramp pitch from 90Hz to 480Hz dynamically as loading increments
+        const targetFreq = 90 + (loading * 3.9);
+        sweepOscRef.current.frequency.setValueAtTime(targetFreq, now);
+      } catch (e) {}
+    }
+
+    if (loading === 100) {
+      playCompleteChime();
+      fadeOutAmbient();
+    }
+  }, [loading]);
+
+  // Play beeps on step change
+  useEffect(() => {
+    if (currentStep > 0) {
+      playStepBeep();
+    }
+  }, [currentStep]);
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-[#030305] z-50 overflow-hidden select-none">
