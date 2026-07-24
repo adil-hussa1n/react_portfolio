@@ -28,18 +28,8 @@ function App() {
 
   return (
     <div className={`${theme} min-h-screen bg-surface-50 dark:bg-surface-950 transition-colors duration-500`}>
-      {/* Mesh gradient background */}
-      <div className="fixed inset-0 pointer-events-none z-0">
-        <div className="mesh-gradient absolute inset-0 opacity-40 dark:opacity-30"></div>
-        <div className="dot-grid absolute inset-0 opacity-50"></div>
-        {/* Floating aurora orbs */}
-        <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] glow-orb-emerald opacity-40 rounded-full animate-float-slow"></div>
-        <div className="absolute bottom-1/3 -left-20 w-[400px] h-[400px] glow-orb-cyan opacity-30 rounded-full animate-float-medium"></div>
-        <div className="absolute top-2/3 right-1/3 w-[350px] h-[350px] glow-orb-violet opacity-25 rounded-full animate-float-fast"></div>
-      </div>
-      
       <AnimatePresence mode="wait">
-        {showPreloader && (
+        {showPreloader ? (
           <motion.div
             key="preloader-wrapper"
             initial={{ opacity: 1, y: 0 }}
@@ -52,27 +42,35 @@ function App() {
           >
             <Preloader theme={theme} onComplete={() => setShowPreloader(false)} />
           </motion.div>
+        ) : (
+          <motion.div
+            key="main-content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6 }}
+          >
+            {/* Mesh gradient background */}
+            <div className="fixed inset-0 pointer-events-none z-0">
+              <div className="mesh-gradient absolute inset-0 opacity-40 dark:opacity-30"></div>
+              <div className="dot-grid absolute inset-0 opacity-50"></div>
+              {/* Floating aurora orbs */}
+              <div className="absolute top-1/4 -right-20 w-[500px] h-[500px] glow-orb-emerald opacity-40 rounded-full animate-float-slow"></div>
+              <div className="absolute bottom-1/3 -left-20 w-[400px] h-[400px] glow-orb-cyan opacity-30 rounded-full animate-float-medium"></div>
+              <div className="absolute top-2/3 right-1/3 w-[350px] h-[350px] glow-orb-violet opacity-25 rounded-full animate-float-fast"></div>
+            </div>
+
+            <Navbar theme={theme} toggleTheme={toggleTheme} />
+            <main className="relative z-10">
+              <Home />
+              <About />
+              <Portfolio />
+              <Contact />
+              <Footer />
+              <ScrollToTop />
+            </main>
+          </motion.div>
         )}
       </AnimatePresence>
-
-      {!showPreloader && (
-        <motion.div
-          key="main-content"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-        >
-          <Navbar theme={theme} toggleTheme={toggleTheme} />
-          <main className="relative z-10">
-            <Home />
-            <About />
-            <Portfolio />
-            <Contact />
-            <Footer />
-            <ScrollToTop />
-          </main>
-        </motion.div>
-      )}
     </div>
   );
 }
