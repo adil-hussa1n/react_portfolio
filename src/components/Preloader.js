@@ -9,7 +9,7 @@ const steps = [
   'System ready.'
 ];
 
-const Preloader = () => {
+const Preloader = ({ onComplete }) => {
   const [loading, setLoading] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
 
@@ -40,7 +40,7 @@ const Preloader = () => {
       const humGain = ctx.createGain();
       humOsc.type = 'sine';
       humOsc.frequency.setValueAtTime(65, now); // Low hum (around C2)
-      humGain.gain.setValueAtTime(0.015, now); // Subtle volume
+      humGain.gain.setValueAtTime(0.08, now); // 8% volume (audible but polite)
 
       humOsc.connect(humGain);
       humGain.connect(ctx.destination);
@@ -54,7 +54,7 @@ const Preloader = () => {
       const sweepGain = ctx.createGain();
       sweepOsc.type = 'triangle'; // Softer harmonics than sawtooth
       sweepOsc.frequency.setValueAtTime(90, now);
-      sweepGain.gain.setValueAtTime(0.01, now);
+      sweepGain.gain.setValueAtTime(0.05, now); // 5% volume
 
       // Low pass filter to make the sweep warmer/smoother
       const filter = ctx.createBiquadFilter();
@@ -84,11 +84,10 @@ const Preloader = () => {
       const gain = ctx.createGain();
 
       osc.type = 'sine';
-      // High-tech beep with a bit of pitch variance
       const pitch = 950 + Math.random() * 80;
       osc.frequency.setValueAtTime(pitch, now);
 
-      gain.gain.setValueAtTime(0.012, now);
+      gain.gain.setValueAtTime(0.06, now); // 6% volume
       gain.gain.exponentialRampToValueAtTime(0.00001, now + 0.06);
 
       osc.connect(gain);
@@ -117,7 +116,7 @@ const Preloader = () => {
         osc.type = 'sine';
         osc.frequency.setValueAtTime(freq, now + idx * 0.08);
 
-        gain.gain.setValueAtTime(0.018, now + idx * 0.08);
+        gain.gain.setValueAtTime(0.08, now + idx * 0.08); // 8% volume
         gain.gain.exponentialRampToValueAtTime(0.00001, now + idx * 0.08 + 0.35);
 
         osc.connect(gain);
@@ -173,7 +172,7 @@ const Preloader = () => {
     window.addEventListener('touchstart', handleUnlock);
     window.addEventListener('keydown', handleUnlock);
 
-    // Increment progress
+    // Increment progress automatically
     const interval = setInterval(() => {
       setLoading((prev) => {
         if (prev >= 100) {
@@ -219,8 +218,13 @@ const Preloader = () => {
     if (loading === 100) {
       playCompleteChime();
       fadeOutAmbient();
+      
+      const timer = setTimeout(() => {
+        if (onComplete) onComplete();
+      }, 950);
+      return () => clearTimeout(timer);
     }
-  }, [loading]);
+  }, [loading, onComplete]);
 
   // Play beeps on step change
   useEffect(() => {
@@ -281,62 +285,65 @@ const Preloader = () => {
           </div>
         </div>
 
-        {/* Cyber Segmented Progress Bar */}
-        <div className="flex flex-col items-center w-full mb-8">
-          <div className="flex items-center gap-1.5 justify-center mb-3.5 w-full">
-            {[...Array(totalSegments)].map((_, i) => {
-              const isActive = i < activeSegments;
-              return (
-                <div
-                  key={i}
-                  className={`flex-1 h-3.5 skew-x-[-12deg] rounded-sm transition-all duration-300 ${
-                    isActive
-                      ? 'bg-gradient-to-t from-emerald-500 to-cyan-400 opacity-100 shadow-[0_0_8px_rgba(6,182,212,0.4)]'
-                      : 'bg-zinc-900 border border-zinc-800/40 opacity-30'
-                  }`}
-                />
-              );
-            })}
-          </div>
-          
-          <div className="flex items-center justify-between w-full px-1 font-mono text-[10px] text-zinc-500">
-            <span className="tracking-wider">SYS_BOOT_STABLE</span>
-            <span className="text-cyan-400 font-bold tracking-wider">[{loading}%]</span>
-            <span className="tracking-wider">PORT_80_ONLINE</span>
-          </div>
-        </div>
-
-        {/* Holographic console card */}
-        <div className="w-full bg-black/60 backdrop-blur-md border border-zinc-800/80 rounded-xl p-4 font-mono text-left shadow-2xl shadow-cyan-500/2">
-          {/* Window header */}
-          <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2 mb-3">
-            <div className="flex items-center gap-1.5">
-              <span className="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
-              <span className="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
-              <span className="text-[10px] text-zinc-500 ml-2">sys_boot.log</span>
+        {/* Loading Content displays immediately */}
+        <div className="w-full space-y-8 animate-fade-in">
+          {/* Cyber Segmented Progress Bar */}
+          <div className="flex flex-col items-center w-full">
+            <div className="flex items-center gap-1.5 justify-center mb-3.5 w-full">
+              {[...Array(totalSegments)].map((_, i) => {
+                const isActive = i < activeSegments;
+                return (
+                  <div
+                    key={i}
+                    className={`flex-1 h-3.5 skew-x-[-12deg] rounded-sm transition-all duration-300 ${
+                      isActive
+                        ? 'bg-gradient-to-t from-emerald-500 to-cyan-400 opacity-100 shadow-[0_0_8px_rgba(6,182,212,0.4)]'
+                        : 'bg-zinc-900 border border-zinc-800/40 opacity-30'
+                    }`}
+                  />
+                );
+              })}
             </div>
-            <span className="text-[9px] text-zinc-600">ADDR: 0x8F9E</span>
+            
+            <div className="flex items-center justify-between w-full px-1 font-mono text-[10px] text-zinc-500">
+              <span className="tracking-wider">SYS_BOOT_STABLE</span>
+              <span className="text-cyan-400 font-bold tracking-wider">[{loading}%]</span>
+              <span className="tracking-wider">PORT_80_ONLINE</span>
+            </div>
           </div>
 
-          {/* Logs */}
-          <div className="space-y-1.5 text-xs">
-            {steps.slice(0, currentStep).map((step, idx) => (
-              <div key={idx} className="text-zinc-500 flex items-start gap-2.5">
-                <span className="text-emerald-500 font-semibold font-sans">✓</span>
-                <span className="text-[10px] text-zinc-700 font-semibold">0x0{idx + 3}A</span>
-                <span className="text-emerald-500/70 font-semibold">[OK]</span>
-                <span className="text-zinc-400">{step}</span>
+          {/* Holographic console card */}
+          <div className="w-full bg-black/60 backdrop-blur-md border border-zinc-800/80 rounded-xl p-4 font-mono text-left shadow-2xl shadow-cyan-500/2">
+            {/* Window header */}
+            <div className="flex items-center justify-between border-b border-zinc-800/80 pb-2 mb-3">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-red-500/40"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/40"></span>
+                <span className="w-2.5 h-2.5 rounded-full bg-green-500/40"></span>
+                <span className="text-[10px] text-zinc-500 ml-2">sys_boot.log</span>
               </div>
-            ))}
-            {currentStep < steps.length && (
-              <div className="text-cyan-400 flex items-start gap-2.5 animate-pulse">
-                <span className="text-cyan-500 font-bold">&gt;</span>
-                <span className="text-[10px] text-cyan-800 font-semibold">0x0{currentStep + 3}A</span>
-                <span className="text-cyan-400 font-semibold">[RUN]</span>
-                <span>{steps[currentStep]}</span>
-              </div>
-            )}
+              <span className="text-[9px] text-zinc-600">ADDR: 0x8F9E</span>
+            </div>
+
+            {/* Logs */}
+            <div className="space-y-1.5 text-xs">
+              {steps.slice(0, currentStep).map((step, idx) => (
+                <div key={idx} className="text-zinc-500 flex items-start gap-2.5">
+                  <span className="text-emerald-500 font-semibold font-sans">✓</span>
+                  <span className="text-[10px] text-zinc-700 font-semibold">0x0{idx + 3}A</span>
+                  <span className="text-emerald-500/70 font-semibold">[OK]</span>
+                  <span className="text-zinc-400">{step}</span>
+                </div>
+              ))}
+              {currentStep < steps.length && (
+                <div className="text-cyan-400 flex items-start gap-2.5 animate-pulse">
+                  <span className="text-cyan-500 font-bold">&gt;</span>
+                  <span className="text-[10px] text-cyan-800 font-semibold">0x0{currentStep + 3}A</span>
+                  <span className="text-cyan-400 font-semibold">[RUN]</span>
+                  <span>{steps[currentStep]}</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
 

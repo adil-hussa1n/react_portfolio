@@ -16,13 +16,7 @@ function App() {
   });
 
   useEffect(() => {
-    const preloaderTimer = setTimeout(() => {
-      setShowPreloader(false);
-    }, 3000);
-
     document.documentElement.classList.toggle('dark', theme === 'dark');
-
-    return () => clearTimeout(preloaderTimer);
   }, [theme]);
 
   const toggleTheme = () => {
@@ -56,7 +50,7 @@ function App() {
             }}
             className="fixed inset-0 z-50 pointer-events-auto"
           >
-            <Preloader theme={theme} />
+            <Preloader theme={theme} onComplete={() => setShowPreloader(false)} />
           </motion.div>
         )}
       </AnimatePresence>
