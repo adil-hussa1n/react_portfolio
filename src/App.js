@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import Preloader from './components/Preloader';
 import Navbar from './components/Navbar';
 import Home from './components/Home';
@@ -43,10 +44,30 @@ function App() {
         <div className="absolute top-2/3 right-1/3 w-[350px] h-[350px] glow-orb-violet opacity-25 rounded-full animate-float-fast"></div>
       </div>
       
-      {showPreloader ? (
-        <Preloader key="preloader" theme={theme} />
-      ) : (
-        <>
+      <AnimatePresence mode="wait">
+        {showPreloader && (
+          <motion.div
+            key="preloader-wrapper"
+            initial={{ opacity: 1, y: 0 }}
+            exit={{ 
+              opacity: 0, 
+              y: '-100vh',
+              transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } 
+            }}
+            className="fixed inset-0 z-50 pointer-events-auto"
+          >
+            <Preloader theme={theme} />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {!showPreloader && (
+        <motion.div
+          key="main-content"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
           <Navbar theme={theme} toggleTheme={toggleTheme} />
           <main className="relative z-10">
             <Home />
@@ -56,7 +77,7 @@ function App() {
             <Footer />
             <ScrollToTop />
           </main>
-        </>
+        </motion.div>
       )}
     </div>
   );
