@@ -12,18 +12,20 @@ const steps = [
 const Preloader = ({ onComplete }) => {
   const [loading, setLoading] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
+  const [isAudioMuted, setIsAudioMuted] = useState(true);
 
   const totalSegments = 15;
   const activeSegments = Math.floor((loading / 100) * totalSegments);
 
   // Web Audio API refs
   const audioContextRef = useRef(null);
-  const humOscRef = useRef(null);
+  const padOscsRef = useRef([]);
+  const padGainRef = useRef(null);
   const sweepOscRef = useRef(null);
-  const humGainRef = useRef(null);
+  const sweepFilterRef = useRef(null);
   const sweepGainRef = useRef(null);
 
-  // Initialize Audio Context and base oscillators
+  // Initialize Audio Context and base sound systems
   const initAudio = () => {
     if (audioContextRef.current) return;
     try {
@@ -33,123 +35,162 @@ const Preloader = ({ onComplete }) => {
       const ctx = new AudioContextClass();
       audioContextRef.current = ctx;
 
+      // Sync state with UI
+      if (ctx.state === 'running') {
+        setIsAudioMuted(false);
+      }
+
+      ctx.onstatechange = () => {
+        if (ctx.state === 'running') {
+          setIsAudioMuted(false);
+        } else {
+          setIsAudioMuted(true);
+        }
+      };
+
       const now = ctx.currentTime;
 
-      // 1. Low ambient cyber hum
-      const humOsc = ctx.createOscillator();
-      const humGain = ctx.createGain();
-      humOsc.type = 'sine';
-      humOsc.frequency.setValueAtTime(65, now); // Low hum (around C2)
-      humGain.gain.setValueAtTime(0.08, now); // 8% volume (audible but polite)
+      // 1. Lush Cinematic Space Pad (Warm Major Chord)
+      const padGain = ctx.createGain();
+      padGain.gain.setValueAtTime(0.04, now); // soft and warm
+      padGain.connect(ctx.destination);
+      padGainRef.current = padGain;
 
-      humOsc.connect(humGain);
-      humGain.connect(ctx.destination);
-      humOsc.start(now);
+      // C3 (130.81Hz), G3 (196.00Hz), C4 (261.63Hz), E4 (329.63Hz)
+      const chordNotes = [130.81, 196.00, 261.63, 329.63];
+      const padOscs = [];
 
-      humOscRef.current = humOsc;
-      humGainRef.current = humGain;
+      chordNotes.forEach((freq) => {
+        const osc = ctx.createOscillator();
+        osc.type = 'triangle'; // Warm, soft harmonic character
+        osc.frequency.setValueAtTime(freq, now);
+        
+        // Add subtle lowpass filter per oscillator to remove high frequency buzz
+        const lp = ctx.createBiquadFilter();
+        lp.type = 'lowpass';
+        lp.frequency.setValueAtTime(450, now);
 
-      // 2. Rising power-up sweep oscillator
+        osc.connect(lp);
+        lp.connect(padGain);
+        osc.start(now);
+        padOscs.push(osc);
+      });
+      padOscsRef.current = padOscs;
+
+      // 2. Analog-style resonant filter sweep
       const sweepOsc = ctx.createOscillator();
       const sweepGain = ctx.createGain();
-      sweepOsc.type = 'triangle'; // Softer harmonics than sawtooth
-      sweepOsc.frequency.setValueAtTime(90, now);
-      sweepGain.gain.setValueAtTime(0.05, now); // 5% volume
+      const sweepFilter = ctx.createBiquadFilter();
 
-      // Low pass filter to make the sweep warmer/smoother
-      const filter = ctx.createBiquadFilter();
-      filter.type = 'lowpass';
-      filter.frequency.setValueAtTime(350, now);
+      sweepOsc.type = 'sawtooth'; // Sawtooth provides rich harmonics for the filter to shape
+      sweepOsc.frequency.setValueAtTime(55, now); // Low A1 note
 
-      sweepOsc.connect(filter);
-      filter.connect(sweepGain);
+      sweepFilter.type = 'lowpass';
+      sweepFilter.Q.setValueAtTime(7.5, now); // Resonant Q peak for high-tech filter sweep sound
+      sweepFilter.frequency.setValueAtTime(120, now); // Start muffled
+
+      sweepGain.gain.setValueAtTime(0.02, now); // Subtle volume
+
+      sweepOsc.connect(sweepFilter);
+      sweepFilter.connect(sweepGain);
       sweepGain.connect(ctx.destination);
       sweepOsc.start(now);
 
       sweepOscRef.current = sweepOsc;
+      sweepFilterRef.current = sweepFilter;
       sweepGainRef.current = sweepGain;
     } catch (e) {
       console.warn('Web Audio API not supported or blocked:', e);
     }
   };
 
-  // Play micro terminal beep
+  // Play a modern sci-fi keyboard double-tick
   const playStepBeep = () => {
     const ctx = audioContextRef.current;
     if (!ctx || ctx.state === 'suspended') return;
 
     try {
       const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
+      
+      // Click 1 (low pitch)
+      const osc1 = ctx.createOscillator();
+      const gain1 = ctx.createGain();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(1300, now);
+      gain1.gain.setValueAtTime(0.03, now);
+      gain1.gain.exponentialRampToValueAtTime(0.00001, now + 0.015);
+      osc1.connect(gain1);
+      gain1.connect(ctx.destination);
+      osc1.start(now);
+      osc1.stop(now + 0.015);
 
-      osc.type = 'sine';
-      const pitch = 950 + Math.random() * 80;
-      osc.frequency.setValueAtTime(pitch, now);
-
-      gain.gain.setValueAtTime(0.06, now); // 6% volume
-      gain.gain.exponentialRampToValueAtTime(0.00001, now + 0.06);
-
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-
-      osc.start(now);
-      osc.stop(now + 0.06);
+      // Click 2 (delayed higher pitch)
+      const osc2 = ctx.createOscillator();
+      const gain2 = ctx.createGain();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(1750, now + 0.025);
+      gain2.gain.setValueAtTime(0.025, now + 0.025);
+      gain2.gain.exponentialRampToValueAtTime(0.00001, now + 0.04);
+      osc2.connect(gain2);
+      gain2.connect(ctx.destination);
+      osc2.start(now + 0.025);
+      osc2.stop(now + 0.040);
     } catch (e) {
       // Ignore audio glitches
     }
   };
 
-  // Play melodic chord when booting completes
+  // Play a beautiful, shimmering pentatonic success chime
   const playCompleteChime = () => {
     const ctx = audioContextRef.current;
     if (!ctx || ctx.state === 'suspended') return;
 
     try {
       const now = ctx.currentTime;
-      const notes = [523.25, 659.25, 783.99, 1046.50]; // C5, E5, G5, C6 (Ascending arpeggio)
+      // Glassy C Major Pentatonic chord (C5, D5, G5, C6, D6)
+      const notes = [523.25, 587.33, 783.99, 1046.50, 1174.66];
       
       notes.forEach((freq, idx) => {
         const osc = ctx.createOscillator();
         const gain = ctx.createGain();
 
         osc.type = 'sine';
-        osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+        osc.frequency.setValueAtTime(freq, now + idx * 0.05); // Rapid harp-like sweep
 
-        gain.gain.setValueAtTime(0.08, now + idx * 0.08); // 8% volume
-        gain.gain.exponentialRampToValueAtTime(0.00001, now + idx * 0.08 + 0.35);
+        gain.gain.setValueAtTime(0.06, now + idx * 0.05);
+        gain.gain.exponentialRampToValueAtTime(0.00001, now + idx * 0.05 + 0.5);
 
         osc.connect(gain);
         gain.connect(ctx.destination);
 
-        osc.start(now + idx * 0.08);
-        osc.stop(now + idx * 0.08 + 0.4);
+        osc.start(now + idx * 0.05);
+        osc.stop(now + idx * 0.05 + 0.65);
       });
     } catch (e) {
       // Ignore audio glitches
     }
   };
 
-  // Smoothly fade out ambient sounds
+  // Smoothly fade out ambient sound systems
   const fadeOutAmbient = () => {
     const ctx = audioContextRef.current;
     if (!ctx) return;
 
     try {
       const now = ctx.currentTime;
-      if (humGainRef.current) {
-        humGainRef.current.gain.setValueAtTime(humGainRef.current.gain.value, now);
-        humGainRef.current.gain.exponentialRampToValueAtTime(0.00001, now + 0.4);
+      if (padGainRef.current) {
+        padGainRef.current.gain.setValueAtTime(padGainRef.current.gain.value, now);
+        padGainRef.current.gain.exponentialRampToValueAtTime(0.00001, now + 0.4);
       }
       if (sweepGainRef.current) {
         sweepGainRef.current.gain.setValueAtTime(sweepGainRef.current.gain.value, now);
         sweepGainRef.current.gain.exponentialRampToValueAtTime(0.00001, now + 0.4);
       }
 
-      // Stop oscillators after fade
+      // Stop oscillators after fade completes
       setTimeout(() => {
         try {
-          if (humOscRef.current) humOscRef.current.stop();
+          padOscsRef.current.forEach(osc => osc.stop());
           if (sweepOscRef.current) sweepOscRef.current.stop();
         } catch (err) {}
       }, 500);
@@ -190,7 +231,7 @@ const Preloader = ({ onComplete }) => {
       window.removeEventListener('keydown', handleUnlock);
       // Clean up oscillators on unmount
       try {
-        if (humOscRef.current) humOscRef.current.stop();
+        padOscsRef.current.forEach(osc => osc.stop());
         if (sweepOscRef.current) sweepOscRef.current.stop();
       } catch (e) {}
     };
@@ -204,14 +245,14 @@ const Preloader = ({ onComplete }) => {
     setCurrentStep(stepIndex);
   }, [loading]);
 
-  // Sync sweep pitch with loading progress
+  // Sync sweep filter resonance frequency with loading progress
   useEffect(() => {
-    if (sweepOscRef.current && audioContextRef.current) {
+    if (sweepFilterRef.current && audioContextRef.current) {
       try {
         const now = audioContextRef.current.currentTime;
-        // Ramp pitch from 90Hz to 480Hz dynamically as loading increments
-        const targetFreq = 90 + (loading * 3.9);
-        sweepOscRef.current.frequency.setValueAtTime(targetFreq, now);
+        // Sweep filter cutoff from 120Hz to 1200Hz dynamically as loading increments
+        const targetCutoff = 120 + (loading * 10.8);
+        sweepFilterRef.current.frequency.setValueAtTime(targetCutoff, now);
       } catch (e) {}
     }
 
@@ -226,7 +267,7 @@ const Preloader = ({ onComplete }) => {
     }
   }, [loading, onComplete]);
 
-  // Play beeps on step change
+  // Play double-click keyboard sound on step change
   useEffect(() => {
     if (currentStep > 0) {
       playStepBeep();
@@ -237,6 +278,14 @@ const Preloader = ({ onComplete }) => {
     <div className="fixed inset-0 flex items-center justify-center bg-[#030305] z-50 overflow-hidden select-none">
       {/* Interactive Scanlines Overlay */}
       <div className="preloader-scanlines"></div>
+
+      {/* Pulsing Audio Warning Alert in top-right */}
+      {isAudioMuted && (
+        <div className="absolute top-6 right-6 z-20 flex items-center gap-2 px-3.5 py-2 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 font-mono text-[9px] tracking-wider animate-pulse shadow-[0_0_15px_rgba(239,68,68,0.05)]">
+          <span className="w-1.5 h-1.5 rounded-full bg-red-500 animate-ping"></span>
+          AUDIO_MUTED // CLICK SCREEN TO UNMUTE
+        </div>
+      )}
 
       {/* Cyber ambient glow orbs */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-r from-emerald-500/5 to-cyan-500/5 blur-[120px] rounded-full pointer-events-none z-0"></div>
