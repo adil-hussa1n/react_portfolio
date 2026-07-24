@@ -9,7 +9,7 @@ const steps = [
   'System ready.'
 ];
 
-const Preloader = ({ onComplete }) => {
+const Preloader = ({ onComplete, isExiting }) => {
   const [loading, setLoading] = useState(0);
   const [currentStep, setCurrentStep] = useState(0);
   const [isAudioMuted, setIsAudioMuted] = useState(true);
@@ -275,7 +275,7 @@ const Preloader = ({ onComplete }) => {
   }, [currentStep]);
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-[#030305] z-50 overflow-hidden select-none">
+    <div className={`preloader-container ${isExiting ? 'exiting' : ''}`}>
       {/* Interactive Scanlines Overlay */}
       <div className="preloader-scanlines"></div>
 
