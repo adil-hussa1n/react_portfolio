@@ -35,13 +35,13 @@ const Home = () => {
     >
       <div ref={containerRef} className="container mx-auto max-w-7xl opacity-0 z-10 px-4 sm:px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
+
           {/* Left Column — Text */}
           <div className="lg:col-span-7 text-center lg:text-left space-y-6">
             {/* Status badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-600 dark:text-emerald-400 font-medium text-xs sm:text-sm backdrop-blur-md">
               <span className="text-base">⚡</span>
-              Software Engineer · Building for the web
+              Web Developer
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
@@ -53,7 +53,7 @@ const Home = () => {
               <Typewriter
                 options={{
                   strings: [
-                    'Software Engineer',
+
                     'Full Stack Developer',
                     'Problem Solver'
                   ],
@@ -66,7 +66,7 @@ const Home = () => {
             </div>
 
             <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Software Engineer at Darun Tech Private Limited. BSc in CSE from Leading University, Sylhet. Building scalable full-stack web applications with React, Node.js, and MongoDB.
+              Web Developer at Darun Tech Private Limited. BSc in CSE from Leading University, Sylhet. Building scalable full-stack web applications with React, Node.js, and MongoDB.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
@@ -81,7 +81,7 @@ const Home = () => {
                 download="adil-hussain_resume.pdf"
                 className="btn-aurora-outline px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md"
               >
-                Download Resume
+                Download
               </a>
             </div>
 
@@ -115,7 +115,7 @@ const Home = () => {
 
               {/* 3D Terminal */}
               <div className="terminal-3d terminal rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/5 flex flex-col h-[380px] sm:h-[420px] font-mono text-xs sm:text-sm">
-                
+
                 {/* Terminal header */}
                 <div className="bg-zinc-100/80 dark:bg-zinc-950/80 border-b border-zinc-200/60 dark:border-zinc-800/40 px-4 py-3 flex items-center justify-between">
                   <div className="flex items-center space-x-2">
@@ -148,7 +148,7 @@ const Home = () => {
 
                     {/* Code content */}
                     <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-2 text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                      <div className="text-zinc-400 text-[10px] mb-3">{"// Software Engineer Profile"}</div>
+                      <div className="text-zinc-400 text-[10px] mb-3">{"// Web Developer Profile"}</div>
                       <div>
                         <span className="text-violet-500">const</span> <span className="text-cyan-500">developer</span> <span className="text-zinc-500">=</span> <span className="text-zinc-500">{'{'}</span>
                       </div>
@@ -156,7 +156,7 @@ const Home = () => {
                         <span className="text-emerald-500">name</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Adil Hussain'</span><span className="text-zinc-500">,</span>
                       </div>
                       <div className="pl-5">
-                        <span className="text-emerald-500">title</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Software Engineer'</span><span className="text-zinc-500">,</span>
+                        <span className="text-emerald-500">title</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Web Developer'</span><span className="text-zinc-500">,</span>
                       </div>
                       <div className="pl-5">
                         <span className="text-emerald-500">company</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Darun Tech Pvt Ltd'</span><span className="text-zinc-500">,</span>

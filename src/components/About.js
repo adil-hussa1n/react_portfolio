@@ -96,7 +96,7 @@ const About = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-violet-500 mx-auto rounded-full mb-6"></div>
           <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            I am a CSE graduate, software engineer, and full-stack developer committed to creating interactive, robust digital experiences.
+            I am a CSE graduate, Web developer, and full-stack developer committed to creating interactive, robust digital experiences.
           </p>
         </div>
 
@@ -115,7 +115,7 @@ const About = () => {
             <div className="font-mono text-xs sm:text-sm bg-zinc-50/50 dark:bg-zinc-950/50 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/30 mb-4">
               <span className="text-violet-500">const</span> <span className="text-cyan-500">aboutMe</span> <span className="text-zinc-500">= {'{'}</span>
               <div className="pl-4 mt-1">
-                <span className="text-emerald-500">role</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Software Engineer & Full Stack Dev'</span><span className="text-zinc-500">,</span>
+                <span className="text-emerald-500">role</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack Dev'</span><span className="text-zinc-500">,</span>
               </div>
               <div className="pl-4">
                 <span className="text-emerald-500">interest</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Modern UI & Interactive Products'</span>
@@ -172,7 +172,7 @@ const About = () => {
                   CURRENT
                 </div>
                 <h4 className="font-bold text-base sm:text-lg">Darun Tech Private Limited</h4>
-                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Software Engineer</p>
+                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Web Developer</p>
                 <p className="text-xs text-zinc-500 mt-1">October 2025 &ndash; Present</p>
                 <div className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 leading-relaxed">
                   <p>&bull; Develop and maintain scalable full-stack web applications using React.js, Node.js, Express.js, and MongoDB</p>
@@ -186,7 +186,7 @@ const About = () => {
                 <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.4)]"></div>
                 <h4 className="font-bold text-base sm:text-lg mt-1">AC Tech Institute</h4>
                 <p className="text-sm font-semibold text-cyan-600 dark:text-cyan-400">IT Instructor</p>
-                <p className="text-xs text-zinc-500 mt-1">January 2025 &ndash; September 2025</p>
+                <p className="text-xs text-zinc-500 mt-1">January 2025 &ndash; August 2026</p>
                 <div className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 leading-relaxed">
                   <p>&bull; Delivered instruction in HTML, CSS, JavaScript and responsive web design</p>
                   <p>&bull; Mentored students through capstone projects resulting in portfolio-ready applications</p>
