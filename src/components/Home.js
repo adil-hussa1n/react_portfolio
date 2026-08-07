@@ -81,7 +81,7 @@ const Home = () => {
                 download="adil-hussain_resume.pdf"
                 className="btn-aurora-outline px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md"
               >
-                Download
+                Resume
               </a>
             </div>
 

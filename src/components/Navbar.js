@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { FaMoon, FaSun, FaDownload } from 'react-icons/fa';
+import { FaMoon, FaSun } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = ({ theme, toggleTheme }) => {
@@ -58,14 +58,6 @@ const Navbar = ({ theme, toggleTheme }) => {
           >
             {theme === 'dark' ? <FaSun className="text-amber-400" /> : <FaMoon className="text-zinc-500" />}
           </button>
-
-          <a
-            href="/resume10.pdf"
-            download="adil-hussain_resume.pdf"
-            className="btn-aurora hidden md:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm"
-          >
-            <FaDownload className="text-xs" /> Resume
-          </a>
 
           {/* Mobile menu button */}
           <button
@@ -137,15 +129,6 @@ const Navbar = ({ theme, toggleTheme }) => {
                     </a>
                   </li>
                 ))}
-                <li className="pt-1">
-                  <a
-                    href="/resume10.pdf"
-                    download="adil-hussain_resume.pdf"
-                    className="btn-aurora flex items-center justify-center gap-2 py-3 px-4 rounded-xl text-sm"
-                  >
-                    <FaDownload /> Download Resume
-                  </a>
-                </li>
               </ul>
             </motion.div>
           )}

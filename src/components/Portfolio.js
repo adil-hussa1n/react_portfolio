@@ -2,13 +2,36 @@ import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaCode, FaTerminal, FaSearchPlus, FaTimes, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
-import imgOmniPOS from '../img/omnipos_dashboard.png';
-import imgApexArena from '../img/apex_arena_booking.png';
-import imgAIPersonality from '../img/ai_personality_predictor.png';
-import imgSmartCamera from '../img/smart_camera_detection.png';
+import omnipos1 from '../img/omnipos/1.png';
 import imgMedify from '../img/medify_healthcare.png';
-import imgBloodify from '../img/bloodify_donation.png';
 import imgJobNest from '../img/jobnest.jpg';
+
+// Screenshots Gallery Imports
+import bloodify1 from '../img/bloodify_247/1.png';
+import bloodify2 from '../img/bloodify_247/2.png';
+import bloodify3 from '../img/bloodify_247/3.png';
+import bloodify4 from '../img/bloodify_247/4.png';
+
+import indoor1 from '../img/indoor_management_system/1.png';
+import indoor2 from '../img/indoor_management_system/2.png';
+import indoor3 from '../img/indoor_management_system/3.png';
+import indoor4 from '../img/indoor_management_system/4.png';
+import indoor5 from '../img/indoor_management_system/5.png';
+import indoor6 from '../img/indoor_management_system/6.png';
+
+import personality1 from '../img/personality_ai/1.png';
+import personality2 from '../img/personality_ai/2.png';
+import personality3 from '../img/personality_ai/3.png';
+import personality4 from '../img/personality_ai/4.png';
+import personality5 from '../img/personality_ai/5.png';
+import personality6 from '../img/personality_ai/6.png';
+import personality7 from '../img/personality_ai/7.png';
+
+import sential1 from '../img/sential_ai/1.png';
+import sential2 from '../img/sential_ai/2.png';
+import sential3 from '../img/sential_ai/3.png';
+import sential4 from '../img/sential_ai/4.png';
+import sential5 from '../img/sential_ai/5.png';
 
 const categories = [
   { id: 'all', name: 'All Projects' },
@@ -20,10 +43,11 @@ const categories = [
 const projects = [
   {
     id: 1,
-    src: imgOmniPOS,
-    title: 'OmniPOS — Restaurant POS & Management System',
+    src: omnipos1,
+    screenshots: [omnipos1],
+    title: 'The Cage Cafe — Restaurant POS & Management System',
     description: 'A full-stack point-of-sale (POS) and restaurant business management system.',
-    longDescription: 'OmniPOS is a premium React 19 + Laravel point-of-sale and business management platform designed specifically for restaurants and food service operations. It features multiple Zustand state stores, real-time transaction calculations, cart management, dynamic table/order state mapping (dine-in, takeaway, order tracking flows), print-ready receipt rendering, dark mode, and an advanced sales analytics dashboard.',
+    longDescription: 'A premium React 19 + Laravel point-of-sale and business management platform designed specifically for restaurants and food service operations. It features multiple Zustand state stores, real-time transaction calculations, cart management, dynamic table/order state mapping (dine-in, takeaway, order tracking flows), print-ready receipt rendering, dark mode, and an advanced sales analytics dashboard.',
     technologies: ['React 19', 'Vite', 'Laravel', 'MySQL', 'Zustand', 'Tailwind CSS v4'],
     category: 'fullstack',
     github: 'https://github.com/adil-hussa1n/The-Cage-Cafe-Pos',
@@ -31,8 +55,9 @@ const projects = [
   },
   {
     id: 2,
-    src: imgApexArena,
-    title: 'Apex Arena',
+    src: indoor1,
+    screenshots: [indoor1, indoor2, indoor3, indoor4, indoor5, indoor6],
+    title: 'Apex Arena (Indoor Management System)',
     description: 'A full-stack indoor sports booking platform with real-time websocket scheduling.',
     longDescription: 'Apex Arena is a premium sports court reservation platform built using React 19, Express, and MySQL. It features shift-based court rates, transaction concurrency slot-locking, real-time WebSocket syncing via Socket.IO, custom alert dialogs, and an interactive Pannellum 360° virtual tour.',
     technologies: ['React 19', 'Node.js', 'Express', 'MySQL', 'Sequelize', 'Socket.io', 'Pannellum'],
@@ -42,7 +67,8 @@ const projects = [
   },
   {
     id: 3,
-    src: imgAIPersonality,
+    src: personality1,
+    screenshots: [personality1, personality2, personality3, personality4, personality5, personality6, personality7],
     title: 'AI Personality Predictor',
     description: 'An NLP machine learning system classifying MBTI personality types from text.',
     longDescription: 'AI Personality Predictor leverages Next.js 15, FastAPI, and scikit-learn. It processes raw user text or files through a spaCy/NLTK pipeline (URL removal, lemmatization, custom stop words) to predict MBTI types with confidence levels and full interactive Plotly probability breakdowns.',
@@ -53,18 +79,20 @@ const projects = [
   },
   {
     id: 4,
-    src: imgSmartCamera,
-    title: 'Smart Camera Object Detection',
-    description: 'An intelligent computer vision system for real-time video stream recognition.',
-    longDescription: 'Smart Camera Object Detection uses OpenCV, YOLOv8, and PyTorch to perform object recognition, track security perimeter violation logic, execute threat verification log recordings, and trigger instant email/webhook notification alerts.',
-    technologies: ['Python', 'OpenCV', 'YOLOv8', 'PyTorch', 'Computer Vision', 'Deep Learning'],
+    src: sential1,
+    screenshots: [sential1, sential2, sential3, sential4, sential5],
+    title: 'Sentinel AI — Smart Camera Object Detection',
+    description: 'An intelligent computer vision & object detection system for real-time stream analysis.',
+    longDescription: 'Sentinel AI is an intelligent computer vision system leveraging Python, OpenCV, YOLOv8, and PyTorch to perform real-time video stream object recognition, perimeter threat monitoring, security violation log tracking, and instant automated alert triggers.',
+    technologies: ['Python', 'OpenCV', 'YOLOv8', 'PyTorch', 'Computer Vision', 'Deep Learning', 'FastAPI'],
     category: 'ai',
-    github: 'https://github.com/adil-hussa1n',
+    github: 'https://github.com/adil-hussa1n/Sentinel-AI',
     demo: null,
   },
   {
     id: 5,
     src: imgMedify,
+    screenshots: [imgMedify],
     title: 'Medify247',
     description: 'A full-stack medical appointment scheduling and subscription management portal.',
     longDescription: 'Medify247 is a comprehensive healthcare system with doctor/patient authentication, online booking portals, home diagnostics requests, secure subscription plans, payment gateway integration, and a dedicated admin coordination dashboard.',
@@ -75,18 +103,20 @@ const projects = [
   },
   {
     id: 6,
-    src: imgBloodify,
-    title: 'Bloodify247',
+    src: bloodify1,
+    screenshots: [bloodify1, bloodify2, bloodify3, bloodify4],
+    title: 'Bloodify-247',
     description: 'A real-time community blood donor registration and emergency seeker network.',
-    longDescription: 'Bloodify247 connects blood seekers and verified community donors instantly. It features dynamic donor filtering by location/blood group, real-time emergency request boards, SMS notification alerts, and full admin review controls.',
+    longDescription: 'Bloodify-247 connects blood seekers and verified community donors instantly. It features dynamic donor filtering by location/blood group, real-time emergency request boards, SMS notification alerts, and full admin review controls.',
     technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
     category: 'fullstack',
-    github: 'https://github.com/adil-hussa1n/Bloodify247',
+    github: 'https://github.com/adil-hussa1n/Blood-donation',
     demo: null,
   },
   {
     id: 7,
     src: imgJobNest,
+    screenshots: [imgJobNest],
     title: 'JobNest',
     description: 'A cross-platform mobile job portal for job search and tracking.',
     longDescription: 'JobNest is a cross-platform mobile application built using React Native and Expo. It enables candidates to search jobs with advanced filters, submit applications, track review status, and allows employers to post listings with real-time analytics dashboards.',
@@ -101,10 +131,12 @@ const Portfolio = () => {
   const sectionRef = useRef(null);
   const contentRef = useRef(null);
   const [selectedProject, setSelectedProject] = useState(null);
+  const [activeScreenshot, setActiveScreenshot] = useState(null);
   const [filter, setFilter] = useState('all');
   const [filteredProjects, setFilteredProjects] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [lightboxIndex, setLightboxIndex] = useState(null);
+  const [lightboxImageIndex, setLightboxImageIndex] = useState(0);
 
   useEffect(() => {
     setFilteredProjects(filter === 'all' ? projects : projects.filter(p => p.category === filter));
@@ -143,17 +175,19 @@ const Portfolio = () => {
 
   const openProjectDetails = (project) => {
     setSelectedProject(project);
+    setActiveScreenshot(project.src);
     setIsModalOpen(true);
     document.body.style.overflow = 'hidden';
   };
 
   const closeProjectDetails = () => {
     setIsModalOpen(false);
-    setTimeout(() => { setSelectedProject(null); document.body.style.overflow = 'auto'; }, 300);
+    setTimeout(() => { setSelectedProject(null); setActiveScreenshot(null); document.body.style.overflow = 'auto'; }, 300);
   };
 
   return (
-    <section
+    <>
+      <section
       id='portfolio'
       ref={sectionRef}
       className="opacity-0 py-20 lg:py-32 bg-transparent text-zinc-900 dark:text-white relative overflow-hidden"
@@ -209,7 +243,7 @@ const Portfolio = () => {
               </div>
 
               {/* Image with hover overlay */}
-              <div className="relative overflow-hidden group cursor-pointer" onClick={() => setLightboxIndex(index)}>
+              <div className="relative overflow-hidden group cursor-pointer" onClick={() => { setLightboxIndex(index); setLightboxImageIndex(0); }}>
                 <img
                   src={project.src}
                   alt={project.title}
@@ -275,110 +309,201 @@ const Portfolio = () => {
 
       {/* ===== Lightbox ===== */}
       <AnimatePresence>
-        {lightboxIndex !== null && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm" onClick={() => setLightboxIndex(null)}>
+        {lightboxIndex !== null && filteredProjects[lightboxIndex] && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md" onClick={() => setLightboxIndex(null)}>
+            {/* Close Button */}
             <button onClick={() => setLightboxIndex(null)} className="absolute top-5 right-5 z-[110] p-3 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Close">
               <FaTimes className="text-xl" />
             </button>
-            <button onClick={(e) => { e.stopPropagation(); setLightboxIndex(prev => prev === 0 ? filteredProjects.length - 1 : prev - 1); }} className="absolute left-4 z-[110] p-4 rounded-full bg-zinc-900/60 border border-zinc-700/40 text-zinc-300 hover:text-white transition-colors" aria-label="Previous">
-              <FaArrowLeft />
-            </button>
-            <button onClick={(e) => { e.stopPropagation(); setLightboxIndex(prev => prev === filteredProjects.length - 1 ? 0 : prev + 1); }} className="absolute right-4 z-[110] p-4 rounded-full bg-zinc-900/60 border border-zinc-700/40 text-zinc-300 hover:text-white transition-colors" aria-label="Next">
-              <FaArrowRight />
-            </button>
-            <div className="relative max-w-5xl max-h-[85vh] w-[90%] flex flex-col items-center p-2" onClick={(e) => e.stopPropagation()}>
-              <motion.img key={lightboxIndex} initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.95 }} transition={{ duration: 0.3 }}
-                src={filteredProjects[lightboxIndex].src} alt={filteredProjects[lightboxIndex].title}
-                className="max-w-full max-h-[78vh] object-contain rounded-xl shadow-2xl border border-zinc-800/50" />
+
+            {/* Left/Right Navigation buttons for Screenshots within the current project or projects array */}
+            {lightboxImageIndex > 0 && (
+              <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev - 1); }} className="absolute left-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Previous Screenshot">
+                <FaArrowLeft />
+              </button>
+            )}
+
+            {filteredProjects[lightboxIndex].screenshots && lightboxImageIndex < filteredProjects[lightboxIndex].screenshots.length - 1 && (
+              <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev + 1); }} className="absolute right-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Next Screenshot">
+                <FaArrowRight />
+              </button>
+            )}
+
+            <div className="relative max-w-5xl max-h-[90vh] w-[92%] flex flex-col items-center p-2" onClick={(e) => e.stopPropagation()}>
+              <motion.img
+                key={`${lightboxIndex}-${lightboxImageIndex}`}
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.2 }}
+                src={filteredProjects[lightboxIndex].screenshots ? filteredProjects[lightboxIndex].screenshots[lightboxImageIndex] || filteredProjects[lightboxIndex].src : filteredProjects[lightboxIndex].src}
+                alt={filteredProjects[lightboxIndex].title}
+                className="max-w-full max-h-[78vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-zinc-800/50 select-none"
+              />
+
               <div className="mt-4 text-center">
                 <h4 className="text-lg font-bold text-white">{filteredProjects[lightboxIndex].title}</h4>
-                <p className="text-sm text-zinc-400 mt-1 capitalize">{filteredProjects[lightboxIndex].category}</p>
+                <p className="text-xs text-zinc-400 mt-1 font-mono">
+                  Screenshot {lightboxImageIndex + 1} of {(filteredProjects[lightboxIndex].screenshots || [filteredProjects[lightboxIndex].src]).length}
+                </p>
+
+                {/* Lightbox Thumbnails Strip */}
+                {filteredProjects[lightboxIndex].screenshots && filteredProjects[lightboxIndex].screenshots.length > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-3 overflow-x-auto max-w-full py-1">
+                    {filteredProjects[lightboxIndex].screenshots.map((imgSrc, sIdx) => (
+                      <button
+                        key={sIdx}
+                        onClick={() => setLightboxImageIndex(sIdx)}
+                        className={`w-14 h-10 rounded-md overflow-hidden border-2 transition-all ${
+                          lightboxImageIndex === sIdx ? 'border-cyan-400 scale-110 shadow-lg' : 'border-zinc-700 opacity-50 hover:opacity-100'
+                        }`}
+                      >
+                        <img src={imgSrc} alt={`Thumb ${sIdx + 1}`} className="w-full h-full object-cover" />
+                      </button>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           </div>
         )}
       </AnimatePresence>
 
-      {/* ===== Project Details Modal ===== */}
-      <AnimatePresence>
-        {isModalOpen && selectedProject && (
-          <div className="fixed inset-0 z-50 overflow-y-auto" role="dialog" aria-modal="true">
-            <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-              <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 0.3 }}
-                className="fixed inset-0 bg-black/80 backdrop-blur-sm" onClick={closeProjectDetails} />
-              <span className="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
-              <motion.div initial={{ opacity: 0, scale: 0.9, y: 20 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9, y: 20 }} transition={{ duration: 0.3 }}
-                className="inline-block align-bottom bg-white dark:bg-surface-900 border border-zinc-200/50 dark:border-zinc-800/30 text-left overflow-hidden shadow-2xl transform sm:my-8 sm:align-middle sm:max-w-4xl sm:w-full rounded-2xl relative z-10">
-                
-                {/* Modal header */}
-                <div className="bg-zinc-50/80 dark:bg-zinc-950/80 py-3 px-5 flex items-center justify-between border-b border-zinc-200/40 dark:border-zinc-800/30">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
-                  </div>
-                  <span className="text-xs text-zinc-500 font-mono">project-details.js</span>
-                  <button onClick={closeProjectDetails} className="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                    <FaTimes />
-                  </button>
+    </section>
+
+    {/* ===== Project Details Modal (Portal/Global Viewport level) ===== */}
+    <AnimatePresence>
+      {isModalOpen && selectedProject && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true">
+          {/* Backdrop */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+            onClick={closeProjectDetails}
+          />
+          
+          {/* Centered Modal Content Card */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95, y: 10 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: 10 }}
+            transition={{ duration: 0.2 }}
+            className="bg-white dark:bg-surface-900 border border-zinc-200/50 dark:border-zinc-800/30 text-left overflow-hidden shadow-2xl max-w-5xl w-full rounded-2xl relative z-10 max-h-[85vh] flex flex-col"
+          >
+              
+              {/* Modal header */}
+              <div className="bg-zinc-50/80 dark:bg-zinc-950/80 py-3 px-5 flex items-center justify-between border-b border-zinc-200/40 dark:border-zinc-800/30 flex-shrink-0">
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+                  <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
                 </div>
+                <span className="text-xs text-zinc-500 font-mono font-semibold truncate max-w-[250px] sm:max-w-none">
+                  {selectedProject.title}
+                </span>
+                <button onClick={closeProjectDetails} className="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50">
+                  <FaTimes />
+                </button>
+              </div>
 
-                <div className="p-5 sm:p-7">
-                  <h3 className="text-2xl font-bold mb-2">{selectedProject.title}</h3>
-                  <span className="inline-block px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400 capitalize mb-4">
-                    {selectedProject.category}
-                  </span>
-
-                  <div className="relative overflow-hidden rounded-xl mb-6 group cursor-zoom-in" onClick={() => { closeProjectDetails(); setLightboxIndex(projects.findIndex(p => p.id === selectedProject.id)); }}>
-                    <img src={selectedProject.src} alt={selectedProject.title} loading="lazy" className="w-full h-64 sm:h-80 object-cover object-top rounded-xl border border-zinc-200/30 dark:border-zinc-800/20 transition-transform duration-500 hover:scale-[1.02]" />
-                    <div className="absolute top-4 right-4 p-2.5 bg-black/50 backdrop-blur-md rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity">
-                      <FaSearchPlus className="text-sm" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-5">
-                    <div>
-                      <h4 className="text-sm font-bold mb-2 flex items-center gap-2 font-mono text-zinc-900 dark:text-white">
-                        <FaTerminal className="text-emerald-500" /> Description
-                      </h4>
-                      <p className="text-zinc-600 dark:text-zinc-400 border-l-2 border-emerald-500/40 pl-4 leading-relaxed text-sm">{selectedProject.longDescription}</p>
-                    </div>
-
-                    <div>
-                      <h4 className="text-sm font-bold mb-2 flex items-center gap-2 font-mono text-zinc-900 dark:text-white">
-                        <FaCode className="text-cyan-500" /> Technologies
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {selectedProject.technologies.map((tech, idx) => (
-                          <span key={idx} className="px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-xs font-mono text-emerald-600 dark:text-emerald-300">
-                            {tech}
-                          </span>
-                        ))}
+              <div className="p-5 sm:p-7 overflow-y-auto flex-1 scrollbar-thin">
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                  
+                  {/* Left Column — Screenshots Preview */}
+                  <div className="lg:col-span-7 space-y-4">
+                    <div className="relative overflow-hidden rounded-xl group cursor-zoom-in bg-zinc-950/80 border border-zinc-800/20 flex items-center justify-center min-h-[220px] max-h-[380px]" onClick={() => { 
+                      closeProjectDetails(); 
+                      const pIdx = projects.findIndex(p => p.id === selectedProject.id);
+                      const sIdx = (selectedProject.screenshots || []).findIndex(s => s === activeScreenshot);
+                      setLightboxIndex(pIdx);
+                      setLightboxImageIndex(sIdx >= 0 ? sIdx : 0);
+                    }}>
+                      <img src={activeScreenshot || selectedProject.src} alt={selectedProject.title} className="w-full h-auto max-h-[380px] object-contain rounded-xl transition-all duration-300 group-hover:scale-[1.01]" />
+                      <div className="absolute top-3 right-3 p-2 bg-black/60 backdrop-blur-md rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                        <FaSearchPlus className="text-xs" />
                       </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-3 pt-2">
+                    {/* Thumbnails */}
+                    {selectedProject.screenshots && selectedProject.screenshots.length > 1 && (
+                      <div>
+                        <p className="text-[11px] font-mono text-zinc-500 mb-2 flex items-center gap-1.5">
+                          <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Screenshots ({selectedProject.screenshots.length}):
+                        </p>
+                        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
+                          {selectedProject.screenshots.map((imgSrc, idx) => (
+                            <button
+                              key={idx}
+                              onClick={() => setActiveScreenshot(imgSrc)}
+                              className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+                                (activeScreenshot === imgSrc || (!activeScreenshot && idx === 0))
+                                  ? 'border-cyan-500 scale-105 shadow-md shadow-cyan-500/20'
+                                  : 'border-zinc-300 dark:border-zinc-700 opacity-60 hover:opacity-100'
+                              }`}
+                            >
+                              <img src={imgSrc} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Right Column — Project Information */}
+                  <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
+                    <div>
+                      <span className="inline-block px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400 capitalize mb-2">
+                        {selectedProject.category}
+                      </span>
+                      <h3 className="text-xl sm:text-2xl font-bold mb-3">{selectedProject.title}</h3>
+                      
+                      <div className="mb-4">
+                        <h4 className="text-xs font-bold mb-1.5 flex items-center gap-2 font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
+                          <FaTerminal className="text-emerald-500" /> Description
+                        </h4>
+                        <p className="text-zinc-600 dark:text-zinc-400 border-l-2 border-emerald-500/40 pl-3 leading-relaxed text-xs sm:text-sm">{selectedProject.longDescription}</p>
+                      </div>
+
+                      <div>
+                        <h4 className="text-xs font-bold mb-2 flex items-center gap-2 font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
+                          <FaCode className="text-cyan-500" /> Technologies
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5">
+                          {selectedProject.technologies.map((tech, idx) => (
+                            <span key={idx} className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-xs font-mono text-emerald-600 dark:text-emerald-300">
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2.5 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/20">
                       {selectedProject.github && (
                         <a href={selectedProject.github} target="_blank" rel="noopener noreferrer"
-                          className="btn-aurora-outline inline-flex items-center px-4 py-2.5 rounded-xl text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md">
+                          className="btn-aurora-outline inline-flex items-center px-4 py-2 rounded-xl text-xs sm:text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md">
                           <FaGithub className="mr-2" /> GitHub Repository
                         </a>
                       )}
                       {selectedProject.demo && (
                         <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer"
-                          className="btn-aurora inline-flex items-center px-5 py-2.5 rounded-xl text-sm">
+                          className="btn-aurora inline-flex items-center px-4 py-2 rounded-xl text-xs sm:text-sm">
                           <FaExternalLinkAlt className="mr-2" /> Live Demo
                         </a>
                       )}
                     </div>
                   </div>
+
                 </div>
-              </motion.div>
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
-    </section>
+              </div>
+            </motion.div>
+        </div>
+      )}
+    </AnimatePresence>
+  </>
   );
 };
 

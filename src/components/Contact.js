@@ -127,12 +127,10 @@ const Contact = () => {
             </div>
 
             {/* CTA Card */}
-            <div className="aurora-card rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-emerald-500/5 to-cyan-500/5">
-              <h3 className="text-xl font-bold mb-2">Let's Build Something Amazing</h3>
-              <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-5 leading-relaxed">I am currently available for freelance work and open to new opportunities.</p>
+            <div className="aurora-card rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-emerald-500/5 to-cyan-500/5 flex items-center justify-center">
               <a href="/resume10.pdf" download="adil-hussain_resume.pdf"
-                className="btn-aurora-outline inline-block px-5 py-2.5 rounded-xl text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md">
-                Download Resume
+                className="btn-aurora-outline inline-block px-6 py-3 rounded-xl text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md font-semibold">
+                Resume
               </a>
             </div>
           </div>
