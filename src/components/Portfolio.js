@@ -3,6 +3,9 @@ import { FaGithub, FaExternalLinkAlt, FaCode, FaTerminal, FaSearchPlus, FaTimes,
 import { motion, AnimatePresence } from 'framer-motion';
 
 import omnipos1 from '../img/omnipos/1.png';
+import omnipos2 from '../img/omnipos/2.png';
+import omnipos3 from '../img/omnipos/3.png';
+import omnipos4 from '../img/omnipos/4.png';
 import imgJobNest from '../img/jobnest.jpg';
 
 // Screenshots Gallery Imports
@@ -47,8 +50,8 @@ const categories = [
 const projects = [
   {
     id: 1,
-    src: omnipos1,
-    screenshots: [omnipos1],
+    src: omnipos4,
+    screenshots: [omnipos4, omnipos1, omnipos2, omnipos3],
     title: 'The Cage Cafe — Restaurant POS & Management System',
     description: 'A full-stack point-of-sale (POS) and restaurant business management system.',
     longDescription: 'A premium React 19 + Laravel point-of-sale and business management platform designed specifically for restaurants and food service operations. It features multiple Zustand state stores, real-time transaction calculations, cart management, dynamic table/order state mapping (dine-in, takeaway, order tracking flows), print-ready receipt rendering, dark mode, and an advanced sales analytics dashboard.',
