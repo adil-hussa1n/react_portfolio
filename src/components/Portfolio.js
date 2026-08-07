@@ -50,26 +50,26 @@ const categories = [
 const projects = [
   {
     id: 1,
-    src: omnipos4,
-    screenshots: [omnipos4, omnipos1, omnipos2, omnipos3],
-    title: 'The Cage Cafe — Restaurant POS & Management System',
-    description: 'A full-stack point-of-sale (POS) and restaurant business management system.',
-    longDescription: 'A premium React 19 + Laravel point-of-sale and business management platform designed specifically for restaurants and food service operations. It features multiple Zustand state stores, real-time transaction calculations, cart management, dynamic table/order state mapping (dine-in, takeaway, order tracking flows), print-ready receipt rendering, dark mode, and an advanced sales analytics dashboard.',
-    technologies: ['React 19', 'Vite', 'Laravel', 'MySQL', 'Zustand', 'Tailwind CSS v4'],
+    src: indoor1,
+    screenshots: [indoor1, indoor2, indoor3, indoor4, indoor5, indoor6],
+    title: 'Indoor Management System',
+    description: 'A full-stack multi-tenant SaaS platform for indoor sports businesses to manage venues, court bookings, schedules, customers, and daily operations.',
+    longDescription: 'Apex Arena is a premium multi-tenant indoor sports management SaaS platform built with React 19, Node.js, Express, and MySQL. Designed for indoor sports businesses, the platform provides centralized management of courts, bookings, schedules, customers, transactions, and day-to-day venue operations. It features shift-based court pricing, real-time availability, transaction concurrency and slot-locking to prevent double bookings, real-time synchronization through Socket.IO, interactive booking workflows, custom alert dialogs, and an immersive Pannellum 360° virtual venue tour. The SaaS architecture is designed to support multiple indoor sports businesses through independent business environments while maintaining centralized platform administration.',
+    technologies: ['React 19', 'Node.js', 'Express', 'MySQL', 'Sequelize', 'Socket.io', 'Pannellum'],
     category: 'fullstack',
-    github: 'https://github.com/adil-hussa1n/The-Cage-Cafe-Pos',
+    github: 'https://github.com/adil-hussa1n/Indoor-Management-System',
     demo: null,
   },
   {
     id: 2,
-    src: indoor1,
-    screenshots: [indoor1, indoor2, indoor3, indoor4, indoor5, indoor6],
-    title: 'Apex Arena (Indoor Management System)',
-    description: 'A full-stack indoor sports booking platform with real-time websocket scheduling.',
-    longDescription: 'Apex Arena is a premium sports court reservation platform built using React 19, Express, and MySQL. It features shift-based court rates, transaction concurrency slot-locking, real-time WebSocket syncing via Socket.IO, custom alert dialogs, and an interactive Pannellum 360° virtual tour.',
-    technologies: ['React 19', 'Node.js', 'Express', 'MySQL', 'Sequelize', 'Socket.io', 'Pannellum'],
+    src: omnipos4,
+    screenshots: [omnipos4, omnipos1, omnipos2, omnipos3],
+    title: 'Restaurant POS & Management SaaS',
+    description: 'A full-stack multi-tenant SaaS platform for restaurant POS and business management.',
+    longDescription: 'A premium React 19 + Laravel multi-tenant SaaS platform designed to help restaurants and food service businesses manage point-of-sale operations, orders, tables, transactions, and business performance from a centralized system. It features multiple Zustand state stores, real-time transaction calculations, cart and order management, dynamic table and order state mapping for dine-in and takeaway workflows, print-ready receipt generation, dark mode, and an advanced sales analytics dashboard. The platform is designed with a scalable SaaS architecture to support multiple restaurant businesses within a centralized management environment.',
+    technologies: ['React 19', 'Vite', 'Laravel', 'MySQL', 'Zustand', 'Tailwind CSS v4'],
     category: 'fullstack',
-    github: 'https://github.com/adil-hussa1n/Indoor-Management-System',
+    github: 'https://github.com/adil-hussa1n',
     demo: null,
   },
   {
@@ -195,212 +195,210 @@ const Portfolio = () => {
   return (
     <>
       <section
-      id='portfolio'
-      ref={sectionRef}
-      className="opacity-0 py-20 lg:py-32 bg-transparent text-zinc-900 dark:text-white relative overflow-hidden"
-    >
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
-            My <span className="aurora-text">Portfolio</span>
-          </h2>
-          <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-violet-500 mx-auto mb-6 rounded-full"></div>
-          <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
-            A hand-picked showcase of full-stack products, responsive mobile applications, and clean interfaces.
-          </p>
-        </div>
+        id='portfolio'
+        ref={sectionRef}
+        className="opacity-0 py-20 lg:py-32 bg-transparent text-zinc-900 dark:text-white relative overflow-hidden"
+      >
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">
+              My <span className="aurora-text">Portfolio</span>
+            </h2>
+            <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-violet-500 mx-auto mb-6 rounded-full"></div>
+            <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto text-base sm:text-lg leading-relaxed">
+              A hand-picked showcase of full-stack products, responsive mobile applications, and clean interfaces.
+            </p>
+          </div>
 
-        {/* Category Filter — pill style */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setFilter(cat.id)}
-              className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 border ${
-                filter === cat.id
+          {/* Category Filter — pill style */}
+          <div className="flex flex-wrap justify-center gap-2 mb-12">
+            {categories.map((cat) => (
+              <button
+                key={cat.id}
+                onClick={() => setFilter(cat.id)}
+                className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 border ${filter === cat.id
                   ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 border-transparent text-white shadow-lg shadow-cyan-500/20'
                   : 'bg-white/50 dark:bg-zinc-900/30 border-zinc-200/50 dark:border-zinc-800/30 text-zinc-600 dark:text-zinc-400 hover:border-cyan-500/30 hover:text-cyan-600 dark:hover:text-cyan-400 backdrop-blur-md'
-              }`}
-            >
-              {cat.name}
-            </button>
-          ))}
+                  }`}
+              >
+                {cat.name}
+              </button>
+            ))}
+          </div>
+
+          {/* Projects Grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filteredProjects.map((project, index) => (
+              <div
+                key={project.id}
+                className="aurora-card spotlight-card animated-border-card rounded-2xl overflow-hidden animate-fade-in-up flex flex-col"
+                style={{ animationDelay: `${0.1 + index * 0.08}s` }}
+                onMouseMove={handleMouseMove}
+              >
+                {/* Category badge header */}
+                <div className="bg-zinc-50/60 dark:bg-zinc-950/40 py-2.5 px-4 flex items-center justify-between border-b border-zinc-200/40 dark:border-zinc-800/20">
+                  <div className="flex items-center space-x-1.5">
+                    <div className="w-2.5 h-2.5 rounded-full bg-red-500/70"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
+                    <div className="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
+                  </div>
+                  <span className="text-[10px] text-zinc-500 font-mono capitalize flex items-center gap-1.5">
+                    {project.category}
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  </span>
+                </div>
+
+                {/* Image with hover overlay */}
+                <div className="relative overflow-hidden group cursor-pointer" onClick={() => { setLightboxIndex(index); setLightboxImageIndex(0); }}>
+                  <img
+                    src={project.src}
+                    alt={project.title}
+                    loading="lazy"
+                    className="w-full h-44 sm:h-48 lg:h-52 object-cover object-top transition-transform duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+                    <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors">
+                      <FaSearchPlus />
+                    </div>
+                    {project.github && (
+                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                        className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors"
+                        onClick={(e) => e.stopPropagation()}>
+                        <FaGithub />
+                      </a>
+                    )}
+                  </div>
+                </div>
+
+                {/* Content */}
+                <div className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-bold text-lg mb-2">{project.title}</h3>
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  <div>
+                    {/* Tech tags */}
+                    <div className="flex flex-wrap gap-1.5 mb-4">
+                      {project.technologies.slice(0, 4).map((tech, idx) => (
+                        <span key={idx} className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-md text-[10px] font-mono text-emerald-600 dark:text-emerald-300">
+                          {tech}
+                        </span>
+                      ))}
+                      {project.technologies.length > 4 && (
+                        <span className="px-2 py-0.5 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200/50 dark:border-zinc-700/30 rounded-md text-[10px] font-mono text-zinc-500">
+                          +{project.technologies.length - 4}
+                        </span>
+                      )}
+                    </div>
+
+                    <button
+                      onClick={() => openProjectDetails(project)}
+                      className="btn-aurora w-full py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-sm"
+                    >
+                      <FaCode /> View Details
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {filteredProjects.length === 0 && (
+            <div className="text-center py-24">
+              <p className="text-lg text-zinc-500">No projects found in this category.</p>
+            </div>
+          )}
         </div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {filteredProjects.map((project, index) => (
-            <div
-              key={project.id}
-              className="aurora-card spotlight-card animated-border-card rounded-2xl overflow-hidden animate-fade-in-up flex flex-col"
-              style={{ animationDelay: `${0.1 + index * 0.08}s` }}
-              onMouseMove={handleMouseMove}
-            >
-              {/* Category badge header */}
-              <div className="bg-zinc-50/60 dark:bg-zinc-950/40 py-2.5 px-4 flex items-center justify-between border-b border-zinc-200/40 dark:border-zinc-800/20">
-                <div className="flex items-center space-x-1.5">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/70"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/70"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/70"></div>
-                </div>
-                <span className="text-[10px] text-zinc-500 font-mono capitalize flex items-center gap-1.5">
-                  {project.category}
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                </span>
-              </div>
+        {/* ===== Lightbox ===== */}
+        <AnimatePresence>
+          {lightboxIndex !== null && filteredProjects[lightboxIndex] && (
+            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md" onClick={() => setLightboxIndex(null)}>
+              {/* Close Button */}
+              <button onClick={() => setLightboxIndex(null)} className="absolute top-5 right-5 z-[110] p-3 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Close">
+                <FaTimes className="text-xl" />
+              </button>
 
-              {/* Image with hover overlay */}
-              <div className="relative overflow-hidden group cursor-pointer" onClick={() => { setLightboxIndex(index); setLightboxImageIndex(0); }}>
-                <img
-                  src={project.src}
-                  alt={project.title}
-                  loading="lazy"
-                  className="w-full h-44 sm:h-48 lg:h-52 object-cover object-top transition-transform duration-700 group-hover:scale-110"
+              {/* Left/Right Navigation buttons for Screenshots within the current project or projects array */}
+              {lightboxImageIndex > 0 && (
+                <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev - 1); }} className="absolute left-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Previous Screenshot">
+                  <FaArrowLeft />
+                </button>
+              )}
+
+              {filteredProjects[lightboxIndex].screenshots && lightboxImageIndex < filteredProjects[lightboxIndex].screenshots.length - 1 && (
+                <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev + 1); }} className="absolute right-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Next Screenshot">
+                  <FaArrowRight />
+                </button>
+              )}
+
+              <div className="relative max-w-5xl max-h-[90vh] w-[92%] flex flex-col items-center p-2" onClick={(e) => e.stopPropagation()}>
+                <motion.img
+                  key={`${lightboxIndex}-${lightboxImageIndex}`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.2 }}
+                  src={filteredProjects[lightboxIndex].screenshots ? filteredProjects[lightboxIndex].screenshots[lightboxImageIndex] || filteredProjects[lightboxIndex].src : filteredProjects[lightboxIndex].src}
+                  alt={filteredProjects[lightboxIndex].title}
+                  className="max-w-full max-h-[78vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-zinc-800/50 select-none"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                  <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors">
-                    <FaSearchPlus />
-                  </div>
-                  {project.github && (
-                    <a href={project.github} target="_blank" rel="noopener noreferrer"
-                      className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors"
-                      onClick={(e) => e.stopPropagation()}>
-                      <FaGithub />
-                    </a>
+
+                <div className="mt-4 text-center">
+                  <h4 className="text-lg font-bold text-white">{filteredProjects[lightboxIndex].title}</h4>
+                  <p className="text-xs text-zinc-400 mt-1 font-mono">
+                    Screenshot {lightboxImageIndex + 1} of {(filteredProjects[lightboxIndex].screenshots || [filteredProjects[lightboxIndex].src]).length}
+                  </p>
+
+                  {/* Lightbox Thumbnails Strip */}
+                  {filteredProjects[lightboxIndex].screenshots && filteredProjects[lightboxIndex].screenshots.length > 1 && (
+                    <div className="flex items-center justify-center gap-2 mt-3 overflow-x-auto max-w-full py-1">
+                      {filteredProjects[lightboxIndex].screenshots.map((imgSrc, sIdx) => (
+                        <button
+                          key={sIdx}
+                          onClick={() => setLightboxImageIndex(sIdx)}
+                          className={`w-14 h-10 rounded-md overflow-hidden border-2 transition-all ${lightboxImageIndex === sIdx ? 'border-cyan-400 scale-110 shadow-lg' : 'border-zinc-700 opacity-50 hover:opacity-100'
+                            }`}
+                        >
+                          <img src={imgSrc} alt={`Thumb ${sIdx + 1}`} className="w-full h-full object-cover" />
+                        </button>
+                      ))}
+                    </div>
                   )}
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-5 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3 className="font-bold text-lg mb-2">{project.title}</h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4 line-clamp-2 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
-
-                <div>
-                  {/* Tech tags */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {project.technologies.slice(0, 4).map((tech, idx) => (
-                      <span key={idx} className="px-2 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-md text-[10px] font-mono text-emerald-600 dark:text-emerald-300">
-                        {tech}
-                      </span>
-                    ))}
-                    {project.technologies.length > 4 && (
-                      <span className="px-2 py-0.5 bg-zinc-100/50 dark:bg-zinc-800/30 border border-zinc-200/50 dark:border-zinc-700/30 rounded-md text-[10px] font-mono text-zinc-500">
-                        +{project.technologies.length - 4}
-                      </span>
-                    )}
-                  </div>
-
-                  <button
-                    onClick={() => openProjectDetails(project)}
-                    className="btn-aurora w-full py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-sm"
-                  >
-                    <FaCode /> View Details
-                  </button>
-                </div>
-              </div>
             </div>
-          ))}
-        </div>
+          )}
+        </AnimatePresence>
 
-        {filteredProjects.length === 0 && (
-          <div className="text-center py-24">
-            <p className="text-lg text-zinc-500">No projects found in this category.</p>
-          </div>
-        )}
-      </div>
+      </section>
 
-      {/* ===== Lightbox ===== */}
+      {/* ===== Project Details Modal (Portal/Global Viewport level) ===== */}
       <AnimatePresence>
-        {lightboxIndex !== null && filteredProjects[lightboxIndex] && (
-          <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md" onClick={() => setLightboxIndex(null)}>
-            {/* Close Button */}
-            <button onClick={() => setLightboxIndex(null)} className="absolute top-5 right-5 z-[110] p-3 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Close">
-              <FaTimes className="text-xl" />
-            </button>
+        {isModalOpen && selectedProject && (
+          <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true">
+            {/* Backdrop */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={closeProjectDetails}
+            />
 
-            {/* Left/Right Navigation buttons for Screenshots within the current project or projects array */}
-            {lightboxImageIndex > 0 && (
-              <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev - 1); }} className="absolute left-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Previous Screenshot">
-                <FaArrowLeft />
-              </button>
-            )}
+            {/* Centered Modal Content Card */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 10 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 10 }}
+              transition={{ duration: 0.2 }}
+              className="bg-white dark:bg-surface-900 border border-zinc-200/50 dark:border-zinc-800/30 text-left overflow-hidden shadow-2xl max-w-5xl w-full rounded-2xl relative z-10 max-h-[85vh] flex flex-col"
+            >
 
-            {filteredProjects[lightboxIndex].screenshots && lightboxImageIndex < filteredProjects[lightboxIndex].screenshots.length - 1 && (
-              <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev + 1); }} className="absolute right-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Next Screenshot">
-                <FaArrowRight />
-              </button>
-            )}
-
-            <div className="relative max-w-5xl max-h-[90vh] w-[92%] flex flex-col items-center p-2" onClick={(e) => e.stopPropagation()}>
-              <motion.img
-                key={`${lightboxIndex}-${lightboxImageIndex}`}
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                src={filteredProjects[lightboxIndex].screenshots ? filteredProjects[lightboxIndex].screenshots[lightboxImageIndex] || filteredProjects[lightboxIndex].src : filteredProjects[lightboxIndex].src}
-                alt={filteredProjects[lightboxIndex].title}
-                className="max-w-full max-h-[78vh] w-auto h-auto object-contain rounded-xl shadow-2xl border border-zinc-800/50 select-none"
-              />
-
-              <div className="mt-4 text-center">
-                <h4 className="text-lg font-bold text-white">{filteredProjects[lightboxIndex].title}</h4>
-                <p className="text-xs text-zinc-400 mt-1 font-mono">
-                  Screenshot {lightboxImageIndex + 1} of {(filteredProjects[lightboxIndex].screenshots || [filteredProjects[lightboxIndex].src]).length}
-                </p>
-
-                {/* Lightbox Thumbnails Strip */}
-                {filteredProjects[lightboxIndex].screenshots && filteredProjects[lightboxIndex].screenshots.length > 1 && (
-                  <div className="flex items-center justify-center gap-2 mt-3 overflow-x-auto max-w-full py-1">
-                    {filteredProjects[lightboxIndex].screenshots.map((imgSrc, sIdx) => (
-                      <button
-                        key={sIdx}
-                        onClick={() => setLightboxImageIndex(sIdx)}
-                        className={`w-14 h-10 rounded-md overflow-hidden border-2 transition-all ${
-                          lightboxImageIndex === sIdx ? 'border-cyan-400 scale-110 shadow-lg' : 'border-zinc-700 opacity-50 hover:opacity-100'
-                        }`}
-                      >
-                        <img src={imgSrc} alt={`Thumb ${sIdx + 1}`} className="w-full h-full object-cover" />
-                      </button>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-      </AnimatePresence>
-
-    </section>
-
-    {/* ===== Project Details Modal (Portal/Global Viewport level) ===== */}
-    <AnimatePresence>
-      {isModalOpen && selectedProject && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true">
-          {/* Backdrop */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.2 }}
-            className="fixed inset-0 bg-black/80 backdrop-blur-sm"
-            onClick={closeProjectDetails}
-          />
-          
-          {/* Centered Modal Content Card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 10 }}
-            animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 10 }}
-            transition={{ duration: 0.2 }}
-            className="bg-white dark:bg-surface-900 border border-zinc-200/50 dark:border-zinc-800/30 text-left overflow-hidden shadow-2xl max-w-5xl w-full rounded-2xl relative z-10 max-h-[85vh] flex flex-col"
-          >
-              
               {/* Modal header */}
               <div className="bg-zinc-50/80 dark:bg-zinc-950/80 py-3 px-5 flex items-center justify-between border-b border-zinc-200/40 dark:border-zinc-800/30 flex-shrink-0">
                 <div className="flex items-center space-x-2">
@@ -418,11 +416,11 @@ const Portfolio = () => {
 
               <div className="p-5 sm:p-7 overflow-y-auto flex-1 scrollbar-thin">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-                  
+
                   {/* Left Column — Screenshots Preview */}
                   <div className="lg:col-span-7 space-y-4">
-                    <div className="relative overflow-hidden rounded-xl group cursor-zoom-in bg-zinc-950/80 border border-zinc-800/20 flex items-center justify-center min-h-[220px] max-h-[380px]" onClick={() => { 
-                      closeProjectDetails(); 
+                    <div className="relative overflow-hidden rounded-xl group cursor-zoom-in bg-zinc-950/80 border border-zinc-800/20 flex items-center justify-center min-h-[220px] max-h-[380px]" onClick={() => {
+                      closeProjectDetails();
                       const pIdx = projects.findIndex(p => p.id === selectedProject.id);
                       const sIdx = (selectedProject.screenshots || []).findIndex(s => s === activeScreenshot);
                       setLightboxIndex(pIdx);
@@ -445,11 +443,10 @@ const Portfolio = () => {
                             <button
                               key={idx}
                               onClick={() => setActiveScreenshot(imgSrc)}
-                              className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
-                                (activeScreenshot === imgSrc || (!activeScreenshot && idx === 0))
-                                  ? 'border-cyan-500 scale-105 shadow-md shadow-cyan-500/20'
-                                  : 'border-zinc-300 dark:border-zinc-700 opacity-60 hover:opacity-100'
-                              }`}
+                              className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${(activeScreenshot === imgSrc || (!activeScreenshot && idx === 0))
+                                ? 'border-cyan-500 scale-105 shadow-md shadow-cyan-500/20'
+                                : 'border-zinc-300 dark:border-zinc-700 opacity-60 hover:opacity-100'
+                                }`}
                             >
                               <img src={imgSrc} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
                             </button>
@@ -466,7 +463,7 @@ const Portfolio = () => {
                         {selectedProject.category}
                       </span>
                       <h3 className="text-xl sm:text-2xl font-bold mb-3">{selectedProject.title}</h3>
-                      
+
                       <div className="mb-4">
                         <h4 className="text-xs font-bold mb-1.5 flex items-center gap-2 font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
                           <FaTerminal className="text-emerald-500" /> Description
@@ -507,10 +504,10 @@ const Portfolio = () => {
                 </div>
               </div>
             </motion.div>
-        </div>
-      )}
-    </AnimatePresence>
-  </>
+          </div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
