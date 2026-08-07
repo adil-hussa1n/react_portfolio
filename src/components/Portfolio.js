@@ -3,10 +3,14 @@ import { FaGithub, FaExternalLinkAlt, FaCode, FaTerminal, FaSearchPlus, FaTimes,
 import { motion, AnimatePresence } from 'framer-motion';
 
 import omnipos1 from '../img/omnipos/1.png';
-import imgMedify from '../img/medify_healthcare.png';
 import imgJobNest from '../img/jobnest.jpg';
 
 // Screenshots Gallery Imports
+import medify1 from '../img/medify_247/1.png';
+import medify2 from '../img/medify_247/2.png';
+import medify3 from '../img/medify_247/3.png';
+import medify4 from '../img/medify_247/4.png';
+
 import bloodify1 from '../img/bloodify_247/1.png';
 import bloodify2 from '../img/bloodify_247/2.png';
 import bloodify3 from '../img/bloodify_247/3.png';
@@ -91,14 +95,14 @@ const projects = [
   },
   {
     id: 5,
-    src: imgMedify,
-    screenshots: [imgMedify],
-    title: 'Medify247',
+    src: medify1,
+    screenshots: [medify1, medify2, medify3, medify4],
+    title: 'Medify_247',
     description: 'A full-stack medical appointment scheduling and subscription management portal.',
-    longDescription: 'Medify247 is a comprehensive healthcare system with doctor/patient authentication, online booking portals, home diagnostics requests, secure subscription plans, payment gateway integration, and a dedicated admin coordination dashboard.',
+    longDescription: 'Medify_247 is a comprehensive healthcare system with doctor/patient authentication, online booking portals, home diagnostics requests, secure subscription plans, payment gateway integration, and a dedicated admin coordination dashboard.',
     technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JWT Authentication', 'Tailwind CSS'],
     category: 'fullstack',
-    github: 'https://github.com/adil-hussa1n/Medify247',
+    github: 'https://github.com/adil-hussa1n/Medify_247',
     demo: null,
   },
   {
