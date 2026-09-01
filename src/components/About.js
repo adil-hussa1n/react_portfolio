@@ -171,13 +171,14 @@ const About = () => {
                 <div className="inline-flex items-center gap-2 px-2.5 py-0.5 bg-emerald-500/10 rounded-full text-[10px] font-semibold text-emerald-600 dark:text-emerald-400 mb-2">
                   CURRENT
                 </div>
-                <h4 className="font-bold text-base sm:text-lg">Darun Tech Private Limited</h4>
-                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Web Developer</p>
+                <h4 className="font-bold text-base sm:text-lg">Darun Tech</h4>
+                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Part-Time Remote Web Developer</p>
                 <p className="text-xs text-zinc-500 mt-1">October 2024 &ndash; Present</p>
                 <div className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 leading-relaxed">
                   <p>&bull; Develop and maintain scalable full-stack web applications using React.js, Node.js, Express.js, and MongoDB</p>
-                  <p>&bull; Build responsive, user-centric interfaces and integrate RESTful APIs</p>
-                  <p>&bull; Collaborate with cross-functional teams using Agile methodologies</p>
+                  <p>&bull; Build responsive, user-centric interfaces and integrate RESTful APIs for seamless application performance</p>
+                  <p>&bull; Collaborate with cross-functional teams to deliver high-quality web solutions using Agile methodologies</p>
+                  <p>&bull; Optimize application performance, resolve technical issues, and manage deployments using Git, Vercel, and modern development tools</p>
                 </div>
               </div>
 
@@ -186,10 +187,12 @@ const About = () => {
                 <div className="absolute -left-[7px] top-0 w-3 h-3 rounded-full bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.4)]"></div>
                 <h4 className="font-bold text-base sm:text-lg mt-1">AC Tech Institute</h4>
                 <p className="text-sm font-semibold text-cyan-600 dark:text-cyan-400">IT Instructor</p>
-                <p className="text-xs text-zinc-500 mt-1">January 2025 &ndash; August 2026</p>
+                <p className="text-xs text-zinc-500 mt-1">January 2025 &ndash; July 2026</p>
                 <div className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 leading-relaxed">
-                  <p>&bull; Delivered instruction in HTML, CSS, JavaScript and responsive web design</p>
-                  <p>&bull; Mentored students through capstone projects resulting in portfolio-ready applications</p>
+                  <p>&bull; Deliver engaging and hands-on instruction in HTML, CSS, JavaScript and responsive web design to diverse student populations</p>
+                  <p>&bull; Develop and maintain up-to-date curriculum and instructional materials aligned with current web development trends</p>
+                  <p>&bull; Mentor students through capstone projects resulting in portfolio-ready web applications</p>
+                  <p>&bull; Assess performance and provide personalized feedback through one-on-one coaching and group mentoring</p>
                 </div>
               </div>
             </div>
