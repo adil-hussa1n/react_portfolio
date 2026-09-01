@@ -142,9 +142,7 @@ const About = () => {
                 <div className="absolute -left-[28px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] border-2 border-white dark:border-surface-950"></div>
                 <h4 className="font-bold text-base sm:text-lg text-zinc-900 dark:text-white">Leading University</h4>
                 <p className="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400">B.Sc. in Computer Science & Engineering</p>
-                <p className="text-xs text-zinc-500 dark:text-zinc-400">
-                  March 2025
-                </p>
+                
                 <div className="pt-2.5 border-t border-zinc-200/40 dark:border-zinc-800/30 mt-3 text-xs text-zinc-650 dark:text-zinc-400">
                   <p className="flex items-start gap-1.5">
                     <span className="text-emerald-500">&bull;</span>
