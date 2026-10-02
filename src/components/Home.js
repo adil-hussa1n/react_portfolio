@@ -41,7 +41,7 @@ const Home = () => {
             {/* Status badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-600 dark:text-emerald-400 font-medium text-xs sm:text-sm backdrop-blur-md">
               <span className="text-base">⚡</span>
-              Web Developer
+              Software Engineer
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
@@ -53,9 +53,9 @@ const Home = () => {
               <Typewriter
                 options={{
                   strings: [
-
-                    'Full Stack Developer',
-                    'Problem Solver'
+                    'Software Engineer',
+                    'Applied AI Specialist',
+                    'Data & Systems Craftsman'
                   ],
                   autoStart: true,
                   loop: true,
@@ -66,7 +66,7 @@ const Home = () => {
             </div>
 
             <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Web Developer at Darun Tech Private Limited. BSc in CSE from Leading University, Sylhet. Building scalable full-stack web applications with React, Node.js, and MongoDB.
+              Software Engineer at Darun Tech Private Limited. BSc in CSE from Leading University, Sylhet. Bridging robust software engineering with applied machine intelligence.
             </p>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
@@ -114,7 +114,7 @@ const Home = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/10 via-cyan-500/10 to-violet-500/10 rounded-2xl filter blur-3xl opacity-60"></div>
 
               {/* 3D Terminal */}
-              <div className="terminal-3d terminal rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/5 flex flex-col h-[380px] sm:h-[420px] font-mono text-xs sm:text-sm">
+              <div className="terminal-3d terminal rounded-2xl overflow-hidden shadow-2xl shadow-cyan-500/5 flex flex-col h-[400px] sm:h-[430px] font-mono text-xs sm:text-[13px]">
 
                 {/* Terminal header */}
                 <div className="bg-zinc-100/80 dark:bg-zinc-950/80 border-b border-zinc-200/60 dark:border-zinc-800/40 px-4 py-3 flex items-center justify-between">
@@ -147,31 +147,33 @@ const Home = () => {
                     </div>
 
                     {/* Code content */}
-                    <div className="flex-1 p-4 sm:p-5 overflow-y-auto space-y-2 text-zinc-700 dark:text-zinc-300 leading-relaxed">
-                      <div className="text-zinc-400 text-[10px] mb-3">{"// Web Developer Profile"}</div>
-                      <div>
-                        <span className="text-violet-500">const</span> <span className="text-cyan-500">developer</span> <span className="text-zinc-500">=</span> <span className="text-zinc-500">{'{'}</span>
+                    <div className="flex-1 p-3.5 sm:p-4.5 overflow-hidden flex flex-col justify-between text-zinc-700 dark:text-zinc-300 leading-relaxed scrollbar-none">
+                      <div className="space-y-1.5 sm:space-y-2">
+                        <div className="text-zinc-400 text-[10px] mb-2 sm:mb-2.5">{"// Software Engineer Profile"}</div>
+                        <div>
+                          <span className="text-violet-500">const</span> <span className="text-cyan-500">engineer</span> <span className="text-zinc-500">=</span> <span className="text-zinc-500">{'{'}</span>
+                        </div>
+                        <div className="pl-4 sm:pl-5">
+                          <span className="text-emerald-500">name</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Adil Hussain'</span><span className="text-zinc-500">,</span>
+                        </div>
+                        <div className="pl-4 sm:pl-5">
+                          <span className="text-emerald-500">role</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Software Engineer'</span><span className="text-zinc-500">,</span>
+                        </div>
+                        <div className="pl-4 sm:pl-5">
+                          <span className="text-emerald-500">company</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Darun Tech Pvt Ltd'</span><span className="text-zinc-500">,</span>
+                        </div>
+                        <div className="pl-4 sm:pl-5">
+                          <span className="text-emerald-500">location</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Sylhet, Bangladesh'</span><span className="text-zinc-500">,</span>
+                        </div>
+                        <div className="pl-4 sm:pl-5">
+                          <span className="text-emerald-500">craft</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack & Applied AI'</span>
+                        </div>
+                        <div>
+                          <span className="text-zinc-500">{'}'}</span><span className="text-violet-500">;</span>
+                        </div>
                       </div>
-                      <div className="pl-5">
-                        <span className="text-emerald-500">name</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Adil Hussain'</span><span className="text-zinc-500">,</span>
-                      </div>
-                      <div className="pl-5">
-                        <span className="text-emerald-500">title</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Web Developer'</span><span className="text-zinc-500">,</span>
-                      </div>
-                      <div className="pl-5">
-                        <span className="text-emerald-500">company</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Darun Tech Pvt Ltd'</span><span className="text-zinc-500">,</span>
-                      </div>
-                      <div className="pl-5">
-                        <span className="text-emerald-500">location</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Sylhet, Bangladesh'</span><span className="text-zinc-500">,</span>
-                      </div>
-                      <div className="pl-5">
-                        <span className="text-emerald-500">skills</span><span className="text-zinc-500">:</span> <span className="text-zinc-400 font-bold">[</span><span className="text-amber-500">'React'</span><span className="text-zinc-500">,</span> <span className="text-amber-500">'Node'</span><span className="text-zinc-500">,</span> <span className="text-amber-500">'MongoDB'</span><span className="text-zinc-400 font-bold">]</span>
-                      </div>
-                      <div>
-                        <span className="text-zinc-500">{'}'}</span><span className="text-violet-500">;</span>
-                      </div>
-                      <div className="mt-4 pt-3 border-t border-zinc-200/30 dark:border-zinc-800/30">
-                        <span className="text-violet-500">export default</span> <span className="text-cyan-500">developer</span><span className="text-violet-500">;</span>
+                      <div className="pt-2 sm:pt-2.5 border-t border-zinc-200/30 dark:border-zinc-800/30">
+                        <span className="text-violet-500">export default</span> <span className="text-cyan-500">engineer</span><span className="text-violet-500">;</span>
                       </div>
                     </div>
                   </div>

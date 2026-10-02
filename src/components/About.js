@@ -96,7 +96,7 @@ const About = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-violet-500 mx-auto rounded-full mb-6"></div>
           <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            I am a CSE graduate, Web developer, and full-stack developer committed to creating interactive, robust digital experiences.
+            I am a CSE graduate and Software Engineer dedicated to bridging robust software engineering with applied machine intelligence.
           </p>
         </div>
 
@@ -115,16 +115,16 @@ const About = () => {
             <div className="font-mono text-xs sm:text-sm bg-zinc-50/50 dark:bg-zinc-950/50 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/30 mb-4">
               <span className="text-violet-500">const</span> <span className="text-cyan-500">aboutMe</span> <span className="text-zinc-500">= {'{'}</span>
               <div className="pl-4 mt-1">
-                <span className="text-emerald-500">role</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack Dev'</span><span className="text-zinc-500">,</span>
+                <span className="text-emerald-500">role</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Software Engineer'</span><span className="text-zinc-500">,</span>
               </div>
               <div className="pl-4">
-                <span className="text-emerald-500">interest</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Modern UI & Interactive Products'</span>
+                <span className="text-emerald-500">craft</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack & Applied AI'</span>
               </div>
               <span className="text-zinc-500">{'}'}</span>
             </div>
 
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base">
-              When I'm not building full-stack applications at Darun Tech, I focus on mentoring next-generation engineers, exploring new technologies, and contributing to communities.
+              When I'm not engineering software and intelligent systems at Darun Tech, I focus on mentoring next-generation engineers, exploring new technologies, and contributing to communities.
             </p>
           </div>
 
@@ -142,7 +142,9 @@ const About = () => {
                 <div className="absolute -left-[28px] top-1.5 w-3 h-3 rounded-full bg-emerald-500 shadow-[0_0_10px_rgba(16,185,129,0.5)] border-2 border-white dark:border-surface-950"></div>
                 <h4 className="font-bold text-base sm:text-lg text-zinc-900 dark:text-white">Leading University</h4>
                 <p className="text-xs sm:text-sm font-semibold text-emerald-600 dark:text-emerald-400">B.Sc. in Computer Science & Engineering</p>
-                
+                <p className="text-xs text-zinc-500 dark:text-zinc-400">
+                  May 2025
+                </p>
                 <div className="pt-2.5 border-t border-zinc-200/40 dark:border-zinc-800/30 mt-3 text-xs text-zinc-650 dark:text-zinc-400">
                   <p className="flex items-start gap-1.5">
                     <span className="text-emerald-500">&bull;</span>
@@ -170,13 +172,28 @@ const About = () => {
                   CURRENT
                 </div>
                 <h4 className="font-bold text-base sm:text-lg">Darun Tech</h4>
-                <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">Part-Time Remote Web Developer</p>
-                <p className="text-xs text-zinc-500 mt-1">October 2024 &ndash; Present</p>
+                
+                {/* Full-Time Role */}
+                <div className="mt-1">
+                  <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+                    Full-Time Software Engineer
+                  </p>
+                  <p className="text-xs text-zinc-500 mt-0.5">October 2026 &ndash; Present</p>
+                </div>
+
+                {/* Previous Role Progression */}
+                <div className="mt-2.5 pt-2 border-t border-zinc-200/40 dark:border-zinc-800/30">
+                  <p className="text-xs font-semibold text-zinc-700 dark:text-zinc-300">
+                    Part-Time Remote Web Developer
+                  </p>
+                  <p className="text-[11px] text-zinc-500">October 2024 &ndash; September 2026</p>
+                </div>
+
                 <div className="mt-3 text-xs sm:text-sm text-zinc-600 dark:text-zinc-400 space-y-1.5 leading-relaxed">
-                  <p>&bull; Develop and maintain scalable full-stack web applications using React.js, Node.js, Express.js, and MongoDB</p>
-                  <p>&bull; Build responsive, user-centric interfaces and integrate RESTful APIs for seamless application performance</p>
-                  <p>&bull; Collaborate with cross-functional teams to deliver high-quality web solutions using Agile methodologies</p>
-                  <p>&bull; Optimize application performance, resolve technical issues, and manage deployments using Git, Vercel, and modern development tools</p>
+                  <p>&bull; Architect end-to-end features, scalable full-stack systems, and robust core services</p>
+                  <p>&bull; Develop and maintain production-grade web applications using React.js, Node.js, Express.js, and MongoDB</p>
+                  <p>&bull; Build responsive, high-performance interfaces and design RESTful APIs for seamless application workflows</p>
+                  <p>&bull; Collaborate with cross-functional engineering teams using Agile methodologies, optimize system performance, and manage deployments</p>
                 </div>
               </div>
 

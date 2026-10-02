@@ -29,7 +29,7 @@ const Footer = () => {
               Adil Hussain
             </h2>
             <p className="text-sm leading-relaxed">
-              Web Developer at Darun Tech Private Limited. Full Stack Developer specializing in React, Node.js, and MongoDB. Passionate about building scalable web applications.
+              Software Engineer at Darun Tech Private Limited. Bridging robust software engineering with applied machine intelligence.
             </p>
             <div className="flex space-x-2 pt-2">
               {socialLinks.map((link, index) => (
