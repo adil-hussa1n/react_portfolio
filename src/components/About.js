@@ -176,7 +176,7 @@ const About = () => {
                 {/* Full-Time Role */}
                 <div className="mt-1">
                   <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
-                    Full-Time Software Engineer
+                    Software Engineer
                   </p>
                   <p className="text-xs text-zinc-500 mt-0.5">October 2026 &ndash; Present</p>
                 </div>
