@@ -15,7 +15,7 @@ const Footer = () => {
     { icon: <FaGithub />, url: 'https://github.com/adil-hussa1n', label: 'GitHub' },
     { icon: <FaLinkedinIn />, url: 'https://www.linkedin.com/in/adil-hussa1n/', label: 'LinkedIn' },
     { icon: <FaTwitter />, url: 'https://x.com/adil_hussa1n', label: 'Twitter' },
-    { icon: <FaFacebookF />, url: 'https://www.facebook.com/Adil.hussain2345/', label: 'Facebook' },
+    { icon: <FaFacebookF />, url: 'https://www.facebook.com/AD1LHUSSA1N/', label: 'Facebook' },
   ];
 
   return (
@@ -25,9 +25,9 @@ const Footer = () => {
 
           {/* Brand */}
           <div className="space-y-4">
-            <h2 className="text-2xl font-bold tracking-tight aurora-text">
+            <p className="text-2xl font-bold tracking-tight aurora-text">
               Adil Hussain
-            </h2>
+            </p>
             <p className="text-sm leading-relaxed">
               Software Engineer at Darun Tech Private Limited. Bridging robust software engineering with applied machine intelligence.
             </p>
@@ -35,10 +35,11 @@ const Footer = () => {
               {socialLinks.map((link, index) => (
                 <a
                   key={index}
+                  id={`footer-social-${link.label.toLowerCase()}`}
                   href={link.url}
                   target="_blank"
-                  rel="noreferrer"
-                  aria-label={link.label}
+                  rel="noopener noreferrer"
+                  aria-label={`Visit Adil Hussain's ${link.label} profile`}
                   className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/50 dark:bg-zinc-900/30 border border-zinc-200/50 dark:border-zinc-800/30 text-zinc-500 hover:border-cyan-500/40 hover:text-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 backdrop-blur-md transition-all duration-300"
                 >
                   {link.icon}
@@ -54,7 +55,9 @@ const Footer = () => {
               {sections.map((section, index) => (
                 <li key={index}>
                   <a
+                    id={`footer-nav-${section.name.toLowerCase()}`}
                     href={section.path}
+                    aria-label={`Navigate to ${section.name}`}
                     className="hover:text-cyan-500 transition-colors duration-300 flex items-center group"
                   >
                     <span className="text-emerald-500 mr-2 opacity-0 group-hover:opacity-100 transition-opacity">&rarr;</span>
@@ -70,10 +73,16 @@ const Footer = () => {
             <h3 className="text-base font-bold text-zinc-900 dark:text-white mb-4">Contact Details</h3>
             <div className="space-y-2 text-sm leading-relaxed">
               <p><span className="text-emerald-500 font-medium">Location:</span> Sylhet, Bangladesh</p>
-              <p><span className="text-emerald-500 font-medium">Email:</span> hussainadil981@gmail.com</p>
-              <p><span className="text-emerald-500 font-medium">Phone:</span> +8801715541267</p>
+              <p><span className="text-emerald-500 font-medium">Work:</span> <a href="mailto:adil@daruntech.com" className="hover:text-cyan-500 transition-colors">adil@daruntech.com</a></p>
+              <p><span className="text-emerald-500 font-medium">Personal:</span> <a href="mailto:hussainadil981@gmail.com" className="hover:text-cyan-500 transition-colors">hussainadil981@gmail.com</a></p>
+              <p><span className="text-emerald-500 font-medium">Phone:</span> <a href="tel:+8801715541267" className="hover:text-cyan-500 transition-colors">+8801715541267</a></p>
             </div>
-            <a href="#contact" className="btn-aurora inline-flex items-center px-5 py-2.5 rounded-xl text-xs sm:text-sm mt-2">
+            <a
+              href="#contact"
+              id="footer-contact-btn"
+              aria-label="Get in touch with Adil Hussain"
+              className="btn-aurora inline-flex items-center px-5 py-2.5 rounded-xl text-xs sm:text-sm mt-2"
+            >
               Get In Touch
             </a>
           </div>

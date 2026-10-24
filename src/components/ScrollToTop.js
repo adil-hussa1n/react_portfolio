@@ -30,11 +30,12 @@ const ScrollToTop = () => {
 
   return (
     <button
+      id="scroll-to-top-btn"
       onClick={scrollToTop}
       className={`${
         isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-90 pointer-events-none'
       } fixed bottom-8 right-8 z-50 w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 transform hover:scale-110 focus:outline-none group`}
-      aria-label="Scroll to top"
+      aria-label="Scroll back to top of page"
     >
       {/* Progress ring */}
       <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 48 48">

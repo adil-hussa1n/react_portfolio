@@ -46,8 +46,9 @@ const Contact = () => {
 
   const contactInfo = [
     { icon: <FiMapPin className="text-xl" />, title: "Location", content: "Sylhet, Bangladesh" },
-    { icon: <FiPhone className="text-xl" />, title: "Phone", content: "+8801715541267" },
-    { icon: <FiMail className="text-xl" />, title: "Email", content: "hussainadil981@gmail.com" },
+    { icon: <FiPhone className="text-xl" />, title: "Phone", content: "+8801715541267", href: "tel:+8801715541267" },
+    { icon: <FiMail className="text-xl" />, title: "Work Email", content: "adil@daruntech.com", href: "mailto:adil@daruntech.com" },
+    { icon: <FiMail className="text-xl" />, title: "Personal Email", content: "hussainadil981@gmail.com", href: "mailto:hussainadil981@gmail.com" },
   ];
 
   const sendEmail = (e) => {
@@ -63,7 +64,7 @@ const Contact = () => {
           setIsSending(false);
           setTimeout(() => setIsSent(false), 5000);
         },
-        (error) => { console.error(error.text); setIsSending(false); });
+          (error) => { console.error(error.text); setIsSending(false); });
     }
   };
 
@@ -88,12 +89,12 @@ const Contact = () => {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          
+
           {/* Left — Contact Info */}
           <div className="lg:col-span-5 space-y-6">
             <div className="aurora-card spotlight-card animated-border-card rounded-2xl p-6 sm:p-8">
               <h3 className="text-xl font-bold mb-6">Contact Information</h3>
-              
+
               <div className="space-y-5">
                 {contactInfo.map((info, index) => (
                   <div key={index} className="flex items-start space-x-4 group">
@@ -102,7 +103,16 @@ const Contact = () => {
                     </div>
                     <div>
                       <h4 className="font-semibold text-sm">{info.title}</h4>
-                      <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm mt-0.5">{info.content}</p>
+                      {info.href ? (
+                        <a
+                          href={info.href}
+                          className="text-zinc-600 dark:text-zinc-400 hover:text-cyan-500 dark:hover:text-cyan-400 text-xs sm:text-sm mt-0.5 block transition-colors"
+                        >
+                          {info.content}
+                        </a>
+                      ) : (
+                        <p className="text-zinc-600 dark:text-zinc-400 text-xs sm:text-sm mt-0.5">{info.content}</p>
+                      )}
                     </div>
                   </div>
                 ))}
@@ -112,13 +122,20 @@ const Contact = () => {
                 <h4 className="font-semibold text-sm mb-4">Connect With Me</h4>
                 <div className="flex space-x-3">
                   {[
-                    { url: "https://www.facebook.com/Adil.hussain2345/", icon: <FaFacebookF /> },
-                    { url: "https://x.com/adil_hussa1n", icon: <FaTwitter /> },
-                    { url: "https://www.linkedin.com/in/adil-hussa1n/", icon: <FaLinkedinIn /> },
-                    { url: "https://github.com/adil-hussa1n", icon: <FaGithub /> }
+                    { url: "https://www.facebook.com/AD1LHUSSA1N/", icon: <FaFacebookF />, label: "Facebook" },
+                    { url: "https://x.com/adil_hussa1n", icon: <FaTwitter />, label: "Twitter" },
+                    { url: "https://www.linkedin.com/in/adil-hussa1n/", icon: <FaLinkedinIn />, label: "LinkedIn" },
+                    { url: "https://github.com/adil-hussa1n", icon: <FaGithub />, label: "GitHub" }
                   ].map((item, idx) => (
-                    <a key={idx} href={item.url} target="_blank" rel="noreferrer"
-                      className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/50 dark:bg-zinc-900/30 border border-zinc-200/50 dark:border-zinc-800/30 text-zinc-500 hover:border-cyan-500/40 hover:text-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 backdrop-blur-md transition-all duration-300">
+                    <a
+                      key={idx}
+                      id={`contact-social-${item.label.toLowerCase()}`}
+                      href={item.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Connect with Adil Hussain on ${item.label}`}
+                      className="w-10 h-10 rounded-xl flex items-center justify-center bg-white/50 dark:bg-zinc-900/30 border border-zinc-200/50 dark:border-zinc-800/30 text-zinc-500 hover:border-cyan-500/40 hover:text-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 backdrop-blur-md transition-all duration-300"
+                    >
                       {item.icon}
                     </a>
                   ))}
@@ -128,8 +145,13 @@ const Contact = () => {
 
             {/* CTA Card */}
             <div className="aurora-card rounded-2xl p-6 sm:p-8 bg-gradient-to-br from-emerald-500/5 to-cyan-500/5 flex items-center justify-center">
-              <a href="/resume10.pdf" download="adil-hussain_resume.pdf"
-                className="btn-aurora-outline inline-block px-6 py-3 rounded-xl text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md font-semibold">
+              <a
+                href="/resume10.pdf"
+                id="contact-resume-btn"
+                download="adil-hussain_resume.pdf"
+                aria-label="Download Adil Hussain Resume PDF"
+                className="btn-aurora-outline inline-block px-6 py-3 rounded-xl text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md font-semibold"
+              >
                 Resume
               </a>
             </div>
@@ -142,35 +164,71 @@ const Contact = () => {
 
               <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
                 <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Full Name</label>
-                  <input type="text" name="fullName" value={formData.fullName} onChange={handleChange}
-                    className={inputClasses('fullName')} placeholder="Your full name" />
+                  <label htmlFor="contact-fullname-input" className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Full Name</label>
+                  <input
+                    id="contact-fullname-input"
+                    type="text"
+                    name="fullName"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    className={inputClasses('fullName')}
+                    placeholder="Your full name"
+                    autoComplete="name"
+                  />
                   {errors.fullName && <p className="mt-1.5 text-xs text-red-400 font-mono">{errors.fullName}</p>}
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Phone Number</label>
-                  <input type="text" name="phoneNumber" value={formData.phoneNumber} onChange={handleChange}
-                    className={inputClasses('phoneNumber')} placeholder="+8801711223344" />
+                  <label htmlFor="contact-phone-input" className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Phone Number</label>
+                  <input
+                    id="contact-phone-input"
+                    type="tel"
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    className={inputClasses('phoneNumber')}
+                    placeholder="+8801711223344"
+                    autoComplete="tel"
+                  />
                   {errors.phoneNumber && <p className="mt-1.5 text-xs text-red-400 font-mono">{errors.phoneNumber}</p>}
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Email Address</label>
-                  <input type="email" name="email" value={formData.email} onChange={handleChange}
-                    className={inputClasses('email')} placeholder="you@example.com" />
+                  <label htmlFor="contact-email-input" className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Email Address</label>
+                  <input
+                    id="contact-email-input"
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    className={inputClasses('email')}
+                    placeholder="you@example.com"
+                    autoComplete="email"
+                  />
                   {errors.email && <p className="mt-1.5 text-xs text-red-400 font-mono">{errors.email}</p>}
                 </div>
 
                 <div>
-                  <label className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Message</label>
-                  <textarea name="message" value={formData.message} onChange={handleChange} rows="5"
-                    className={inputClasses('message')} placeholder="Write your message here..." />
+                  <label htmlFor="contact-message-input" className="block mb-2 text-xs sm:text-sm font-semibold text-zinc-600 dark:text-zinc-400">Message</label>
+                  <textarea
+                    id="contact-message-input"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    rows="5"
+                    className={inputClasses('message')}
+                    placeholder="Write your message here..."
+                  />
                   {errors.message && <p className="mt-1.5 text-xs text-red-400 font-mono">{errors.message}</p>}
                 </div>
 
-                <button type="submit" disabled={isSending}
-                  className="btn-aurora w-full py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed">
+                <button
+                  type="submit"
+                  id="contact-submit-btn"
+                  disabled={isSending}
+                  aria-label="Send message"
+                  className="btn-aurora w-full py-3.5 px-6 rounded-xl flex items-center justify-center gap-2 text-sm sm:text-base disabled:opacity-60 disabled:cursor-not-allowed"
+                >
                   {isSending ? (
                     <>
                       <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

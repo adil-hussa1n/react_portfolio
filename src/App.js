@@ -47,15 +47,22 @@ function App() {
         <Preloader key="preloader" theme={theme} />
       ) : (
         <>
+          <a
+            href="#main-content"
+            id="skip-to-content"
+            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:px-4 focus:py-2 focus:bg-emerald-500 focus:text-white focus:rounded-xl focus:shadow-lg focus:outline-none font-medium text-sm transition-all"
+          >
+            Skip to main content
+          </a>
           <Navbar theme={theme} toggleTheme={toggleTheme} />
-          <main className="relative z-10">
+          <main id="main-content" className="relative z-10">
             <Home />
             <About />
             <Portfolio />
             <Contact />
-            <Footer />
-            <ScrollToTop />
           </main>
+          <Footer />
+          <ScrollToTop />
         </>
       )}
     </div>

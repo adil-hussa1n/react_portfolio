@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Adil Hussain",
+  "name": "Adil Hussain | Software Engineer & Applied AI Specialist",
+  "description": "Portfolio of Adil Hussain - Full Stack Software Engineer and Applied AI Specialist.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,18 +9,16 @@
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "og-image.png",
       "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
+      "sizes": "1200x630",
+      "purpose": "any maskable"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "orientation": "portrait",
+  "theme_color": "#090d16",
+  "background_color": "#090d16",
+  "categories": ["portfolio", "technology", "development"]
 }

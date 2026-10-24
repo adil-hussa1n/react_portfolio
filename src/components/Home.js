@@ -72,13 +72,17 @@ const Home = () => {
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
               <a
                 href="#contact"
+                id="hero-contact-btn"
+                aria-label="Contact Adil Hussain"
                 className="btn-aurora px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base"
               >
                 <FiMail className="text-lg" /> Contact Me
               </a>
               <a
                 href="/resume10.pdf"
+                id="hero-resume-btn"
                 download="adil-hussain_resume.pdf"
+                aria-label="Download Adil Hussain Resume PDF"
                 className="btn-aurora-outline px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md"
               >
                 Resume
@@ -88,17 +92,18 @@ const Home = () => {
             {/* Social links */}
             <div className="flex gap-3 justify-center lg:justify-start pt-4">
               {[
-                { url: "https://www.facebook.com/Adil.hussain2345/", icon: <FaFacebookF />, label: "Facebook" },
+                { url: "https://www.facebook.com/AD1LHUSSA1N/", icon: <FaFacebookF />, label: "Facebook" },
                 { url: "https://x.com/adil_hussa1n", icon: <FaTwitter />, label: "Twitter" },
                 { url: "https://www.linkedin.com/in/adil-hussa1n/", icon: <FaLinkedinIn />, label: "LinkedIn" },
                 { url: "https://github.com/adil-hussa1n", icon: <FaGithub />, label: "GitHub" }
               ].map((item, idx) => (
                 <a
                   key={idx}
+                  id={`hero-social-${item.label.toLowerCase()}`}
                   href={item.url}
                   target="_blank"
-                  rel="noreferrer"
-                  aria-label={item.label}
+                  rel="noopener noreferrer"
+                  aria-label={`Visit Adil Hussain's ${item.label} profile`}
                   className="w-11 h-11 rounded-xl flex items-center justify-center bg-white/50 dark:bg-zinc-900/40 border border-zinc-200/50 dark:border-zinc-800/30 text-zinc-500 dark:text-zinc-400 backdrop-blur-md hover:border-cyan-500/40 hover:text-cyan-500 hover:shadow-lg hover:shadow-cyan-500/10 transition-all duration-300"
                 >
                   {item.icon}
@@ -198,9 +203,10 @@ const Home = () => {
 
       {/* Scroll indicator */}
       <button
+        id="hero-scroll-down-btn"
         onClick={scrollToNext}
         className="absolute bottom-6 sm:bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce bg-white/60 dark:bg-zinc-900/40 border border-zinc-200/50 dark:border-zinc-800/30 backdrop-blur-md p-2.5 sm:p-3 rounded-full shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300 text-cyan-500 focus:outline-none"
-        aria-label="Scroll down"
+        aria-label="Scroll down to About section"
       >
         <FaArrowDown className="text-sm sm:text-base" />
       </button>

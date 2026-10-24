@@ -42,7 +42,7 @@ const Navbar = ({ theme, toggleTheme }) => {
     >
       <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 sm:px-6 py-4">
         {/* Logo */}
-        <a href="#home" className="flex items-center space-x-2 group">
+        <a href="#home" id="nav-brand-logo" aria-label="Adil Hussain - Return to Home top" className="flex items-center space-x-2 group">
           <span className="text-xl md:text-2xl font-bold tracking-tight aurora-text group-hover:opacity-80 transition-opacity">
             ADIL
           </span>
@@ -52,6 +52,7 @@ const Navbar = ({ theme, toggleTheme }) => {
         {/* Right controls */}
         <div className="flex items-center md:order-2 space-x-2 sm:space-x-3">
           <button
+            id="theme-toggle-btn"
             onClick={toggleTheme}
             className="p-2.5 rounded-xl text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white bg-white/60 dark:bg-zinc-900/40 border border-zinc-200/60 dark:border-zinc-800/40 hover:border-zinc-300 dark:hover:border-zinc-700 backdrop-blur-md transition-all duration-300"
             aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
@@ -61,6 +62,7 @@ const Navbar = ({ theme, toggleTheme }) => {
 
           {/* Mobile menu button */}
           <button
+            id="mobile-menu-toggle-btn"
             onClick={() => setIsOpen(!isOpen)}
             className="inline-flex items-center p-2.5 justify-center text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white rounded-xl md:hidden bg-white/60 dark:bg-zinc-900/40 border border-zinc-200/60 dark:border-zinc-800/40 backdrop-blur-md transition-all duration-300"
             aria-controls="mobile-menu"
@@ -81,7 +83,9 @@ const Navbar = ({ theme, toggleTheme }) => {
             {['home', 'about', 'portfolio', 'contact'].map((item) => (
               <a
                 key={item}
+                id={`nav-link-${item}`}
                 href={`#${item}`}
+                aria-label={`Navigate to ${item} section`}
                 onClick={() => handleSetActiveLink(item)}
                 className={`relative px-5 py-2 rounded-xl capitalize text-sm font-medium transition-all duration-300 ${
                   activeLink === item
@@ -117,7 +121,9 @@ const Navbar = ({ theme, toggleTheme }) => {
                 {['home', 'about', 'portfolio', 'contact'].map((item) => (
                   <li key={item}>
                     <a
+                      id={`mobile-nav-link-${item}`}
                       href={`#${item}`}
+                      aria-label={`Navigate to ${item} section`}
                       onClick={() => handleSetActiveLink(item)}
                       className={`block py-3 px-4 rounded-xl capitalize transition-all duration-300 text-center text-sm font-medium ${
                         activeLink === item

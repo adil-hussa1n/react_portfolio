@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { FaGithub, FaExternalLinkAlt, FaCode, FaTerminal, FaSearchPlus, FaTimes, FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -14,10 +15,9 @@ import medify2 from '../img/medify_247/2.png';
 import medify3 from '../img/medify_247/3.png';
 import medify4 from '../img/medify_247/4.png';
 
-import bloodify1 from '../img/bloodify_247/1.png';
-import bloodify2 from '../img/bloodify_247/2.png';
-import bloodify3 from '../img/bloodify_247/3.png';
-import bloodify4 from '../img/bloodify_247/4.png';
+import darunDonors1 from '../img/darun_donors/1.png';
+import darunDonors2 from '../img/darun_donors/2.png';
+import darunDonors3 from '../img/darun_donors/3.png';
 
 import indoor1 from '../img/indoor_management_system/1.png';
 import indoor2 from '../img/indoor_management_system/2.png';
@@ -40,6 +40,12 @@ import sential3 from '../img/sential_ai/3.png';
 import sential4 from '../img/sential_ai/4.png';
 import sential5 from '../img/sential_ai/5.png';
 
+import darunBusiness1 from '../img/darun_business/1.png';
+import darunBusiness2 from '../img/darun_business/2.png';
+import darunBusiness3 from '../img/darun_business/3.png';
+import darunBusiness4 from '../img/darun_business/4.png';
+import darunBusiness5 from '../img/darun_business/5.png';
+
 const categories = [
   { id: 'all', name: 'All Projects' },
   { id: 'fullstack', name: 'Full Stack' },
@@ -58,7 +64,19 @@ const projects = [
     technologies: ['React 19', 'Node.js', 'Express', 'MySQL', 'Sequelize', 'Socket.io', 'Pannellum'],
     category: 'fullstack',
     github: 'https://github.com/adil-hussa1n/Indoor-Management-System',
-    demo: null,
+    demo: 'https://indoor.daruntech.com',
+  },
+  {
+    id: 8,
+    src: darunBusiness1,
+    screenshots: [darunBusiness1, darunBusiness2, darunBusiness3, darunBusiness4, darunBusiness5],
+    title: 'Business Management & POS SaaS',
+    description: 'A full-stack enterprise business management, inventory control, and multi-mode POS SaaS platform with an AI copilot.',
+    longDescription: 'A robust, enterprise-grade multi-tenant Business Management & POS SaaS platform engineered for modern commercial and retail businesses. It delivers complete operational control with real-time financial tracking (COGS, Gross/Net Profit, Dealer Payables, Customer Receivables), multi-mode sales creation (Quick Sale & Multi-Item Cart), catalog & batch inventory management, warranty & refund processing, multi-branch settings, multi-currency & bilingual localization (EN / বাংলা), and Darun Copilot — an intelligent conversational business assistant that automates expense logging, accounting entries, and custom reports through voice and chat.',
+    technologies: ['React 19', 'Node.js', 'Express', 'MongoDB', 'AI Copilot', 'Tailwind CSS', 'RESTful APIs', 'Zustand'],
+    category: 'fullstack',
+    github: 'https://github.com/adil-hussa1n',
+    demo: 'https://business.daruntech.com',
   },
   {
     id: 2,
@@ -70,7 +88,7 @@ const projects = [
     technologies: ['React 19', 'Vite', 'Laravel', 'MySQL', 'Zustand', 'Tailwind CSS v4'],
     category: 'fullstack',
     github: 'https://github.com/adil-hussa1n',
-    demo: null,
+    demo: 'https://restaurant.daruntech.com',
   },
   {
     id: 3,
@@ -110,15 +128,15 @@ const projects = [
   },
   {
     id: 6,
-    src: bloodify1,
-    screenshots: [bloodify1, bloodify2, bloodify3, bloodify4],
-    title: 'Bloodify-247',
-    description: 'A real-time community blood donor registration and emergency seeker network.',
-    longDescription: 'Bloodify-247 connects blood seekers and verified community donors instantly. It features dynamic donor filtering by location/blood group, real-time emergency request boards, SMS notification alerts, and full admin review controls.',
-    technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS'],
+    src: darunDonors1,
+    screenshots: [darunDonors1, darunDonors2, darunDonors3],
+    title: 'Darun Donors',
+    description: 'A full-stack real-time donor management platform empowering community blood seekers and donors.',
+    longDescription: 'Darun Donors is a dedicated full-stack community blood donation platform connecting emergency blood seekers and verified volunteer donors in real-time. Features include a dynamic Donor Control Center with Smart Donor Card privileges, donation event logs with a 90-day medical cooldown tracker, emergency request broadcast feeds, multi-criteria donor filtering across Sylhet, and a full-featured Administration Dashboard with system moderator controls, activity logs, blocked phone management, and audit records.',
+    technologies: ['React.js', 'Node.js', 'Express.js', 'MongoDB', 'Tailwind CSS', 'RESTful APIs'],
     category: 'fullstack',
     github: 'https://github.com/adil-hussa1n/Blood-donation',
-    demo: null,
+    demo: 'https://donors.daruntech.com',
   },
   {
     id: 7,
@@ -164,13 +182,56 @@ const Portfolio = () => {
     return () => { if (currentRef) observer.unobserve(currentRef); };
   }, []);
 
+  const openLightbox = useCallback((index, imageIndex = 0) => {
+    setLightboxIndex(index);
+    setLightboxImageIndex(imageIndex);
+    document.body.style.overflow = 'hidden';
+  }, []);
+
+  const closeLightbox = useCallback(() => {
+    setLightboxIndex(null);
+    setLightboxImageIndex(0);
+    if (!isModalOpen) {
+      document.body.style.overflow = 'auto';
+    }
+  }, [isModalOpen]);
+
+  const openProjectDetails = useCallback((project) => {
+    setSelectedProject(project);
+    setActiveScreenshot(project.src);
+    setIsModalOpen(true);
+    document.body.style.overflow = 'hidden';
+  }, []);
+
+  const closeProjectDetails = useCallback(() => {
+    setIsModalOpen(false);
+    setTimeout(() => {
+      setSelectedProject(null);
+      setActiveScreenshot(null);
+      if (lightboxIndex === null) {
+        document.body.style.overflow = 'auto';
+      }
+    }, 300);
+  }, [lightboxIndex]);
+
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') { closeProjectDetails(); setLightboxIndex(null); }
+      if (e.key === 'Escape') {
+        closeProjectDetails();
+        closeLightbox();
+      } else if (lightboxIndex !== null && filteredProjects[lightboxIndex]) {
+        const currentProject = filteredProjects[lightboxIndex];
+        const count = (currentProject.screenshots || [currentProject.src]).length;
+        if (e.key === 'ArrowLeft') {
+          setLightboxImageIndex((prev) => (prev > 0 ? prev - 1 : prev));
+        } else if (e.key === 'ArrowRight') {
+          setLightboxImageIndex((prev) => (prev < count - 1 ? prev + 1 : prev));
+        }
+      }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, []);
+  }, [closeProjectDetails, closeLightbox, lightboxIndex, filteredProjects]);
 
   // Spotlight cursor effect handler
   const handleMouseMove = useCallback((e) => {
@@ -179,18 +240,6 @@ const Portfolio = () => {
     card.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
     card.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
   }, []);
-
-  const openProjectDetails = (project) => {
-    setSelectedProject(project);
-    setActiveScreenshot(project.src);
-    setIsModalOpen(true);
-    document.body.style.overflow = 'hidden';
-  };
-
-  const closeProjectDetails = () => {
-    setIsModalOpen(false);
-    setTimeout(() => { setSelectedProject(null); setActiveScreenshot(null); document.body.style.overflow = 'auto'; }, 300);
-  };
 
   return (
     <>
@@ -215,6 +264,8 @@ const Portfolio = () => {
             {categories.map((cat) => (
               <button
                 key={cat.id}
+                id={`portfolio-filter-${cat.id}`}
+                aria-label={`Filter projects by ${cat.name}`}
                 onClick={() => setFilter(cat.id)}
                 className={`px-5 py-2.5 rounded-xl text-sm font-medium transition-all duration-300 border ${filter === cat.id
                   ? 'bg-gradient-to-r from-emerald-500 to-cyan-500 border-transparent text-white shadow-lg shadow-cyan-500/20'
@@ -249,22 +300,43 @@ const Portfolio = () => {
                 </div>
 
                 {/* Image with hover overlay */}
-                <div className="relative overflow-hidden group cursor-pointer" onClick={() => { setLightboxIndex(index); setLightboxImageIndex(0); }}>
+                <div className="relative overflow-hidden group cursor-pointer" onClick={() => openLightbox(index, 0)}>
                   <img
                     src={project.src}
-                    alt={project.title}
+                    alt={`${project.title} - ${project.category} Software Engineering Project by Adil Hussain`}
                     loading="lazy"
+                    width="600"
+                    height="350"
                     className="w-full h-44 sm:h-48 lg:h-52 object-cover object-top transition-transform duration-700 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
-                    <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors">
+                    <div className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors" title="Zoom in">
                       <FaSearchPlus />
                     </div>
                     {project.github && (
-                      <a href={project.github} target="_blank" rel="noopener noreferrer"
+                      <a
+                        href={project.github}
+                        id={`portfolio-github-link-${project.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`View ${project.title} source code on GitHub`}
                         className="p-3 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-white hover:bg-white/20 transition-colors"
-                        onClick={(e) => e.stopPropagation()}>
+                        onClick={(e) => e.stopPropagation()}
+                      >
                         <FaGithub />
+                      </a>
+                    )}
+                    {project.demo && (
+                      <a
+                        href={project.demo}
+                        id={`portfolio-hover-demo-link-${project.id}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Open live production site of ${project.title}`}
+                        className="p-3 bg-emerald-500/80 backdrop-blur-md border border-emerald-400/30 rounded-full text-white hover:bg-emerald-600 transition-colors shadow-lg"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FaExternalLinkAlt />
                       </a>
                     )}
                   </div>
@@ -294,12 +366,28 @@ const Portfolio = () => {
                       )}
                     </div>
 
-                    <button
-                      onClick={() => openProjectDetails(project)}
-                      className="btn-aurora w-full py-2.5 px-4 rounded-xl flex items-center justify-center gap-2 text-sm"
-                    >
-                      <FaCode /> View Details
-                    </button>
+                    <div className="flex gap-2">
+                      <button
+                        id={`portfolio-details-btn-${project.id}`}
+                        aria-label={`View full details of ${project.title}`}
+                        onClick={() => openProjectDetails(project)}
+                        className={`btn-aurora ${project.demo ? 'flex-1' : 'w-full'} py-2.5 px-3 rounded-xl flex items-center justify-center gap-2 text-xs sm:text-sm`}
+                      >
+                        <FaCode /> Details
+                      </button>
+                      {project.demo && (
+                        <a
+                          id={`portfolio-card-demo-btn-${project.id}`}
+                          href={project.demo}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Open live production site of ${project.title}`}
+                          className="btn-aurora-outline px-3.5 py-2.5 rounded-xl flex items-center justify-center gap-1.5 text-xs sm:text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md text-emerald-600 dark:text-emerald-400 hover:text-emerald-500 border border-emerald-500/30"
+                        >
+                          <FaExternalLinkAlt className="text-xs" /> Live Demo
+                        </a>
+                      )}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -312,30 +400,50 @@ const Portfolio = () => {
             </div>
           )}
         </div>
+      </section>
 
-        {/* ===== Lightbox ===== */}
+      {/* ===== Global Viewport Lightbox Portal (Mounted to document.body) ===== */}
+      {typeof document !== 'undefined' && createPortal(
         <AnimatePresence>
           {lightboxIndex !== null && filteredProjects[lightboxIndex] && (
-            <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-md" onClick={() => setLightboxIndex(null)}>
+            <div
+              className="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen z-[99999] flex items-center justify-center bg-black/95 backdrop-blur-md p-3 sm:p-6"
+              onClick={closeLightbox}
+            >
               {/* Close Button */}
-              <button onClick={() => setLightboxIndex(null)} className="absolute top-5 right-5 z-[110] p-3 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Close">
+              <button
+                id="lightbox-close-btn"
+                onClick={closeLightbox}
+                className="absolute top-5 right-5 z-[100000] p-3 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                aria-label="Close Lightbox"
+              >
                 <FaTimes className="text-xl" />
               </button>
 
               {/* Left/Right Navigation buttons for Screenshots within the current project or projects array */}
               {lightboxImageIndex > 0 && (
-                <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev - 1); }} className="absolute left-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Previous Screenshot">
+                <button
+                  id="lightbox-prev-btn"
+                  onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev - 1); }}
+                  className="absolute left-4 z-[100000] p-3.5 sm:p-4 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Previous Screenshot"
+                >
                   <FaArrowLeft />
                 </button>
               )}
 
               {filteredProjects[lightboxIndex].screenshots && lightboxImageIndex < filteredProjects[lightboxIndex].screenshots.length - 1 && (
-                <button onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev + 1); }} className="absolute right-4 z-[110] p-4 rounded-full bg-zinc-900/70 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors" aria-label="Next Screenshot">
+                <button
+                  id="lightbox-next-btn"
+                  onClick={(e) => { e.stopPropagation(); setLightboxImageIndex(prev => prev + 1); }}
+                  className="absolute right-4 z-[100000] p-3.5 sm:p-4 rounded-full bg-zinc-900/80 border border-zinc-700/50 text-zinc-300 hover:text-white transition-colors cursor-pointer"
+                  aria-label="Next Screenshot"
+                >
                   <FaArrowRight />
                 </button>
               )}
 
-              <div className="relative max-w-5xl max-h-[90vh] w-[92%] flex flex-col items-center p-2" onClick={(e) => e.stopPropagation()}>
+              <div className="relative max-w-5xl max-h-[90vh] w-[95%] sm:w-[90%] flex flex-col items-center p-2" onClick={(e) => e.stopPropagation()}>
                 <motion.img
                   key={`${lightboxIndex}-${lightboxImageIndex}`}
                   initial={{ opacity: 0, scale: 0.95 }}
@@ -360,7 +468,7 @@ const Portfolio = () => {
                         <button
                           key={sIdx}
                           onClick={() => setLightboxImageIndex(sIdx)}
-                          className={`w-14 h-10 rounded-md overflow-hidden border-2 transition-all ${lightboxImageIndex === sIdx ? 'border-cyan-400 scale-110 shadow-lg' : 'border-zinc-700 opacity-50 hover:opacity-100'
+                          className={`w-14 h-10 rounded-md overflow-hidden border-2 transition-all cursor-pointer ${lightboxImageIndex === sIdx ? 'border-cyan-400 scale-110 shadow-lg' : 'border-zinc-700 opacity-50 hover:opacity-100'
                             }`}
                         >
                           <img src={imgSrc} alt={`Thumb ${sIdx + 1}`} className="w-full h-full object-cover" />
@@ -372,141 +480,160 @@ const Portfolio = () => {
               </div>
             </div>
           )}
-        </AnimatePresence>
+        </AnimatePresence>,
+        document.body
+      )}
 
-      </section>
+      {/* ===== Global Viewport Project Details Modal (Mounted to document.body) ===== */}
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {isModalOpen && selectedProject && (
+            <div className="fixed inset-0 top-0 left-0 right-0 bottom-0 w-screen h-screen z-[9999] flex items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true">
+              {/* Backdrop */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 bg-black/80 backdrop-blur-sm"
+                onClick={closeProjectDetails}
+              />
 
-      {/* ===== Project Details Modal (Portal/Global Viewport level) ===== */}
-      <AnimatePresence>
-        {isModalOpen && selectedProject && (
-          <div className="fixed inset-0 z-[999] flex items-center justify-center p-3 sm:p-6" role="dialog" aria-modal="true">
-            {/* Backdrop */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 bg-black/80 backdrop-blur-sm"
-              onClick={closeProjectDetails}
-            />
+              {/* Centered Modal Content Card */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95, y: 10 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95, y: 10 }}
+                transition={{ duration: 0.2 }}
+                className="bg-white dark:bg-surface-900 border border-zinc-200/50 dark:border-zinc-800/30 text-left overflow-hidden shadow-2xl max-w-5xl w-full rounded-2xl relative z-10 max-h-[85vh] flex flex-col"
+              >
 
-            {/* Centered Modal Content Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95, y: 10 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.95, y: 10 }}
-              transition={{ duration: 0.2 }}
-              className="bg-white dark:bg-surface-900 border border-zinc-200/50 dark:border-zinc-800/30 text-left overflow-hidden shadow-2xl max-w-5xl w-full rounded-2xl relative z-10 max-h-[85vh] flex flex-col"
-            >
-
-              {/* Modal header */}
-              <div className="bg-zinc-50/80 dark:bg-zinc-950/80 py-3 px-5 flex items-center justify-between border-b border-zinc-200/40 dark:border-zinc-800/30 flex-shrink-0">
-                <div className="flex items-center space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
+                {/* Modal header */}
+                <div className="bg-zinc-50/80 dark:bg-zinc-950/80 py-3 px-5 flex items-center justify-between border-b border-zinc-200/40 dark:border-zinc-800/30 flex-shrink-0">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-red-500/70"></div>
+                    <div className="w-3 h-3 rounded-full bg-yellow-500/70"></div>
+                    <div className="w-3 h-3 rounded-full bg-green-500/70"></div>
+                  </div>
+                  <span className="text-xs text-zinc-500 font-mono font-semibold truncate max-w-[250px] sm:max-w-none">
+                    {selectedProject.title}
+                  </span>
+                  <button
+                    id="modal-close-btn"
+                    onClick={closeProjectDetails}
+                    className="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50"
+                    aria-label="Close project details"
+                  >
+                    <FaTimes />
+                  </button>
                 </div>
-                <span className="text-xs text-zinc-500 font-mono font-semibold truncate max-w-[250px] sm:max-w-none">
-                  {selectedProject.title}
-                </span>
-                <button onClick={closeProjectDetails} className="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors p-1.5 rounded-lg hover:bg-zinc-200/50 dark:hover:bg-zinc-800/50">
-                  <FaTimes />
-                </button>
-              </div>
 
-              <div className="p-5 sm:p-7 overflow-y-auto flex-1 scrollbar-thin">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+                <div className="p-5 sm:p-7 overflow-y-auto flex-1 scrollbar-thin">
+                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
 
-                  {/* Left Column — Screenshots Preview */}
-                  <div className="lg:col-span-7 space-y-4">
-                    <div className="relative overflow-hidden rounded-xl group cursor-zoom-in bg-zinc-950/80 border border-zinc-800/20 flex items-center justify-center min-h-[220px] max-h-[380px]" onClick={() => {
-                      closeProjectDetails();
-                      const pIdx = projects.findIndex(p => p.id === selectedProject.id);
-                      const sIdx = (selectedProject.screenshots || []).findIndex(s => s === activeScreenshot);
-                      setLightboxIndex(pIdx);
-                      setLightboxImageIndex(sIdx >= 0 ? sIdx : 0);
-                    }}>
-                      <img src={activeScreenshot || selectedProject.src} alt={selectedProject.title} className="w-full h-auto max-h-[380px] object-contain rounded-xl transition-all duration-300 group-hover:scale-[1.01]" />
-                      <div className="absolute top-3 right-3 p-2 bg-black/60 backdrop-blur-md rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-                        <FaSearchPlus className="text-xs" />
-                      </div>
-                    </div>
-
-                    {/* Thumbnails */}
-                    {selectedProject.screenshots && selectedProject.screenshots.length > 1 && (
-                      <div>
-                        <p className="text-[11px] font-mono text-zinc-500 mb-2 flex items-center gap-1.5">
-                          <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Screenshots ({selectedProject.screenshots.length}):
-                        </p>
-                        <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
-                          {selectedProject.screenshots.map((imgSrc, idx) => (
-                            <button
-                              key={idx}
-                              onClick={() => setActiveScreenshot(imgSrc)}
-                              className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${(activeScreenshot === imgSrc || (!activeScreenshot && idx === 0))
-                                ? 'border-cyan-500 scale-105 shadow-md shadow-cyan-500/20'
-                                : 'border-zinc-300 dark:border-zinc-700 opacity-60 hover:opacity-100'
-                                }`}
-                            >
-                              <img src={imgSrc} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
-                            </button>
-                          ))}
+                    {/* Left Column — Screenshots Preview */}
+                    <div className="lg:col-span-7 space-y-4">
+                      <div className="relative overflow-hidden rounded-xl group cursor-zoom-in bg-zinc-950/80 border border-zinc-800/20 flex items-center justify-center min-h-[220px] max-h-[380px]" onClick={() => {
+                        const pIdx = filteredProjects.findIndex(p => p.id === selectedProject.id);
+                        const sIdx = (selectedProject.screenshots || []).findIndex(s => s === activeScreenshot);
+                        closeProjectDetails();
+                        openLightbox(pIdx >= 0 ? pIdx : 0, sIdx >= 0 ? sIdx : 0);
+                      }}>
+                        <img src={activeScreenshot || selectedProject.src} alt={selectedProject.title} className="w-full h-auto max-h-[380px] object-contain rounded-xl transition-all duration-300 group-hover:scale-[1.01]" />
+                        <div className="absolute top-3 right-3 p-2 bg-black/60 backdrop-blur-md rounded-full text-white opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
+                          <FaSearchPlus className="text-xs" />
                         </div>
                       </div>
-                    )}
-                  </div>
 
-                  {/* Right Column — Project Information */}
-                  <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
-                    <div>
-                      <span className="inline-block px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400 capitalize mb-2">
-                        {selectedProject.category}
-                      </span>
-                      <h3 className="text-xl sm:text-2xl font-bold mb-3">{selectedProject.title}</h3>
+                      {/* Thumbnails */}
+                      {selectedProject.screenshots && selectedProject.screenshots.length > 1 && (
+                        <div>
+                          <p className="text-[11px] font-mono text-zinc-500 mb-2 flex items-center gap-1.5">
+                            <span className="w-2 h-2 rounded-full bg-emerald-500"></span> Screenshots ({selectedProject.screenshots.length}):
+                          </p>
+                          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-thin">
+                            {selectedProject.screenshots.map((imgSrc, idx) => (
+                              <button
+                                key={idx}
+                                onClick={() => setActiveScreenshot(imgSrc)}
+                                className={`relative flex-shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 transition-all duration-200 ${(activeScreenshot === imgSrc || (!activeScreenshot && idx === 0))
+                                  ? 'border-cyan-500 scale-105 shadow-md shadow-cyan-500/20'
+                                  : 'border-zinc-300 dark:border-zinc-700 opacity-60 hover:opacity-100'
+                                  }`}
+                              >
+                                <img src={imgSrc} alt={`Screenshot ${idx + 1}`} className="w-full h-full object-cover" />
+                              </button>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
 
-                      <div className="mb-4">
-                        <h4 className="text-xs font-bold mb-1.5 flex items-center gap-2 font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
-                          <FaTerminal className="text-emerald-500" /> Description
-                        </h4>
-                        <p className="text-zinc-600 dark:text-zinc-400 border-l-2 border-emerald-500/40 pl-3 leading-relaxed text-xs sm:text-sm">{selectedProject.longDescription}</p>
-                      </div>
-
+                    {/* Right Column — Project Information */}
+                    <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
                       <div>
-                        <h4 className="text-xs font-bold mb-2 flex items-center gap-2 font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
-                          <FaCode className="text-cyan-500" /> Technologies
-                        </h4>
-                        <div className="flex flex-wrap gap-1.5">
-                          {selectedProject.technologies.map((tech, idx) => (
-                            <span key={idx} className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-xs font-mono text-emerald-600 dark:text-emerald-300">
-                              {tech}
-                            </span>
-                          ))}
+                        <span className="inline-block px-2.5 py-0.5 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-xs font-semibold text-emerald-600 dark:text-emerald-400 capitalize mb-2">
+                          {selectedProject.category}
+                        </span>
+                        <h3 className="text-xl sm:text-2xl font-bold mb-3">{selectedProject.title}</h3>
+
+                        <div className="mb-4">
+                          <h4 className="text-xs font-bold mb-1.5 flex items-center gap-2 font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
+                            <FaTerminal className="text-emerald-500" /> Description
+                          </h4>
+                          <p className="text-zinc-600 dark:text-zinc-400 border-l-2 border-emerald-500/40 pl-3 leading-relaxed text-xs sm:text-sm">{selectedProject.longDescription}</p>
+                        </div>
+
+                        <div>
+                          <h4 className="text-xs font-bold mb-2 flex items-center gap-2 font-mono text-zinc-900 dark:text-white uppercase tracking-wider">
+                            <FaCode className="text-cyan-500" /> Technologies
+                          </h4>
+                          <div className="flex flex-wrap gap-1.5">
+                            {selectedProject.technologies.map((tech, idx) => (
+                              <span key={idx} className="px-2.5 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-xs font-mono text-emerald-600 dark:text-emerald-300">
+                                {tech}
+                              </span>
+                            ))}
+                          </div>
                         </div>
                       </div>
+
+                      <div className="flex flex-wrap gap-2.5 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/20">
+                        {selectedProject.github && (
+                          <a
+                            id="modal-project-github-btn"
+                            href={selectedProject.github}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View ${selectedProject.title} source code on GitHub`}
+                            className="btn-aurora-outline inline-flex items-center px-4 py-2 rounded-xl text-xs sm:text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md"
+                          >
+                            <FaGithub className="mr-2" /> GitHub Repository
+                          </a>
+                        )}
+                        {selectedProject.demo && (
+                          <a
+                            id="modal-project-demo-btn"
+                            href={selectedProject.demo}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            aria-label={`View live demo of ${selectedProject.title}`}
+                            className="btn-aurora inline-flex items-center px-4 py-2 rounded-xl text-xs sm:text-sm"
+                          >
+                            <FaExternalLinkAlt className="mr-2" /> Live Demo
+                          </a>
+                        )}
+                      </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2.5 pt-4 border-t border-zinc-200/30 dark:border-zinc-800/20">
-                      {selectedProject.github && (
-                        <a href={selectedProject.github} target="_blank" rel="noopener noreferrer"
-                          className="btn-aurora-outline inline-flex items-center px-4 py-2 rounded-xl text-xs sm:text-sm bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md">
-                          <FaGithub className="mr-2" /> GitHub Repository
-                        </a>
-                      )}
-                      {selectedProject.demo && (
-                        <a href={selectedProject.demo} target="_blank" rel="noopener noreferrer"
-                          className="btn-aurora inline-flex items-center px-4 py-2 rounded-xl text-xs sm:text-sm">
-                          <FaExternalLinkAlt className="mr-2" /> Live Demo
-                        </a>
-                      )}
-                    </div>
                   </div>
-
                 </div>
-              </div>
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </>
   );
 };
