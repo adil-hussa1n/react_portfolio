@@ -4,11 +4,14 @@ import { FaGithub, FaLinkedinIn, FaTwitter, FaFacebookF } from 'react-icons/fa';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const isHome = typeof window !== 'undefined' ? window.location.pathname === '/' : true;
+
   const sections = [
-    { name: 'Home', path: '#home' },
-    { name: 'About', path: '#about' },
-    { name: 'Portfolio', path: '#portfolio' },
-    { name: 'Contact', path: '#contact' },
+    { name: 'Home', path: isHome ? '#home' : '/#home' },
+    { name: 'About (Overview)', path: isHome ? '#about' : '/#about' },
+    { name: 'Dedicated About Page', path: '/about' },
+    { name: 'Portfolio Showcase', path: isHome ? '#portfolio' : '/#portfolio' },
+    { name: 'Contact', path: isHome ? '#contact' : '/#contact' },
   ];
 
   const socialLinks = [
@@ -29,7 +32,7 @@ const Footer = () => {
               Adil Hussain
             </p>
             <p className="text-sm leading-relaxed">
-              Software Engineer at Darun Tech Private Limited. Bridging robust software engineering with applied machine intelligence.
+              Software Engineer at Darun Tech Private Limited. Building robust software architectures while independently developing solutions in machine learning, artificial intelligence, and data science.
             </p>
             <div className="flex space-x-2 pt-2">
               {socialLinks.map((link, index) => (

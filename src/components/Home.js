@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import Typewriter from 'typewriter-effect';
 import { FaFacebookF, FaTwitter, FaLinkedinIn, FaGithub, FaArrowDown, FaFolder, FaTerminal, FaCheckCircle } from 'react-icons/fa';
 import { FiMail } from 'react-icons/fi';
@@ -41,11 +42,11 @@ const Home = () => {
             {/* Status badge */}
             <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-600 dark:text-emerald-400 font-medium text-xs sm:text-sm backdrop-blur-md">
               <span className="text-base">⚡</span>
-              Software Engineer
+              Software Engineer at Darun Tech
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
-              Hi, I'm <span className="aurora-text-glow">Adil Hussain</span>
+              <span className="sr-only">Adil Hussain &mdash; </span>Hi, I'm <span className="aurora-text-glow">Adil Hussain</span>
             </h1>
 
             <div className="text-xl sm:text-2xl md:text-3xl font-mono text-zinc-500 dark:text-zinc-400 h-10 sm:h-12 flex justify-center lg:justify-start items-center">
@@ -54,8 +55,9 @@ const Home = () => {
                 options={{
                   strings: [
                     'Software Engineer',
-                    'Applied AI Specialist',
-                    'Data & Systems Craftsman'
+                    'Machine Learning & AI',
+                    'Data Science & Analytics',
+                    'Full-Stack Systems Architect'
                   ],
                   autoStart: true,
                   loop: true,
@@ -66,24 +68,32 @@ const Home = () => {
             </div>
 
             <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto lg:mx-0 leading-relaxed">
-              Software Engineer at Darun Tech Private Limited. BSc in CSE from Leading University, Sylhet. Bridging robust software engineering with applied machine intelligence.
+              Software Engineer at Darun Tech Private Limited. Professionally engineering scalable software architectures, while independently researching and developing solutions across Machine Learning, Artificial Intelligence, and Data Science.
             </p>
 
-            <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2">
+            <div className="flex flex-wrap gap-3.5 justify-center lg:justify-start pt-2">
               <a
                 href="#contact"
                 id="hero-contact-btn"
                 aria-label="Contact Adil Hussain"
-                className="btn-aurora px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base"
+                className="btn-aurora px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base font-semibold"
               >
                 <FiMail className="text-lg" /> Contact Me
               </a>
+              <Link
+                to="/about"
+                id="hero-about-page-btn"
+                aria-label="View dedicated about page and biography of Adil Hussain"
+                className="btn-aurora-outline px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base font-semibold bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md"
+              >
+                About Me
+              </Link>
               <a
                 href="/resume10.pdf"
                 id="hero-resume-btn"
                 download="adil-hussain_resume.pdf"
                 aria-label="Download Adil Hussain Resume PDF"
-                className="btn-aurora-outline px-6 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md"
+                className="btn-aurora-outline px-5 py-3.5 rounded-xl flex items-center gap-2 text-sm sm:text-base bg-white/50 dark:bg-zinc-900/30 backdrop-blur-md text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
               >
                 Resume
               </a>
@@ -154,7 +164,7 @@ const Home = () => {
                     {/* Code content */}
                     <div className="flex-1 p-3.5 sm:p-4.5 overflow-hidden flex flex-col justify-between text-zinc-700 dark:text-zinc-300 leading-relaxed scrollbar-none">
                       <div className="space-y-1.5 sm:space-y-2">
-                        <div className="text-zinc-400 text-[10px] mb-2 sm:mb-2.5">{"// Software Engineer Profile"}</div>
+                        <div className="text-zinc-400 text-[10px] mb-2 sm:mb-2.5">{"// Software Engineer & ML Profile"}</div>
                         <div>
                           <span className="text-violet-500">const</span> <span className="text-cyan-500">engineer</span> <span className="text-zinc-500">=</span> <span className="text-zinc-500">{'{'}</span>
                         </div>
@@ -171,7 +181,10 @@ const Home = () => {
                           <span className="text-emerald-500">location</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Sylhet, Bangladesh'</span><span className="text-zinc-500">,</span>
                         </div>
                         <div className="pl-4 sm:pl-5">
-                          <span className="text-emerald-500">craft</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack & Applied AI'</span>
+                          <span className="text-emerald-500">independentWork</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Machine Learning, AI &amp; Data Science'</span><span className="text-zinc-500">,</span>
+                        </div>
+                        <div className="pl-4 sm:pl-5">
+                          <span className="text-emerald-500">craft</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack &amp; Intelligent Systems'</span>
                         </div>
                         <div>
                           <span className="text-zinc-500">{'}'}</span><span className="text-violet-500">;</span>

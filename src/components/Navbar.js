@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = ({ theme, toggleTheme }) => {
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   const [activeLink, setActiveLink] = useState('home');
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -42,7 +45,7 @@ const Navbar = ({ theme, toggleTheme }) => {
     >
       <div className="max-w-7xl flex flex-wrap items-center justify-between mx-auto px-4 sm:px-6 py-4">
         {/* Logo */}
-        <a href="#home" id="nav-brand-logo" aria-label="Adil Hussain - Return to Home top" className="flex items-center space-x-2 group">
+        <a href={isHome ? "#home" : "/"} id="nav-brand-logo" aria-label="Adil Hussain - Return to Home top" className="flex items-center space-x-2 group">
           <span className="text-xl md:text-2xl font-bold tracking-tight aurora-text group-hover:opacity-80 transition-opacity">
             ADIL
           </span>
@@ -84,7 +87,7 @@ const Navbar = ({ theme, toggleTheme }) => {
               <a
                 key={item}
                 id={`nav-link-${item}`}
-                href={`#${item}`}
+                href={isHome ? `#${item}` : `/#${item}`}
                 aria-label={`Navigate to ${item} section`}
                 onClick={() => handleSetActiveLink(item)}
                 className={`relative px-5 py-2 rounded-xl capitalize text-sm font-medium transition-all duration-300 ${
@@ -122,7 +125,7 @@ const Navbar = ({ theme, toggleTheme }) => {
                   <li key={item}>
                     <a
                       id={`mobile-nav-link-${item}`}
-                      href={`#${item}`}
+                      href={isHome ? `#${item}` : `/#${item}`}
                       aria-label={`Navigate to ${item} section`}
                       onClick={() => handleSetActiveLink(item)}
                       className={`block py-3 px-4 rounded-xl capitalize transition-all duration-300 text-center text-sm font-medium ${

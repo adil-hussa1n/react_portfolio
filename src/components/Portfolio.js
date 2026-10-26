@@ -49,7 +49,7 @@ import darunBusiness5 from '../img/darun_business/5.png';
 const categories = [
   { id: 'all', name: 'All Projects' },
   { id: 'fullstack', name: 'Full Stack' },
-  { id: 'ai', name: 'AI & Machine Learning' },
+  { id: 'ai', name: 'AI, ML & Data Science' },
   { id: 'mobile', name: 'Mobile' },
 ];
 

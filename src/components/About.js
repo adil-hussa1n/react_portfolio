@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { FaCode, FaServer, FaDatabase, FaCloud, FaUserTie, FaGraduationCap, FaBriefcase, FaTerminal } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import { FaCode, FaServer, FaDatabase, FaUserTie, FaGraduationCap, FaBriefcase, FaTerminal, FaBrain } from 'react-icons/fa';
 
 const About = () => {
   const sectionRef = useRef(null);
@@ -23,27 +24,27 @@ const About = () => {
   const skillCategories = [
     {
       icon: <FaCode />,
-      title: 'Frontend',
+      title: 'Frontend Architecture',
       color: 'emerald',
-      skills: ['React.js', 'React Native', 'JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'Redux', 'Vite'],
+      skills: ['React.js', 'React Native', 'JavaScript (ES6+)', 'Tailwind CSS', 'Redux', 'HTML5/CSS3'],
     },
     {
       icon: <FaServer />,
-      title: 'Backend',
+      title: 'Backend & APIs',
       color: 'cyan',
-      skills: ['Node.js', 'Express.js', 'RESTful APIs', 'JWT Authentication'],
+      skills: ['Node.js', 'Express.js', 'Python', 'FastAPI', 'Laravel', 'RESTful APIs'],
     },
     {
       icon: <FaDatabase />,
-      title: 'Database',
+      title: 'Databases & Cloud',
       color: 'violet',
-      skills: ['MongoDB', 'Mongoose', 'Supabase', 'Firebase'],
+      skills: ['MongoDB', 'MySQL', 'PostgreSQL', 'Mongoose', 'AWS', 'Docker'],
     },
     {
-      icon: <FaCloud />,
-      title: 'Cloud & DevOps',
+      icon: <FaBrain />,
+      title: 'ML, AI & Data Science',
       color: 'amber',
-      skills: ['AWS', 'Vercel', 'Netlify', 'Docker', 'Git', 'Postman'],
+      skills: ['Machine Learning', 'Data Science', 'Pandas & NumPy', 'Scikit-Learn', 'YOLOv8 & OpenCV'],
     },
   ];
 
@@ -96,7 +97,7 @@ const About = () => {
           </h2>
           <div className="w-24 h-1 bg-gradient-to-r from-emerald-500 via-cyan-500 to-violet-500 mx-auto rounded-full mb-6"></div>
           <p className="text-base sm:text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed">
-            I am a CSE graduate and Software Engineer dedicated to bridging robust software engineering with applied machine intelligence.
+            Software Engineer at Darun Tech Private Limited, engineering scalable enterprise systems while independently researching and developing solutions across Machine Learning, Artificial Intelligence, and Data Science.
           </p>
         </div>
 
@@ -105,11 +106,14 @@ const About = () => {
 
           {/* BENTO: Who I Am — spans 2 cols on lg */}
           <div className="lg:col-span-2 aurora-card spotlight-card animated-border-card rounded-2xl p-6 sm:p-8 bento-item">
-            <div className="flex items-center mb-5">
-              <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl mr-4 text-emerald-500">
-                <FaUserTie className="text-2xl" />
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-5">
+              <div className="flex items-center">
+                <div className="p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl mr-4 text-emerald-500">
+                  <FaUserTie className="text-2xl" />
+                </div>
+                <h3 className="text-xl sm:text-2xl font-bold">Who I Am</h3>
               </div>
-              <h3 className="text-xl sm:text-2xl font-bold">Who I Am</h3>
+
             </div>
 
             <div className="font-mono text-xs sm:text-sm bg-zinc-50/50 dark:bg-zinc-950/50 p-4 rounded-xl border border-zinc-200/50 dark:border-zinc-800/30 mb-4">
@@ -118,13 +122,19 @@ const About = () => {
                 <span className="text-emerald-500">role</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Software Engineer'</span><span className="text-zinc-500">,</span>
               </div>
               <div className="pl-4">
-                <span className="text-emerald-500">craft</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack & Applied AI'</span>
+                <span className="text-emerald-500">company</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Darun Tech Pvt Ltd'</span><span className="text-zinc-500">,</span>
+              </div>
+              <div className="pl-4">
+                <span className="text-emerald-500">independentWork</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Machine Learning, AI &amp; Data Science'</span><span className="text-zinc-500">,</span>
+              </div>
+              <div className="pl-4">
+                <span className="text-emerald-500">craft</span><span className="text-zinc-500">:</span> <span className="text-amber-500">'Full Stack &amp; Intelligent Systems'</span>
               </div>
               <span className="text-zinc-500">{'}'}</span>
             </div>
 
             <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed text-sm sm:text-base">
-              When I'm not engineering software and intelligent systems at Darun Tech, I focus on mentoring next-generation engineers, exploring new technologies, and contributing to communities.
+              Professionally, I architect and build full-stack enterprise systems at Darun Tech. Independently, I design and deploy intelligent solutions using Machine Learning, Artificial Intelligence, and Data Science.
             </p>
           </div>
 
@@ -172,7 +182,7 @@ const About = () => {
                   CURRENT
                 </div>
                 <h4 className="font-bold text-base sm:text-lg">Darun Tech</h4>
-                
+
                 {/* Full-Time Role */}
                 <div className="mt-1">
                   <p className="text-sm font-semibold text-emerald-600 dark:text-emerald-400">
@@ -264,6 +274,18 @@ const About = () => {
             </div>
           </div>
 
+        </div>
+
+        {/* Dedicated About Page Navigation Banner */}
+        <div className="mt-10 text-center">
+          <Link
+            to="/about"
+            id="about-full-biography-btn"
+            className="btn-aurora-outline inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl text-sm font-semibold bg-white/60 dark:bg-zinc-900/40 backdrop-blur-md shadow-lg shadow-cyan-500/5 hover:border-cyan-500/50 transition-all"
+            aria-label="Explore dedicated About Adil Hussain page with detailed career timeline"
+          >
+            Read Full Biography, Background &amp; Credentials &rarr;
+          </Link>
         </div>
       </div>
     </section>
