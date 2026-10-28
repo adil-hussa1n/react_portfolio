@@ -19,14 +19,14 @@ import {
 
 const AboutPage = ({ theme }) => {
   useEffect(() => {
-    document.title = "About Adil Hussain | Software Engineer • ML, AI & Data Science";
+    document.title = "About Adil Hussain (Adil) | Software Engineer • ML, AI & Data Science";
     
     // Update meta description dynamically for /about
     let metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) {
       metaDesc.setAttribute(
         "content",
-        "Learn about Adil Hussain, Software Engineer at Darun Tech Private Limited and CSE graduate from Leading University, Sylhet. Specializing in full-stack architecture, with independent expertise in machine learning, artificial intelligence, and data science."
+        "Learn about Adil Hussain (Adil), Software Engineer at Darun Tech Private Limited and CSE graduate from Leading University, Sylhet. Specializing in full-stack architecture, with independent expertise in machine learning, artificial intelligence, and data science."
       );
     }
     
@@ -39,7 +39,7 @@ const AboutPage = ({ theme }) => {
     window.scrollTo(0, 0);
 
     return () => {
-      document.title = "Adil Hussain | Software Engineer • ML, AI & Data Science";
+      document.title = "Adil Hussain (Adil) | Software Engineer • ML, AI & Data Science";
       if (canonical) {
         canonical.setAttribute("href", "https://www.adilhussa1n.online/");
       }
@@ -94,7 +94,7 @@ const AboutPage = ({ theme }) => {
             <div className="w-44 h-56 sm:w-52 sm:h-64 rounded-2xl overflow-hidden border-2 border-emerald-500/30 shadow-2xl shadow-cyan-500/10 relative z-10 bg-zinc-900">
               <img
                 src="/images/adil-hussain.jpg"
-                alt="Adil Hussain - Software Engineer at Darun Tech Private Limited"
+                alt="Adil Hussain (Adil) - Software Engineer at Darun Tech Private Limited"
                 className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                 onError={(e) => {
                   e.target.src = "/og-image.png";
@@ -112,7 +112,7 @@ const AboutPage = ({ theme }) => {
             </div>
             
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight">
-              Adil Hussain
+              Adil Hussain <span className="sr-only">(Adil)</span>
             </h1>
 
             <p className="text-sm sm:text-base text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-2xl">

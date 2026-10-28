@@ -1,5 +1,14 @@
-# Robots.txt for Adil Hussain Portfolio
+# Robots.txt for Adil Hussain (Adil) Portfolio
 User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 # Host
@@ -7,3 +16,4 @@ Host: https://www.adilhussa1n.online
 
 # Sitemaps
 Sitemap: https://www.adilhussa1n.online/sitemap.xml
+

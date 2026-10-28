@@ -46,7 +46,7 @@ const Home = () => {
             </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight tracking-tight">
-              <span className="sr-only">Adil Hussain &mdash; </span>Hi, I'm <span className="aurora-text-glow">Adil Hussain</span>
+              <span className="sr-only">Adil Hussain (Adil) &mdash; Software Engineer </span>Hi, I'm <span className="aurora-text-glow">Adil Hussain</span>
             </h1>
 
             <div className="text-xl sm:text-2xl md:text-3xl font-mono text-zinc-500 dark:text-zinc-400 h-10 sm:h-12 flex justify-center lg:justify-start items-center">

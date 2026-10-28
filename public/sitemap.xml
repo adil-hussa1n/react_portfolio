@@ -6,29 +6,34 @@
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
     <loc>https://www.adilhussa1n.online/</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
     <image:image>
       <image:loc>https://www.adilhussa1n.online/images/adil-hussain.jpg</image:loc>
-      <image:title>Adil Hussain - Software Engineer at Darun Tech</image:title>
-      <image:caption>Professional portrait photograph of Adil Hussain, Software Engineer at Darun Tech</image:caption>
+      <image:title>Adil Hussain (Adil) - Software Engineer at Darun Tech</image:title>
+      <image:caption>Official portrait photograph of Adil Hussain (Adil), Software Engineer at Darun Tech Private Limited</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.adilhussa1n.online/og-image.png</image:loc>
+      <image:title>Adil Hussain (Adil) Portfolio Technical Showcase</image:title>
+      <image:caption>Full-stack software engineering and machine learning portfolio banner of Adil Hussain</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://www.adilhussa1n.online/about</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
     <image:image>
       <image:loc>https://www.adilhussa1n.online/images/adil-hussain.jpg</image:loc>
-      <image:title>About Adil Hussain</image:title>
-      <image:caption>Adil Hussain professional headshot and biography</image:caption>
+      <image:title>About Adil Hussain (Adil) - Biography &amp; Background</image:title>
+      <image:caption>Adil Hussain (Adil) professional portrait photograph and biography</image:caption>
     </image:image>
   </url>
   <url>
     <loc>https://www.adilhussa1n.online/resume10.pdf</loc>
-    <lastmod>2026-10-27</lastmod>
+    <lastmod>2026-10-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
